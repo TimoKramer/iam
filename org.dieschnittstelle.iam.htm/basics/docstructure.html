@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- oben_^ Dokumententyp Deklaration für HTML5 (muss an erster Stelle stehen) -->
+<!-- Wurzelelement -->
+<html>
+	<!-- Metainformation, inklusive Titel des Dokuments (wird z.B. im Browser Tab angezeigt) -->
+	<head>
+		<title>HTML Dokumentenstruktur</title>
+		<meta charset="UTF-8"/>
+		<!-- Style als Inline style -->
+		<style>
+			body {
+				background-color: rgb(90,90,90);
+				color: rgb(204,204,204);
+			}
+		</style>
+		<!-- Verknüpfungen mittels link. Mittels "rel" kann die Rolle angegeben werden, die die referenzierte Ressource erfüllt, z.B:  -->
+		<!-- Import eines CSS Stylesheets -->
+		<!-- <link rel="stylesheet" href="URL des Stylesheets" /> -->
+		<!-- Bezeichnung eines Icons, das z.B. als Bookmark Symbol angezeigt wird -->
+		<link rel="icon" href="img/icon.ico" />
+		<!-- weitere Imports siehe http://www.whatwg.org/specs/web-apps/current-work/multipage/links.html#linkTypes -->
+
+		<!-- Javascript inline -->
+		<script type="text/javascript">
+            function reconfirm() {
+                alert("dolor sit amet!");
+            }
+		</script>
+		<!-- Javascript online - muss von der gleichen Domain geladen werden wie das html Dokument! -->
+		<!-- <script type="text/javascript" src="URL des Skripts"></script>-->
+		<!-- <script type="text/javascript" src="http://W-Lan IP Adresse:8020/org.dieschnittstelle.mee2.html5/script/worker.js"></script> -->
+		<script type="text/javascript" src="../script/worker.js"></script>
+	</head>
+	<!-- der Inhalt des Dokuments, beliebige Anzahl beliebig eingebetteter Elemente gemaess HTML5 Spezifikation -->
+	<body>
+		<!-- Textabschnitt -->
+		<p>
+			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+		</p>
+		<!-- Abbildung -->
+		<figure>
+			<img src="../media/img.jpg" alt="H.M."/>
+			<figcaption>
+				Apokalypse mit Zigarre
+			</figcaption>
+		</figure>
+		<!-- etc... -->
+		<!-- hier koennen auch Skripte platziert werden, die unmittelbar nach Laden des Dokuments ausgefuehrt werden -->
+		<script type="text/javascript">
+            if (confirm("lorem ipsum?")) {
+                reconfirm();
+            }
+		</script>
+	</body>
+</html>

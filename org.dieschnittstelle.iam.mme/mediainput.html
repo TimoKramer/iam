@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML Media Input Example</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- import our own scripts	-->
+        <script type="text/javascript" src="js/mediainput.js"></script>
+    </head>
+    <body onload="initialise()">
+        <button onclick="captureAudio()">
+            Audio
+        </button>
+        <button onclick="captureVideo()">
+            Video
+        </button>
+        <button onclick="storeMedia()">
+            Speichern
+        </button>
+
+        <p>
+            <span id="mediauri"></span>
+        </p>
+        <p>
+            <span id="savedmediauri"></span>
+        </p>
+        <p>
+            <span id="mediametadata"></span>
+        </p>
+
+        <!-- video playback and image display -->
+        <p>
+            <img id="img1"></img>
+            <video autoplay="autoplay" id="video"></video>
+        </p>
+        <p>
+            <canvas id="canvas"></canvas>
+            <img id="img2"></img>
+        </p>
+        <p>
+            <audio controls="controls" autoplay="autoplay" id="audio"></audio>
+        </p>
+    </body>
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.aptana.php.debug.core.launching.webPageLaunch">
+<stringAttribute key="ATTR_SERVER_BASE_URL" value="http://localhost/PongClone/index.php"/>
+<stringAttribute key="ATTR_SERVER_FILE_NAME" value="/PongClone/index.php"/>
+<stringAttribute key="ATTR_SERVER_NAME" value="localhost"/>
+<stringAttribute key="com.aptana.php.debug.configurationDelegateClass" value="org2.eclipse.php.internal.debug.core.launching.XDebugWebLaunchConfigurationDelegate"/>
+<stringAttribute key="com.aptana.php.debug.php_debugger_id" value="org2.eclipse.php.debug.core.xdebugDebugger"/>
+<stringAttribute key="debugOutputEncoding" value="UTF-8"/>
+<stringAttribute key="debugTransferEncoding" value="UTF-8"/>
+<booleanAttribute key="firstLineBreakpoint" value="true"/>
+<booleanAttribute key="org2.eclipse.php.debug.core.OpenInBrowser" value="true"/>
+<stringAttribute key="org2.eclipse.php.debug.core.PHP_Project" value="/PongClone"/>
+<booleanAttribute key="org2.eclipse.php.debug.core.RunWithDebugInfo" value="true"/>
+</launchConfiguration>

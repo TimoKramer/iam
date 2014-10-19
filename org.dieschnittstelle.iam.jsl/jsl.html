@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Interaktionssteuerung mit JavaScript</title>
+        <!-- style -->
+        <link rel="stylesheet" href="css/jsl.css"/>
+        <!-- script -->
+        <script type="text/javascript" src="js/jsl.js"></script>
+    </head>
+    <body onload="onPageLoaded()">
+        <article>
+            <div id="articlecontent">
+                <h2>Interaktionssteuerung mit JavaScript</h2>
+                <div>
+                <section onclick="markSelected(event)">
+                    <h3>&lt;span&gt;</h3>
+                    Lorem ipsum <span class="term" id="mainterm">dolor</span> sit amet. consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <span class="term">labore et dolore</span> magna aliqua.
+                </section>
+                <section id="maincontent" onclick="markSelected(event)">
+                    <h3>&lt;div&gt;</h3>
+                    Lorem ipsum
+                    <div class="term">
+                        dolor
+                    </div>
+                    sit amet. consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                    <div class="term">
+                        labore et dolore
+                    </div>
+                    magna aliqua.
+                    <section onclick="markSelected(event)">
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        <section onclick="markSelected(event)">
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                        </section>
+                    </section>
+                </section>
+            </div>
+        </article>
+        <div class="buttonbar">
+            <button onclick="moveMainterm()">
+                Move Mainterm
+            </button>
+            <button onclick="fadeSelected()">
+                Fade Selected
+            </button>
+            <button onclick="showToast()">
+                Show Toast
+            </button>
+            <button id="disableButtonsButton">
+                Disable Buttons
+            </button>
+        </div>
+        <div class="toast">
+            lorem ipsum
+        </div>
+    </body>
+</html>

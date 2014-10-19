@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HTML5 Drag and Drop API Example</title>
+		<meta charset="UTF-8"/>
+		<style>
+			#dropbox {
+				min-height: 100px;
+				width: 200px;
+				border: 3px dashed green;
+				margin: 10px;
+				padding: 10px;
+				color: green;
+				bordercolor: green;
+			}
+
+			#dragbox {
+				min-height: 100px;
+				width: 200px;
+				border: 3px dashed blue;
+				margin: 10px;
+				padding: 10px;
+				color: blue;
+			}
+
+			div[draggable=true] {
+				font-weight: bold;
+			}
+
+			p {
+				margin: 3px 0;
+			}
+		</style>
+		<script>
+            // handle the beginning of a drag and drop
+            function onDragStart(event, element) {
+                // pass the id of the element to identify it on drop
+                event.dataTransfer.setData('Text', element.id);
+            }
+
+            // handle the dropping of an element
+            function onDrop(event, element) {
+                checkPropagation(event);
+                // get the draggedItem
+                var draggedItem = document.getElementById(event.dataTransfer.getData("text/plain"));
+                // add it to the target box
+                element.appendChild(draggedItem.parentNode.removeChild(draggedItem));
+                return false;
+            }
+
+            // check whether the event shall be propagated upwards from the element in which it occurred
+            function checkPropagation(event, element) {
+                // get the draggedItem
+                var draggedItem = document.getElementById(event.dataTransfer.getData("text/plain"));
+
+                // prevent propagation of the event unless we have a drag that moves some draggable element out of its box
+                if (event.preventDefault && (draggedItem == null || draggedItem.parentNode != element)) {
+                    event.preventDefault();
+                }
+                return false;
+            }
+		</script>
+
+	</head>
+	<body>
+		<!-- the initial state with all draggable elements being placed in the dragbox -->
+		<div id="dragbox" ondragover="checkPropagation(event,this);"
+		ondragenter="checkPropagation(event,this);"
+		ondrop="onDrop(event,this);">
+			<div id="item1" draggable="true" ondragstart="onDragStart(event,this);">
+				Item
+				1
+			</div>
+			<div id="item2" draggable="true" ondragstart="onDragStart(event,this);">
+				Item
+				2
+			</div>
+			<div id="item3" draggable="true" ondragstart="onDragStart(event,this);">
+				Item
+				3
+			</div>
+		</div>
+		<!--  the box on which we drop the draggable elements -->
+		<div id="dropbox" ondragover="checkPropagation(event,this);"
+		ondragenter="checkPropagation(event,this);"
+		ondrop="onDrop(event,this);"></div>
+	</body>
+</html>

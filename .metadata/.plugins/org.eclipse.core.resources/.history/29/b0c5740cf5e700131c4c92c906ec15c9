@@ -1,0 +1,521 @@
+/*
+* www.KNACSS.com V2.6k @author: Raphael Goetter, Alsacreations
+* Licence CC-BY http://creativecommons.org/licenses/by/3.0/de/ 
+*/
+
+html {
+  font-size: 62.5%
+}
+body {
+  overflow: hidden;
+  background-color: #FFF;
+  color: #333;
+  font-size: 1.4em;
+  line-height: 1.5
+}
+p {
+  font-size: 1em;
+  line-height: 1.5;
+  margin: .75em 0 0
+}
+h1,
+.h1-like {
+  font-size: 1.8571em;
+  font-weight: 400;
+  line-height: 1.6154em;
+  margin: .8077em 0 0
+}
+h2,
+.h2-like {
+  font-size: 1.7143em;
+  font-weight: 400;
+  line-height: 1.75em;
+  margin: .875em 0 0
+}
+html,
+body {
+  margin: 0;
+  padding: 0
+}
+p:first-child,
+h1:first-child,
+h2:first-child,
+{
+  margin-top: 0
+}
+img {}img {
+  height: auto;
+  vertical-align: middle
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box
+}
+.row {
+  clear: both
+}
+.row {
+  display: table;
+  table-layout: fixed;
+  width: 100%
+}
+.row>* {
+  display: table-cell;
+  vertical-align: top
+}
+.center {
+  margin-left: auto;
+  margin-right: auto
+}
+.txtcenter {
+  text-align: center
+}
+.w50 {
+  width: 50%
+}
+.ma0 {
+  margin: 0
+}
+.pa1 {
+  padding: 10px
+}
+.mt3 {
+  margin-top: 30px
+}
+.mb3 {
+  margin-bottom: 30px
+}
+img {
+  border-radius: 50%
+}
+h1 {
+  font-size: 4.5em;
+  text-transform: uppercase;
+  letter-spacing: .05em
+}
+hr {
+  width: 30%;
+  height: 1px;
+  border: 0;
+  color: #D5D5D5;
+  background-color: #D5D5D5
+}
+p {
+  font-weight: 300;
+  font-size: 1.2em
+}
+a {
+  color: orange;
+  text-decoration: none
+}
+a:hover {
+  border-bottom: 1px solid orange
+}
+a:visited {
+  color: darkorange
+}
+body,
+html {
+  width: 100%;
+  height: 100%
+}
+body {
+  font-family: 'Open Sans', sans-serif
+}
+.main {
+  height: 100%;
+  opacity: 0;
+  -webkit-animation: fadeIn .5s linear 2.5s forwards;
+  animation: fadeIn .5s linear 2.5s forwards
+}
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+}
+.box {
+  display: table-cell;
+  vertical-align: middle
+}
+@-webkit-viewport{width:device-width;zoom:1}@-moz-viewport{width:device-width;zoom:1}@-ms-viewport{width:device-width;zoom:1}@-o-viewport{width:device-width;zoom:1}@viewport{width:device-width;zoom:1}@media (max-width:768px) {
+  .main {
+    opacity: 1
+  }
+  h1 {
+    font-size: 2em
+  }
+  h2 {
+    font-size: 1.25em
+  }
+  div,
+  textarea,
+  table,
+  td,
+  th,
+  code,
+  pre,
+  samp {
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -o-hyphens: auto;
+    hyphens: auto
+  }
+}
+@media (max-width: 640px) {
+  .w50 {
+    width: auto
+  }
+  .row {
+    display: block!important;
+    width: 100%!important
+  }
+  .tiny-hidden {
+    display: none!important
+  }
+  .tiny-w100 {
+    display: block!important;
+    float: none!important;
+    clear: none!important;
+    width: auto!important;
+    margin-left: 0!important;
+    margin-right: 0!important;
+    border: 0
+  }
+}
+.strip {
+  position: absolute;
+  width: 0;
+  height: 20%
+}
+.left {
+  left: 0
+}
+.right {
+  right: 0
+}
+.l1,
+.r1 {
+  top: 0
+}
+.l2,
+.r2 {
+  top: 20%
+}
+.l3,
+.r3 {
+  top: 40%
+}
+.l4,
+.r4 {
+  top: 60%
+}
+.l5,
+.r5 {
+  top: 80%
+}
+.l1 {
+  background-color: #e74c3c;
+  -webkit-animation: openl1 2s linear .5s forwards;
+  animation: openl1 2s linear .5s forwards
+}
+.l2 {
+  background-color: #2ecc71;
+  -webkit-animation: openl2 2s linear .5s forwards;
+  animation: openl2 2s linear .5s forwards
+}
+.l3 {
+  background-color: #f1c40f;
+  -webkit-animation: openl3 2s linear .5s forwards;
+  animation: openl3 2s linear .5s forwards
+}
+.l4 {
+  background-color: #3498db;
+  -webkit-animation: openl4 2s linear .5s forwards;
+  animation: openl4 2s linear .5s forwards
+}
+.l5 {
+  background-color: #bdc3c7;
+  -webkit-animation: openl5 2s linear .5s forwards;
+  animation: openl5 2s linear .5s forwards
+}
+@-webkit-keyframes openl1 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 15%
+  }
+}
+@keyframes openl1 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 15%
+  }
+}
+@-webkit-keyframes openl2 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 10%
+  }
+}
+@keyframes openl2 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 10%
+  }
+}
+@-webkit-keyframes openl3 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 15%
+  }
+}
+@keyframes openl3 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 15%
+  }
+}
+@-webkit-keyframes openl4 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 10%
+  }
+}
+@keyframes openl4 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 10%
+  }
+}
+@-webkit-keyframes openl5 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 15%
+  }
+}
+@keyframes openl5 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 15%
+  }
+}
+.r1 {
+  background-color: #e74c3c;
+  -webkit-animation: openr1 2s linear .5s forwards;
+  animation: openr1 2s linear .5s forwards
+}
+.r2 {
+  background-color: #2ecc71;
+  -webkit-animation: openr2 2s linear .5s forwards;
+  animation: openr2 2s linear .5s forwards
+}
+.r3 {
+  background-color: #f1c40f;
+  -webkit-animation: openr3 2s linear .5s forwards;
+  animation: openr3 2s linear .5s forwards
+}
+.r4 {
+  background-color: #3498db;
+  -webkit-animation: openr4 2s linear .5s forwards;
+  animation: openr4 2s linear .5s forwards
+}
+.r5 {
+  background-color: #bdc3c7;
+  -webkit-animation: openr5 2s linear .5s forwards;
+  animation: openr5 2s linear .5s forwards
+}
+@keyframes openr1 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 15%
+  }
+}
+@-webkit-keyframes openr1 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 15%
+  }
+}
+@-webkit-keyframes openr2 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 10%
+  }
+}
+@keyframes openr2 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 10%
+  }
+}
+@-webkit-keyframes openr3 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 15%
+  }
+}
+@keyframes openr3 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 15%
+  }
+}
+@-webkit-keyframes openr4 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 10%
+  }
+}
+@keyframes openr4 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 10%
+  }
+}
+@-webkit-keyframes openr5 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 15%
+  }
+}
+@keyframes openr5 {
+  from {
+    width: 0
+  }
+  70% {
+    width: 15%
+  }
+  to {
+    width: 10%
+  }
+}
+.left,
+.right {
+  z-index: 1;
+  -webkit-transition: 0.5s linear;
+  transition: 0.5s linear
+}
+.left:hover {
+  margin-left: -5%
+}
+.right:hover {
+  margin-right: -5%;
+}
+
+/** Selfmade CSS **/
+.visually-hidden {
+  *clip: rect(1px 1px 1px 1px);
+}
+li {
+display: inline;
+list-style-type: none;
+padding-right: 20px;
+}

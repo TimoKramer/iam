@@ -1,0 +1,27 @@
+{
+	"topicid": "die_umsiedlerin",
+	"title": "Die Umsiedlerin",
+	"content_items": [
+		{
+			"render_container": "middle",
+			"type": "objekt",
+			"src": "content/img/hm_als_fondrak_1961.jpg",
+			"description": "Kommentar zum Bild"
+		}, {
+			"render_container": "left",
+			"type": "medienverweise",
+			"title": "Filme und Audio",
+			"content": [
+				{
+					"mediatype": "video/ogg",
+					"title": "Über Tiere und Menschen",
+					"src": "content/mov/hm_tiere_und_menschen.ogv"
+				}, {
+					"mediatype": "audio/ogg",
+					"title": "Demo Alexanderplatz 1989",
+					"src": "content/wav/4_november_1989_alexanderplatz_berlin_ddr_ausschnitt.ogg"
+				}
+			]
+		}
+	]
+}

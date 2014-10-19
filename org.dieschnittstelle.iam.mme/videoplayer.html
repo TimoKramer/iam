@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML5 Multimedia Example (Video)</title>
+        <meta charset="UTF-8"/>
+        <!-- import the script that implements the common controller for audio and video -->
+        <script type="text/javascript" src="js/mediacontrols.js"></script>
+    </head>
+    <body onload="initialiseView()">
+        <!--  the video element that sets the event listeners for the video content -->
+        <video id="mediaelement" preload="metadata" oncanplay="mediaLoaded(this);">
+            <source src="media/video.ogv"></source>
+            <track kind="subtitles" src="media/subtitles.vtt" srclang="de" label="German" default="default"/>
+        </video>
+        <!--  the button bar that provides the interface for interacting with the media content -->
+        <p id="controls">
+            <span id="playbutton">
+                <input type="button" id="play" value="play"/>
+            </span>
+            <span
+            id="position">00:00</span> / <span id="duration">loading...</span>
+            <span id="soundbutton">
+                <input type="button" id="sound" value="mute"/>
+            </span>
+        </p>
+    </body>
+</html>

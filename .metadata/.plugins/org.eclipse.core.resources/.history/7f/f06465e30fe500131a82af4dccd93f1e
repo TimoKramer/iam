@@ -1,0 +1,212 @@
+//jQuery to check Login-Cookie on load
+
+$(function(){
+	var preval = readCookie('ci_session');
+	
+	if (preval.logged_in != null) {
+		var myJSON = new Object();
+		console.log(preval.rank);
+		console.log(precal.score);
+		myJSON.rank = preval.rank;
+		myJSON.score = preval.score;
+		showProfile(myJSON);
+	}
+	console.log(preval);
+});
+
+//jQuery to collapse the navbar on scroll
+$(window).scroll(function() {
+    if ($(".navbar").offset().top > 50) {
+        $(".navbar-fixed-top").addClass("top-nav-collapse");
+    } else {
+        $(".navbar-fixed-top").removeClass("top-nav-collapse");
+    }
+});
+
+//jQuery for page scrolling feature - requires jQuery Easing plugin
+$(function() {
+    $('.page-scroll a').bind('click', function(event) {
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+            scrollTop: $($anchor.attr('href')).offset().top
+        }, 1500, 'easeInOutExpo');
+        event.preventDefault();
+    });
+});
+
+/** PongClone Javascript */
+//jQuery for Register-Button
+$(function(){
+    $("#regButton").click(function(event){
+   		myRegSubmit();
+        $("#errorSpan").append("POST sent!");
+    });
+});
+
+function myRegSubmit() {
+    $.ajax({
+        url: "index.php/user/registration", // http://pongclone.cloudcontrolled.com
+        data: {
+            playername: $("#inputPlayer").val(),
+    		password: $("#inputPassword").val()
+    	},
+    	type: "POST",
+        dataType: "json",
+        // code to run if the request succeeds;
+        // the response is passed to the function
+        success: function (json) {
+		    $("#errorSpan").append(" It worked!");
+    	},
+		// code to run if the request fails; the raw request and
+		// status codes are passed to the function
+		error: function (xhr, status) {
+        	$("#errorSpan").append(xhr + " Sorry, there was a problem!");
+    	},
+    	// code to run regardless of success or failure
+    	complete: function (xhr, status) {
+        	$('#errorSpan').append(xhr + " The request is sent!");
+    	}
+	});
+}
+
+//jQuery for Login-Button
+$(function(){
+    $("#loginButton").click(function(event){
+   		myLoginSubmit();
+        $("#errorSpan").append("POST sent!");
+        event.preventDefault();
+    });
+});
+
+function myLoginSubmit() {
+    $.ajax({
+        url: "index.php/user/login", // http://pongclone.cloudcontrolled.com
+        data: {
+            playername: $("#inputPlayer").val(),
+    		password: $("#inputPassword").val()
+    	},
+    	type: "POST",
+        dataType: "json",
+        // code to run if the request succeeds;
+        // the response is passed to the function
+        success: function (json) {
+		    $("#errorSpan").append(" You are logged in!");
+		    console.log(json);
+		    showProfile(json);
+    	},
+		// code to run if the request fails; the raw request and
+		// status codes are passed to the function
+		error: function (xhr, status) {
+        	$("#errorSpan").append(" Sorry, there was a problem! ");
+        	console.log(xhr);
+    	},
+    	// code to run regardless of success or failure
+    	complete: function (xhr, status) {
+        	$('#errorSpan').append(" The request is sent! ");
+        	console.log(xhr);
+    	}
+	});
+}
+
+function showProfile(json) {
+    $('.notloggedin').css('visibility', 'hidden');
+    $('.notloggedin').css('display', 'none');
+    $('.loggedin').css('visibility', 'visible');
+    $('.loggedin').css('display', 'inline');
+    $('#profile').text("Profile");
+    var rank = JSON.stringify(json.rank);
+    var score = JSON.stringify(json.score);
+    $('#rank').html(rank);
+    $('#score').html(score);
+}
+
+function showLogin(){
+	$('.notloggedin').css('visibility', 'visible');
+    $('.notloggedin').css('display', 'inline');
+    $('.loggedin').css('visibility', 'hidden');
+    $('.loggedin').css('display', 'none');
+    $('#profile').text("Login");
+}
+
+function logout() {
+    $.ajax({
+        url: "index.php/user/logout", // http://pongclone.cloudcontrolled.com
+        success: function (json) {
+		    showLogin();
+    	}
+
+    });
+}
+
+/*\
+|*|
+|*|  :: cookies.js ::
+|*|
+|*|  A complete cookies reader/writer framework with full unicode support.
+|*|
+|*|  https://developer.mozilla.org/en-US/docs/DOM/document.cookie
+|*|
+|*|  This framework is released under the GNU Public License, version 3 or later.
+|*|  http://www.gnu.org/licenses/gpl-3.0-standalone.html
+|*|
+|*|  Syntaxes:
+|*|
+|*|  * docCookies.setItem(name, value[, end[, path[, domain[, secure]]]])
+|*|  * docCookies.getItem(name)
+|*|  * docCookies.removeItem(name[, path], domain)
+|*|  * docCookies.hasItem(name)
+|*|  * docCookies.keys()
+|*|
+\*/
+
+var docCookies = {
+  getItem: function (sKey) {
+    return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+  },
+  setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+    if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+    var sExpires = "";
+    if (vEnd) {
+      switch (vEnd.constructor) {
+        case Number:
+          sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+          break;
+        case String:
+          sExpires = "; expires=" + vEnd;
+          break;
+        case Date:
+          sExpires = "; expires=" + vEnd.toUTCString();
+          break;
+      }
+    }
+    document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+    return true;
+  },
+  removeItem: function (sKey, sPath, sDomain) {
+    if (!sKey || !this.hasItem(sKey)) { return false; }
+    document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + ( sDomain ? "; domain=" + sDomain : "") + ( sPath ? "; path=" + sPath : "");
+    return true;
+  },
+  hasItem: function (sKey) {
+    return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+  },
+  keys: /* optional method: you can safely remove it! */ function () {
+    var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
+    for (var nIdx = 0; nIdx < aKeys.length; nIdx++) { aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]); }
+    return aKeys;
+  }
+};
+
+//http://www.quirksmode.org/js/cookies.html
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+

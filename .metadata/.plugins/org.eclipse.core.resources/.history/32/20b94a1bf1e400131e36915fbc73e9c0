@@ -1,0 +1,29 @@
+<?php
+
+	if (!defined('BASEPATH'))
+		exit('No direct script access allowed');
+	class User_model extends CI_Model {
+		public function __construct() {
+			parent::__construct();
+		}
+
+
+	function queryRanking(){	
+		$sql = "SELECT rank, playername, points FROM (
+	               SELECT id, playername, @rownum := @rownum + 1 AS rank, points
+	               FROM players ORDER BY points DESC
+	               ) as result";
+		
+		$query = $this -> db -> query($sql2);
+	
+		if (!empty($query)) {
+			foreach ($query->result() as $rows) {
+				$scores = array('rank' => $rows -> rank, 'playername' => $rows -> playername, 'score' => $rows -> points);
+				return $scores;				
+			}
+		} else {
+			return FALSE;
+		}
+	}
+}
+?>

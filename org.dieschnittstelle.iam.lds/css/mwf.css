@@ -1,0 +1,397 @@
+body {
+    background-color: rgb(90,90,90);
+    color: white;
+    height: 100%;
+    width: 100%;
+    font-family: "Avenir Medium", sans-serif;
+}
+
+.mwf-view {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+.mwf-view.mwf-dialog-shown {
+    opacity: 0.15;
+    transition: opacity 2s;    
+    z-index: 0;
+}
+
+.mwf-currentview {
+    z-index: 1;
+    opacity: 1.0;
+    transition: opacity 0.5s;
+}
+
+.mwf-stopped, .mwf-paused {
+    z-index: 0;
+    opacity: 0.0;
+    transition: opacity 2s;
+}
+
+.mwf-idle {
+    display: none;
+}
+
+header {
+    background-color: #33B5E5;
+    color: white;
+    height: 40px;
+}
+
+/* by default, dialog-body is dealt with like the body of a normal view */
+.mwf-body, .mwf-dialog-body {
+    height: calc(100% - (40px + 30px) );
+    /*height: -webkit-calc(100% - (40px + 30px));*/
+    font-size: 18pt;
+}
+
+footer {
+    background-color: black;
+    height: 30px;
+}
+
+/*.mwf-dialog-shown footer {
+    height: 0px;
+}*/
+
+.mwf-dialog.mwf-shown footer {
+    height: 30px;
+}
+
+.mwf-dialog.mwf-popup {
+    top: 15%;
+    left: 10%;
+    height: auto;
+    max-height: 70%;
+    width: 70%;
+    padding: 15px;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: rgb(224,224,224);
+}
+
+.mwf-dialog form {
+    background-color: inherit;    
+}
+
+.mwf-dialog.mwf-popup input[type=submit]:active {
+    background-color: #33B5E5;
+    opacity: 0.7;
+}
+
+/* there is an issue about the sizing of fieldset, see: http://stackoverflow.com/questions/17408815/fieldset-resizes-wrong-appears-to-have-unremovable-min-width-min-content */
+.mwf-dialog fieldset {    
+    display: table-column;
+    width: 85%;
+    max-width: 85%;
+}
+
+.mwf-dialog button, .mwf-dialog fieldset, .mwf-dialog input[type=submit] {
+    margin-bottom: 10px;
+    margin-top: 10px;    
+}
+
+.mwf-dialog input {
+    background-color: inherit;
+    color: rgb(90,90,90);
+}
+
+.mwf-dialog legend {
+    color: rgb(90,90,90);
+}
+
+footer button, footer input[type=submit] {
+    height: 100%;
+    background-color: transparent;
+    color: white;
+}
+
+button, input[type=submit] {
+    display: block;
+    background-color: gray;
+    color: white;
+    width: 100%;
+    height: 35px;
+    margin: 0px;
+    font-size: 10pt;
+    border: none;
+}
+
+button:active {
+    background-color: #33B5E5;
+    opacity: 0.7;
+}
+
+.mwf-imgbutton, li .mwf-imgbutton, header .mwf-imgbutton, header input[type=submit].mwf-imgbutton {
+    background-repeat: no-repeat;
+    background-color: transparent;
+    font-size: 0pt;    
+    width: 40px;
+    height: 40px;
+    padding: 0px;
+    margin: 0px;
+}
+
+
+.mwf-imgbutton:active {
+    opacity: 0.3;
+}
+
+header input[type=submit].mwf-imgbutton.mwf-save {
+    /*background: url("./img/bb10.png") -8px -8px;*/
+    background-image: url("./img/save.png"); 
+    background-repeat: no-repeat;
+    background-size: 35px 35px;
+    width:35px;
+    height:35px;    
+}
+
+.mwf-add {
+    background: url("./img/bb10.png") -8px -8px;
+}
+
+.mwf-cancel {
+    background: url("./img/bb10.png") -331px -168px;
+}
+
+.mwf-camerabutton {
+    background: url("./img/bb10.png") -274px -543px;
+}
+
+.mwf-ok {
+    background: url("./img/bb10.png") -435px -8px;        
+}
+
+.mwf-rightarrow {
+    background: url("./img/bb10.png") -215px -592px;        
+}
+
+.mwf-settings {
+    background: url("./img/bb10.png") -493px -168px;
+}
+
+
+/* format header and footer buttons */
+header button, footer button, header input[type=submit], footer[type=submit] {
+    width: auto;
+    height: 100%;
+}
+
+.mwf-left-align {
+    float: left;
+}
+
+.mwf-right-align {
+    float: right;
+}
+
+/* dialogs are by default not visible */
+.mwf-dialog {
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+}
+ 
+.mwf-dialog.mwf-hidden {
+    display: block;
+    opacity: 0.0;
+    transition: opacity 1s;
+}
+
+.mwf-dialog.mwf-shown {
+    display: block;
+    opacity: 1.0;
+    transition: opacity 0.5s;
+    z-index: 2;
+}
+
+@media (orientation: portrait) {
+    .mwf-vhfill-container {
+    }
+}
+
+@media (orientation: landscape) {
+    .mwf-vhfill-container {
+        display: inline-block;
+        vertical-align: top;
+    }
+}
+
+/* forms */
+
+form {
+    width: 100%;
+    max-width: 100%;
+}
+
+fieldset {
+     min-width: 90%;
+     font-size: 12pt;
+     border: 1px solid #33B5E5;   
+     color: white;
+     padding-top: 0px;
+     padding-bottom: 2px;
+     width: 90%;
+     max-width: 90%;
+}
+
+legend {
+    /*color: rgb(172,172,172);*/
+}
+
+output {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+}
+
+input {
+    width: 100%;
+    max-width: 100%;
+    background-color: rgb(90,90,90);
+    border: none;
+    color: white;
+    font-size: 18pt;    
+}
+
+input:invalid {
+    border: none;
+    box-shadow: none;
+}
+
+fieldset img {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+/*
+ * toasts - TODO: handle short/long by adding classes 'long' and ' short'
+ */
+.mwf-toast {
+    width: 60%;
+    position: fixed;
+    text-align: center;
+    bottom: 15%;
+    left: 20%;
+    background-color: white;
+    opacity: 0.0;
+    color: gray;
+    /*-moz-transition:opacity 3s, background-color 3s, color 3s;    */
+    transition: opacity 3s, background-color 3s, color 3s;
+    z-index: 0;
+}
+
+.mwf-toast.mwf-active {
+    background-color: gray;
+    color: black;
+    /*-moz-transition:opacity 3s, background-color 3s, color 3s;    */
+    transition: opacity 3s, background-color 3s, color 3s;
+    opacity: 1.0;
+}
+
+/*
+ * scrolling
+ */
+.scrollview {
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+/*
+ * list views
+ */
+ul {
+    list-style: none;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0px;
+}
+
+li.mwf-li-singletitle, li.mwf-li-title-subtitle {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 50px;
+    max-height: 50px;
+    border-bottom: 1px dashed rgb(172,172,172);
+    /* these ones prevent text selection on list items */
+    -moz-user-select: none;
+    user-select: none;
+}
+
+li:last-child {
+    /*border-bottom: none;*/
+}
+
+li:active {
+    background-color: #33B5E5;
+    opacity: 0.7;
+}
+
+li.mwf-li-singletitle .mwf-imgbutton, li.mwf-li-title-subtitle .mwf-imgbutton {
+    margin-top: 5px;
+} 
+
+.mwf-li-titleblock {
+    padding-left: 10px;
+    display: inline-block;
+    font-size: 20pt;
+    font-weight: normal;
+    margin: 0px;
+    max-width: -moz-calc(100% - 100px);
+    overflow: hidden;
+}
+
+h2.mwf-li-titleblock {
+    margin-top: 5px;
+    overflow: inherit;
+    height: 50px;
+    max-height: 50px;
+    overflow: hidden;
+}
+
+.mwf-li-titleblock h2 {
+    font-weight: inherit;
+    margin: 0px;
+    font-size: 16pt;
+    padding-left: 0px;   
+    overflow: inherit;
+    max-height: 30px;
+}
+
+.mwf-li-titleblock h3 {
+    font-weight: inherit;
+    margin: 0px;
+    margin-top: -2.5px;
+    font-size: 10pt;
+    font-style: italic;
+    padding-left: 0px;   
+    max-height: 20px;
+}
+
+li img {
+    width: 50px;
+    max-height: 50px;
+    margin: 0px;
+    padding: 0px;
+}
+
+li input {
+    width: 50px;
+    height: 50px;
+    margin: 0px;
+    padding: 0px;
+    max-height: 50px;
+    display: inline-block
+}

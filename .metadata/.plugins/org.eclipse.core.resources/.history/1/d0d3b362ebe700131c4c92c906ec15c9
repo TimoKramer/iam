@@ -1,0 +1,57 @@
+<!doctype html>
+<!--[if lte IE 7]> <html class="no-js ie67 ie678" lang="de"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8 ie678" lang="de"> <![endif]-->
+<!--[if IE 9]> <html class="no-js ie9" lang="de"> <![endif]-->
+<!--[if gt IE 9]> <!--><html class="no-js" lang="de"> <!--<![endif]-->
+<head>
+		<meta charset="UTF-8">
+		<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+		<title>Timos Seite</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" href="css/knacss.css" media="all">
+		<link rel="stylesheet" href="css/styles.css" media="all">
+</head>
+<body>
+	
+	<header id="header" role="banner" class="line pam txtcenter">
+		Homepage von <strong>Timo Kramer</strong> – Webkram und Strassenprogrammierer
+		<nav id="navigation" role="navigation">
+			<ul class="txtcenter pam">
+				<li class="pam inbl">Arbeit</li>
+				<li class="pam inbl">Portfolio</li>
+				<li class="inbl pam">Kontakt</li>
+				<li class="pam inbl">Anderes</li>
+			</ul>
+		</nav>
+	</header>
+	<div id="main" role="main" class="line pal txtcenter">
+		<article id="work">
+			<h2>Arbeit</h2>
+			<span>Ich bin Webentwickler und suche nach interessanten Aufgaben.</span>
+			<div>JavaScript, PHP und Processing sind meine Sprachen.</div>
+		</article>			
+		<article id="portfolio">
+			<h2>Portfolio</h2>
+			<span>Mein Portfolio ist noch nicht gro&szlig;. Ich suche interessante und anspruchsvolle Aufgaben.</span>
+			<div>Bisher gab es nur ein paar &Uuml;bungsprojekte, aber mehr wird kommen.</div>
+		</article>
+		<article>
+			<h2>Kontakt</h2>
+			<span>Schreibt mir oder ruft mich an.</span>
+			<div>
+				<ul>
+					<li><a href="https://github.com/TimoKramer"><span>Github</span></a></li>
+					<li><a href="http://de.linkedin.com/pub/timo-kramer/65/532/793/"><span>LinkedIn</span></a></li>
+					<li><a href="http://de.linkedin.com/pub/timo-kramer/65/532/793/"><span>LinkedIn</span></a></li>
+				</ul>
+			</div>
+		</article>
+	<footer id="footer" role="contentinfo" class="line pam txtcenter">
+		Lorem Elsass ipsum lacus leverwurscht Wurschtsalad mamsell Gal. gewurztraminer turpis, suspendisse commodo Oberschaeffolsheim ornare aliquam semper Miss Dahlias Mauris turpis sagittis kuglopf eleifend dignissim baeckeoffe geht's Richard Schirmeck mollis habitant schnaps ante et sit leo schpeck sit Salu bissame Salut bisamme varius quam. amet elementum nullam bissame bredele Heineken picon bière gal sed risus, condimentum Verdammi ch'ai ac réchime météor barapli s'guelt quam, non Christkindelsmärik blottkopf, Carola tellus rucksack vielmols, Gal !
+	</footer>
+
+</body>
+</html>

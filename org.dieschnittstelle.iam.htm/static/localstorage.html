@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HTML5 Local Storage API Example</title>
+		<meta charset="UTF-8"/>
+		<style>
+			input {
+				width: 100px;
+				padding: 10px;
+				border: 1px solid;
+				background-color: lightgray;
+				border-color: gray;
+			}
+		</style>
+		<script type="text/javascript">
+            function updateCount() {
+                localStorage.setItem("accessCount", parseInt(readCount()) + 1);
+            }
+
+            function readCount() {
+                var count = localStorage.getItem("accessCount");
+                if (count == null) {
+                    return 0;
+                }
+                return count;
+            }
+
+            function resetCount() {
+                localStorage.setItem("accessCount", 0);
+            }
+
+            function displayCount() {
+                alert("accessCount is: " + readCount() + "\n (note that localStorage is not persisted for file:// URLs)");
+            }
+		</script>
+	</head>
+	<body>
+		<p>
+			<input value="update" type="button" onclick="updateCount();" onmousedown="this.style.backgroundColor='gray';" onmouseup="this.style.backgroundColor='lightgray';"/>
+			<input value="read" type="button" onclick="displayCount();" onmousedown="this.style.backgroundColor='gray';" onmouseup="this.style.backgroundColor='lightgray';"/>
+			<input value="reset" type="button" onclick="resetCount();" onmousedown="this.style.backgroundColor='gray';" onmouseup="this.style.backgroundColor='lightgray';"/>
+		</p>
+	</body>
+</html>

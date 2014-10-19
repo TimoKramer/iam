@@ -1,0 +1,97 @@
+div#editview {
+	position:absolute;
+	top:0px;
+	left:0px;
+	margin:0px;
+	background:rgb(100,100,100);
+	overflow-y:scroll;
+	/* in order for the fading-in to work we need to set height/width to 0%, changing the display property from none to block will result in a messed up transition */
+	height:0%;
+	width:0%;
+	opacity:0.0;
+	transition:opacity 2.5s;
+}
+div#editview.overlay {
+	height:100%;
+	width:100%;
+	opacity:0.95;
+}
+input, button, textarea, div.checkboxgroup, select {
+	width:100%;
+	display:block;
+	margin:0%;
+	margin-top:2%;
+	margin-bottom:2%;
+	font-family:"Avenir Medium",sans-serif;
+	font-size:12pt;
+	padding-left:1px;
+	padding-top:2px;
+	padding-bottom:2px;
+}
+input[type=radio] {
+	display:inline-block;
+	margin-right:7px;
+	width:auto;
+}
+input[type=radio]:not(:first-of-type) {
+margin-left: 15px;
+}
+label {
+	display:inline-block !important;
+	vertical-align:middle;
+}
+select option {
+	display:block;
+	height:auto;
+}
+/* MFM styles */
+output.validationMessages {
+	display:block;
+	color:red;
+	height:15px;
+	margin-top: 0px;
+	padding-top: 0px;
+}
+input {
+	height:30px;
+	border:1px solid gray;
+}
+input[type=radio] {
+	vertical-align:middle;
+}
+input[type=submit], input[type=button], button {
+	height:35px;
+	padding-right:0px;
+	width:100%;
+}
+
+input:disabled {
+	background-color:none;
+	opacity:0.3;
+}
+input:invalid, textarea:invalid {
+	border:1px solid red;
+	/* the box-shadow property creates the red border! need to overwrite it! */
+	box-shadow:none;
+}
+
+/* styling for focused elements */
+input:focus, textarea:focus {
+    border:1px solid blue;
+    box-shadow:none;
+}
+
+fieldset.radiogroup {
+    margin-top: 15px;
+    margin-left: 0px;
+    padding: 0px;
+    border: none;
+}
+
+fieldset.radiogroup * {
+    height: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}

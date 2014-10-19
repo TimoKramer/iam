@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <script type="text/javascript" src="./js/lib/ixdb.js"></script>
+        <script type="text/javascript" src="./js/DataItemCRUDOperations.js"></script>
+        <script type="text/javascript" src="./js/ListviewViewController.js"></script>
+        <link rel="stylesheet" href="./css/mwf.css"/>
+    </head>
+
+    <body onload="vc.initialiseView()">
+        <!-- for dialog, add: mwf-dialog-shown -->
+        <div class="mwf-view mwf-view-initial" id="itemOverview" data-mwf-viewcontroller="OverviewViewController">
+            <header>
+                <button id="createDB" class="mwf-left-align mwf-imgbutton mwf-settings">
+                    installieren
+                </button>
+                <button id="createItem" class="mwf-right-align mwf-imgbutton mwf-add">
+                    hinzufügen
+                </button>
+            </header>
+            <div class="mwf-body">
+                <ul id="itemlist" class="scrollview">
+                    <!-- <li class="mwf-li-singletitle mwf-template" data-mwf-templatename="listitem-img-h2" >
+                    <img class="mwf-left-align" src="img/hm.jpg"/>
+                    <h2 class="mwf-left-align mwf-li-titleblock">Lorem Ipsum</h2>
+                    <div class="mwf-right-align mwf-imgbutton mwf-rightarrow"></div>
+                    </li> -->
+                    <li class="mwf-li-title-subtitle mwf-template" data-mwf-templatename="listitem-img-h2-h3" id="itemlistElement">
+                        <img class="mwf-left-align" src="img/hm2.jpg"/>
+                        <div class="mwf-left-align mwf-li-titleblock">
+                            <h2>Lorem Ipsum</h2><h3>dolor sit amet, consectetur adipisicing</h3>
+                        </div>
+                        <div class="mwf-right-align mwf-imgbutton mwf-rightarrow"></div>
+                    </li>
+                    <!-- <li class="mwf-li-singletitle mwf-template" data-mwf-templatename="listitem-checkbox-h2">
+                    <input class="mwf-left-align" type="checkbox"/>
+                    <h2 class="mwf-left-align mwf-li-titleblock">Ipsum quia</h2>
+                    <div class="mwf-right-align mwf-imgbutton mwf-rightarrow"></div>
+                    </li> -->
+                </ul>
+            </div>
+            <footer>
+                <button id="deleteDB" class="mwf-left-align">
+                    löschen
+                </button>
+                <button id="toggleIdSetting" class="mwf-right-align">
+                    idsIDB
+                </button>
+            </footer>
+        </div>
+        <!-- a dialog that is used by this view -->
+        <div class="mwf-dialog mwf-popup" id="itemDialog"> <!-- add: mwf-shown -->
+            <div class="mwf-dialog-body">
+                <form id="itemDialog-updateForm">
+                    <fieldset>
+                        <legend>
+                            Titel
+                        </legend>
+                        <input autocomplete="off" class="mwf-dynvalue" id="itemDialog-title" type="text" placeholder="..." autofocus="autofocus" required="required"/>
+                    </fieldset>
+                    <input type="submit" value="Update"/>
+                    <button id="itemDialog-delete">Delete</button>
+                </form>
+            </div>
+            <!-- <footer></footer> -->
+        </div>
+    </body>
+</html>

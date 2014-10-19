@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HTML5 Forms Example</title>
+		<meta charset="UTF-8"/>
+		<style>
+			input {
+  				width: 280px;
+  				height: 20px;
+  				padding: 2px;
+  				border: 1px solid;
+  				border-color: gray;
+			}
+
+			input[type="submit"] {
+  				background-color: lightgray;
+  				width: 286px;
+  				height: 40px;
+  				padding: 2px;
+			}
+
+			input[type="reset"] {
+  				background-color: lightgray;
+  				width: 286px;
+  				height: 25px;
+  				padding: 2px;
+			}
+		</style>
+		<!--  the function called on submitting the form -->
+		<script type="text/javascript">
+			function registerSite(form) {
+				alert("registering:\n" + form.urlfield.value + "\n" + form.textfield.value + "\n" + form.emailfield.value + "\n" + form.pwdfield.value);	
+			}
+		</script>
+	</head>
+	<body>
+		<!--  the form -->
+		<form id="form" action="javascript:registerSite(document.getElementById('form'));"> 
+  			<input type="reset" value="Reset Form" onmousedown="this.style.backgroundColor='gray';" onmouseup="this.style.backgroundColor='lightgray';"/>
+  			<br/>
+  			<input type="url" name="urlfield" placeholder="Some URL" autofocus="autofocus" required="required"/>
+  			<br/>
+  			<input name="textfield" placeholder="Some Text" required="required"/>
+  			<br/>
+  			<input type="email" name="emailfield" placeholder="Registration Email"/>
+  			<br/>
+  			<input type="password" name="pwdfield" placeholder="Password" required="required"/>
+  			<br/>
+  			<input type="submit" value="Register Site" onmousedown="this.style.backgroundColor='green';" onmouseup="this.style.backgroundColor='lightgray';"/>
+		</form>
+	</body>
+</html>

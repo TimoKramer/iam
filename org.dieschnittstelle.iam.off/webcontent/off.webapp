@@ -1,0 +1,13 @@
+{
+  "name": "offwebapp",
+  "description": "sample offline webapps",
+  "icons": {
+    "128": "/img/hmicon.png"
+  },
+  "launch_path": "/off.html",
+  "developer": {
+    "name": "dieschnittstelle.org",
+    "url": "http://www.dieschnittstelle.org"
+  },
+  "default_locale": "en"
+} 

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>HTML Speechinput Example</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Jörn Kreutel" />
+		<script type="text/javascript" src="js/speechinput.js"></script>
+	</head>
+
+	<body onload="onPageLoaded()">
+		<div>
+			<form id="inputform">
+				<table>
+					<tr>
+					<td>
+						language
+					</td>
+					<td>
+						<select id="recolang">
+							<option value="de">de</option>
+							<option value="en">en</option>
+						</select>
+					</td></tr>
+					<tr>
+						<td>
+							max nbest
+						</td>
+						<td>
+							<input type="number" size="1" id="recomaxnbest" value="3"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							continuous
+						</td>
+						<td>
+							<input type="checkbox" id="recocontinuous" checked="checked"/>							
+						</td>
+					</tr>
+					<tr>
+						<td>
+							intermediate
+						</td>
+						<td>
+							<input type="checkbox" id="recointerim" checked="checked"/>														
+						</td>
+					</tr>
+				</table>
+				<textarea id="recoinput" cols="70" rows="5"> </textarea>
+				<br/>
+				<input type="button" id="recocontrol" value="start reco" onclick="startReco()"/>
+				<input type="button" id="recocontrolabort" value="stop reco" onclick="abortReco()"/>
+			</form>
+			<ol id="recoresults"></ol>
+			<span id="recoerror"> </span>
+		</div>
+	</body>
+</html>

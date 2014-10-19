@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HTML5 Multimedia Example (Video)</title>
+		<meta charset="UTF-8"/>
+		<style>
+			input {
+				width: 100px;
+				padding: 10px;
+				border: 1px solid;
+				background-color: lightgray;
+				border-color: gray;
+			}
+		</style>
+		<!-- import the script that implements the common controller for audio and video -->
+		<script type="text/javascript" src="../script/mediacontrols.js"></script>
+	</head>
+	<body onload="initialiseMediaElement('video')">
+		<!--  the video element that sets the event listeners for the video content -->
+		<video onended="mediaEnded(this);" ontimeupdate="updateTimer(this);"
+		oncanplay="mediaLoaded(this);">
+			<source src="../media/video.ogv"></source>
+		</video>
+		<!--  the button bar that provides the interface for interacting with the media content -->
+		<p id="controls">
+			<span id="playbutton">
+				<input type="button" id="play"
+				value="play" onclick="togglePlay(this);"
+				onmousedown="this.style.backgroundColor='gray';"
+				onmouseup="this.style.backgroundColor='lightgray';" />
+			</span>
+			<span
+			id="position">00:00</span> / <span id="duration">loading...</span>
+			<span
+			id="soundbutton">
+				<input type="button" id="sound" value="mute"
+				onclick="toggleSound(this);"
+				onmousedown="this.style.backgroundColor='gray';"
+				onmouseup="this.style.backgroundColor='lightgray';" />
+			</span>
+		</p>
+	</body>
+</html>

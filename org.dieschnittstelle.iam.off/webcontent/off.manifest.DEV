@@ -1,0 +1,41 @@
+CACHE MANIFEST
+# v0.0.15 - 2014-01-12
+# This is a comment.
+
+# ATTENTION: IF THIS FILE REFERENCES ANY UNAVAILABLE RESSOURCES, NO CACHE WILL BE CREATED!!!
+
+##############
+# application
+##############
+
+NETWORK:
+http2mdb/*
+available
+
+off.html
+
+# js
+js/lib/webapp.js
+js/lib/xhr.js
+js/lib/RemoteMasterSyncedCRUDOperationsImpl.js
+js/lib/IndexedDBCRUDOperationsImpl.js
+js/lib/Http2MdbCRUDOperationsImpl.js
+js/DataItemCRUDOperations.js
+js/ListviewViewController.js
+
+# style and style imgs
+css/mwf.css
+css/img/save.png
+css/img/ok.png
+css/img/cancel.png
+css/img/cancel2.png
+css/img/bb10.png
+
+# content imgs
+img/hm.jpg
+img/hm2.jpg
+img/hmicon.png
+
+# webapp stuff
+off.webapp
+

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HTML5 Canvas API Example</title>
+		<meta charset="UTF-8"/>
+		<script type="text/javascript">
+// count the number of clicks
+var clickcount = 0;
+// the parametrised ellipses that will be drawn and animated on the canvas
+var ellipses = [ [ 140, 199, 130, 32 ], [ 205, 230, 130, 38 ],
+[ 336, 250, 160, 42 ], [ 462, 210, 75, 30, ], [ 405, 138, 92, 35 ],
+[ 370, 98, 97, 33 ], [ 232, 133, 135, 42 ] ];
+
+// the status of interacting with the canvas
+var lifecyclestatus = "initial";
+var currentintervalid = -1;
+
+// the canvas
+var canvas = null;
+// the base image
+var baseimg = null;
+// the graphical context from the canvas
+var gctx = null;
+
+// create an ellipse and it on the canvas
+function drawEllipse(x, y, w, h) {
+
+// calculate the measures
+var kappa = .5522848;
+ox = (w / 2) * kappa, // control point offset horizontal
+oy = (h / 2) * kappa, // control point offset vertical
+xe = x + w, // x-end
+ye = y + h, // y-end
+xm = x + w / 2, // x-middle
+ym = y + h / 2; // y-middle
+
+// create the ellipse
+gctx.beginPath();
+gctx.moveTo(x, ym);
+gctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
+gctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
+gctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
+gctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
+gctx.closePath();
+
+// draw the ellipse
+var stroke = gctx.stroke();
+}
+
+// draw the background image
+function drawBaseimg() {
+// obtain the canvas
+if (!canvas) {
+canvas = document.getElementById('canvas');
+}
+if (canvas.getContext) {
+// obtain the context
+if (!gctx) {
+gctx = canvas.getContext('2d');
+}
+
+// create an image object
+baseimg = new Image();
+
+// declare the onload callback
+baseimg.onload = function() {
+// draw the image on the canvas
+gctx.drawImage(baseimg, 0, 0);
+// set the initial contetx parameters
+gctx.strokeStyle = "blue";
+gctx.lineWidth = 4;
+gctx.save();
+};
+
+// set the source of the image (this will trigger invocation of the onload callback)
+baseimg.src = '../media/Web20en.png';
+}
+}
+
+// handle user intteractions
+function onClick() {
+
+// stop the animation mode
+if (currentintervalid > -1) {
+clearInterval(currentintervalid);
+currentintervalid = -1;
+lifecyclestatus = "initial";
+}
+// start the animation mode after the first round
+else if (lifecyclestatus == "done") {
+currentintervalid = setInterval(nextState, 500);
+}
+// manual mode
+else {
+nextState();
+}
+
+}
+
+function nextState() {
+// after each round, we reset the base image
+if (clickcount > (ellipses.length - 1)) {
+//canvas.getContext('2d').restore();
+
+drawBaseimg();
+
+clickcount = 0;
+lifecyclestatus = "done";
+return;
+} else {
+
+if (clickcount > 0) {
+// draw the ellipse using the base settings of the context (blue lines)
+var lastel = ellipses[clickcount - 1];
+drawEllipse(lastel[0], lastel[1], lastel[2], lastel[3]);
+}
+var currentel = ellipses[clickcount];
+
+// save the context settings
+gctx.save();
+
+// change the context parameters (use red lines)
+gctx.strokeStyle = "red";
+// draw the ellipse
+drawEllipse(currentel[0], currentel[1], currentel[2], currentel[3]);
+
+// restore the context, i.e. the next drawing will use the settings that were used when calling gctx.save()
+gctx.restore();
+
+clickcount++;
+
+lifecyclestatus = "continue";
+return;
+}
+
+lifecyclestatus = "error";
+return;
+}
+		</script>
+		<style type="text/css">
+			canvas {
+				border: 2px solid black;
+			}
+		</style>
+	</head>
+	<body onload="drawBaseimg();">
+		<!-- the actual canvas element -->
+		<canvas id="canvas" width="600" height="400" onclick="onClick();"></canvas>
+	</body>
+</html>

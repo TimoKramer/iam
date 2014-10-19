@@ -1,0 +1,1 @@
+../Binrunnable/mongodb-osx-x86_64-2.4.8/bin/mongod -dbpath ../org.dieschnittstelle.iam.off/mdbdata/db --rest

@@ -1,0 +1,10 @@
+<?php
+
+		$sql = "SELECT rank, points FROM (
+                   SELECT id, playername, @rownum := @rownum + 1 AS rank, points
+                   FROM players ORDER BY points DESC
+                   ) as result";
+		
+		$query = $this -> db -> query($sql2);	
+
+?>

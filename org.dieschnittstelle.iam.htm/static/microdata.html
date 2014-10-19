@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HTML5 Microdata Example</title>
+		<meta charset="UTF-8"/>
+	</head>
+	<body>
+		<h2>Anschrift</h2>
+		<!-- outer item: an organisation and its properties -->
+		<p itemscope="" itemtype="http://data-vocabulary.org/Organization">
+			<span itemprop="name"> Beuth Hochschule f&uuml;r Technik Berlin </span>
+			<br />
+			<!--  inner item: an address -->
+			<span itemprop="address" itemscope=""
+			itemtype="http://data-vocabulary.org/Address"> <span itemprop="street-address">Luxemburger Stra&szlig;e 10</span>
+				<br />
+				<span itemprop="postal-code">13353</span> <span itemprop="locality">Berlin</span> </span>
+			<br />
+			Telefon:
+			<span itemprop="tel">+49&nbsp;30
+				4504 - 0 </span>
+			<br />
+			Telefax: +49&nbsp;30
+			4504 - 5555
+			<br />
+			E-Mail:
+			<a href="mailto:www@beuth-hochschule.de">www@beuth-hochschule.de</a>
+			<br />
+		</p>
+	</body>
+</html>

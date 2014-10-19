@@ -1,0 +1,1 @@
+../Binrunnable/mongodb-win32-x86_64-2008plus-2.4.8/bin/mongod -dbpath ../org.dieschnittstelle.iam.off/mdbdata/db --rest
