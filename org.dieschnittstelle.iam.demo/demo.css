@@ -1,0 +1,66 @@
+body {
+	background-color: rgb(90,90,90);
+	font-family: Avenir, sans-serif;
+}
+
+h1 {
+	color: rgb(204,204,204);
+	font-size: 30pt;
+	font-weight: normal;
+	text-transform: uppercase;
+}
+
+footer, #zeitdokumente, #einfuehrungstext, #textauszug, .medienverweise {
+	display: none;
+}
+
+#verknuepfungen {
+	color: rgb(179,179,179);
+	border: 1px dashed rgb(179,179,179);
+	max-width: 250px;
+	padding: 10px;
+	padding-right: 5px;
+	padding-bottom: 0px;
+}
+
+#verknuepfungen h2 {
+	text-transform: uppercase;
+	font-weight: normal;
+	font-size: 15pt;
+	margin: 0px;
+	border-bottom: 1px dashed rgb(179,179,179);
+	padding-bottom: 10px;
+}
+
+#verknuepfungen ul {
+	list-style: none;
+	padding-left: 0px;
+	margin: 0px;
+}
+
+#verknuepfungen li {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px dashed rgb(179,179,179);
+	background-image: url('./css/img/Pfeil_weiss01.png');
+	background-repeat: no-repeat;
+	background-position: right center;
+	background-size: 25px 25px;
+}
+
+#verknuepfungen a {
+	text-decoration: none;
+	color: inherit;
+	font-size: 20pt;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+#verknuepfungen li:last-child {
+	border-bottom: none;
+}
+
+#verknuepfungen li:active {
+	background-color: rgb(63,169,245	);
+	opacity: 0.5;
+}
