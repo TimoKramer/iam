@@ -23,11 +23,3 @@ h1 {
 .medienverweise {
 	background-color: rgb(45, 45, 45);
 }
-.medienverweise h2 {
-	text-transform: uppercase;
-	font-family: "Avenir Medium", sans-serif;
-	font-weight: normal;
-	font-style: normal;
-	font-size: 25pt;
-	color: rgb(63, 169, 245);
-}

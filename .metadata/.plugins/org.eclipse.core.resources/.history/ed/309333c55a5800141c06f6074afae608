@@ -7,19 +7,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
-		<section>
+		<article>
 			<h1 id="topic_title" class="editable">Die Umsiedlerin</h1>
-			<article id="zeitdokumente">
+			<section id="zeitdokumente">
 				<h2>Zeitdokumente</h2>
 				<figure>
-					<img src="http://www.esquife.cult.cu/primeraepoca/imagenes/imrevista/No60/muller.jpg"/>			
-					<!-- <img src="img/hm_mit_bk_tragelehn.jpg"/> -->
+					<!-- <img src="http://www.esquife.cult.cu/primeraepoca/imagenes/imrevista/No60/muller.jpg"/> -->			
+					<img src="img/hm_mit_bk_tragelehn.jpg"/>
 					<figcaption>
 						Programmheft zur Uraufführung
 					</figcaption>
 				</figure>
-			</article>
-			<article id="einfuehrungstext">
+			</section>
+			<section id="einfuehrungstext">
 				<div class="contentfragment">
 					<h2>&bdquo;Die Umsiedlerin oder das Leben auf dem Lande&ldquo;</h2>
 					<p>
@@ -38,8 +38,8 @@
 				<div class="fullcontent_link">
 					<a href="#">weiter lesen</a>
 				</div>
-			</article>
-			<article id="verknuepfungen">
+			</section>
+			<section id="verknuepfungen">
 				<h2>Mehr dazu unter:</h2>
 				<nav>
 					<ul>
@@ -51,7 +51,7 @@
 						</li>
 					</ul>
 				</nav>
-			</article>
-		</section>
+			</section>
+		</article>
 	</body>
 </html>

@@ -3,13 +3,12 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>CSS Beispiele</title>
-		<link rel="stylesheet" href="css/css.css"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/css_uebungen.css"/>
 	</head>
 	<body>
-		<section>
+		<article>
 			<h1 id="topic_title" class="editable">Die Umsiedlerin</h1>
-			<article id="zeitdokumente">
+			<section id="zeitdokumente">
 				<h2>Zeitdokumente</h2>
 				<figure>
 					<img src="http://www.esquife.cult.cu/primeraepoca/imagenes/imrevista/No60/muller.jpg"/>			
@@ -18,8 +17,8 @@
 						Programmheft zur Uraufführung
 					</figcaption>
 				</figure>
-			</article>
-			<article id="einfuehrungstext">
+			</section>
+			<section id="einfuehrungstext">
 				<div class="contentfragment">
 					<h2>&bdquo;Die Umsiedlerin oder das Leben auf dem Lande&ldquo;</h2>
 					<p>
@@ -38,20 +37,39 @@
 				<div class="fullcontent_link">
 					<a href="#">weiter lesen</a>
 				</div>
-			</article>
-			<article id="verknuepfungen">
+			</section>
+			<section id="textauszug">
+				<div class="textauszug">
+					<h2>Textauszug</h2>
+					<ul>
+						<li>14</li>
+						<li>Kate</li>
+					</ul>
+				</div>
+			</section>
+			<section id="kommentar" class="medienverweise">
+				<h2>Kommentar</h2>
+				<ul>
+					<li>Hochschule f&uuml;r &Ouml;konomie</li>
+				</ul>
+			</section>
+			<section id="filmeundaudio" class="medienverweise">
+					<h2>Filme und Audio</h2>
+					<ul>
+						<li>&Uuml;ber Tiere und Menschen</li>
+						<li>Demo Alexanderplatz 1989</li>
+					</ul>
+			</section>
+			<section id="verknuepfungen">
 				<h2>Mehr dazu unter:</h2>
 				<nav>
 					<ul>
 						<li>
 							<a href="#">Ort</a>
 						</li>
-						<li>
-							<a href="#">Zeit</a>
-						</li>
 					</ul>
 				</nav>
-			</article>
-		</section>
+			</section>
+		</article>
 	</body>
 </html>
