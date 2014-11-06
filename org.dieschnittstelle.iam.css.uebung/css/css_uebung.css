@@ -42,7 +42,7 @@ footer, #zeitdokumente, #einfuehrungstext, #textauszug, .medienverweise {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	border-bottom: 1px dashed rgb(179,179,179);
-	background-image: url('./css/img/Pfeil_weiss01.png');
+	background-image: url('./img/Pfeil_weiss01.png');
 	background-repeat: no-repeat;
 	background-position: right center;
 	background-size: 25px 25px;
