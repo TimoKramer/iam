@@ -10,9 +10,11 @@ h1 {
 	text-transform: uppercase;
 }
 
+/* Vermutlich nur zur Übung ausgeblendet
 footer, #zeitdokumente, #einfuehrungstext, #textauszug, .medienverweise {
 	display: none;
 }
+*/
 
 #verknuepfungen {
 	color: rgb(179,179,179);
