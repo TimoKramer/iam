@@ -1,13 +1,84 @@
 body {
 	background-color: rgb(90,90,90);
 	font-family: Avenir, sans-serif;
+	margin: 0;
 }
 
 h1 {
-	color: rgb(204,204,204);
 	font-size: 30pt;
 	font-weight: normal;
-	text-transform: uppercase;
+	font-style: normal;
+	color: rgb(204,204,204);
+	padding-top: 20px;
+	margin-left: 20px;
+	white-space: nowrap;
+/*
+	-moz-user-select: none;
+	user-select: none;
+*/
+}
+
+header {
+    line-height: 50px;
+	background-color: rgb(0,0,0);
+}
+
+header>a {
+    font-family: "Avenir Black", sans-serif;
+	font-size: 27pt;
+	font-style: normal;
+	font-weight: normal;
+	color: rgb(128,128,128);
+    text-decoration: none;
+    text-transform: uppercase;
+    padding-left:20px;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+
+section {
+	background-color: rgb(90,90,90);
+	/*
+	transition: opacity 2s, background-color 2s;
+	opacity: 1.0;
+	*/
+}
+
+
+article {
+	margin-left: 20px;
+    width: 240px;
+    float: left;
+}
+
+footer {
+	clear:left;
+	padding-top: 1em;
+	padding-bottom: 5em;
+	padding-left: 0em;
+	padding-right: 0em;
+    margin: 0 auto;
+    transition: opacity 2s, background-color 2s;
+	opacity: 1.0;
+}
+
+footer a {
+    font-family: "Avenir Black", sans-serif;
+	font-size: 20pt;
+	font-style: normal;
+	font-weight: normal;
+	color: rgb(128,128,128);
+    text-decoration: none;
+}
+
+footer li {
+    list-style: none;
+    display: inline;
+}
+
+footer ul {
+	margin-bottom: 0;
 }
 
 /* Vermutlich nur zur Übung ausgeblendet
@@ -63,6 +134,121 @@ footer, #zeitdokumente, #einfuehrungstext, #textauszug, .medienverweise {
 }
 
 #verknuepfungen li:active {
-	background-color: rgb(63,169,245	);
+	background-color: rgb(63,169,245);
 	opacity: 0.5;
+}
+
+.medienverweise div {
+	background-color: rgb(40,40,40);
+	margin: 20px 0;
+	padding-bottom: 20px;
+}
+
+.medienverweise h2 {
+	font-family: "Avenir Medium", sans-serif;
+	font-size: 20pt;
+	font-style: normal;
+	font-weight: normal;
+	color: rgb(69,169,245);
+	padding: 10px 0;
+	margin: 0 10px;
+	background-image: url("img/Pfeil03.png");
+	background-repeat:no-repeat;
+	background-position:right;
+	background-size: Auto 50%;
+	text-transform: uppercase;
+}
+
+.medienverweise ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.medienverweise li {
+	padding: 10px 0;
+	margin: 0 10px;
+	border-top: 1px dashed rgb(242,242,242);
+}
+
+.medienverweise li a {
+	font-family: "Avenir Black", sans-serif;
+	font-size: 15pt;
+	color: rgb(242,242,242);
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+}
+
+#textauszug {
+	 background-image: url("img/BackgroundMerkliste.png");
+	 font-family: serif;
+}
+
+/*
+#text_headline {
+    border-bottom: 1px dashed rgb(69,169,245);
+    margin-bottom: 0;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: 0;
+    padding-bottom: inherit;
+}
+*/
+
+#textauszug h2 {
+    font-family: "Avenir Medium", sans-serif;
+	font-size: 20pt;
+	font-weight: normal;
+	font-style: normal;
+	color: rgb(69,169,245);
+	text-transform: uppercase;
+	padding: 10px;
+	margin: 0;
+}
+
+#textauszug p {
+	margin: 0;
+}
+
+.scene {
+	margin: 10px;
+}
+
+.meta {
+	font-style: italic;
+	line-height: 19pt;
+}
+
+.dialog {
+	font-family: "Marion Regular", serif;
+	font-style: none;
+	margin-top: 25px;
+	line-height: 17pt;
+}
+
+.name {
+	margin-right: 6px;
+	text-transform: uppercase;
+}
+
+.fullcontent_link{
+	padding-left: 40px;
+	padding-top: 20px;
+	padding-bottom: 10px;
+	margin-left: 10px;
+	background-image: url("img/Pfeil01.png");
+	background-size: Auto 50%;
+	background-repeat: no-repeat;
+	background-position: left;
+}
+
+.fullcontent_link a{
+	font-family: "Marion Regular";
+	font-size: 15pt;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration:none;
+	line-height: 15px;
+	color: rgb(69,169,245);
 }
