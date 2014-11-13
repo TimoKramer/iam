@@ -1,7 +1,11 @@
-body {
+* {
+	margin: 0;
+}
+
+html, body {
 	background-color: rgb(90,90,90);
 	font-family: Avenir, sans-serif;
-	margin: 0;
+	height: 100%;
 }
 
 h1 {
@@ -9,8 +13,7 @@ h1 {
 	font-weight: normal;
 	font-style: normal;
 	color: rgb(204,204,204);
-	padding-top: 20px;
-	margin-left: 20px;
+	margin: 10px 0 10px 10px;
 	white-space: nowrap;
 /*
 	-moz-user-select: none;
@@ -19,39 +22,99 @@ h1 {
 }
 
 header {
-    line-height: 50px;
+    line-height: 20px;
 	background-color: rgb(0,0,0);
 }
 
 header>a {
-    font-family: "Avenir Black", sans-serif;
-	font-size: 27pt;
+    font-family: Avenir, sans-serif;
+	font-size: 12pt;
 	font-style: normal;
-	font-weight: normal;
+	font-weight: 600;
 	color: rgb(128,128,128);
     text-decoration: none;
     text-transform: uppercase;
-    padding-left:20px;
-    margin-top: 5px;
+    padding-left:10px;
+    margin-top: 3px;
+    margin-bottom: 3px;
     display: inline-block;
 }
 
-
 section {
 	background-color: rgb(90,90,90);
+	min-height: 100%;
+	margin-bottom: -25px;
 	/*
 	transition: opacity 2s, background-color 2s;
 	opacity: 1.0;
 	*/
 }
 
+section:after {
+	content: "";
+	display: block;
+	height: 25px;
+}
 
 article {
-	margin-left: 20px;
+	margin-left: 10px;
+	margin-right: 20px;
     width: 240px;
     float: left;
 }
 
+footer {
+	clear: left;
+	/*
+	padding-top: 1em;
+	padding-bottom: 5em;
+	padding-left: 0;
+	padding-right: 0;
+    margin: 0 auto;
+    width: max;
+    */
+ 	line-height: 25px; 
+	margin: none;
+	padding: none;
+	background-color: rgb(0,0,0);
+    /*transition: opacity 2s, background-color 2s;
+	opacity: 1.0;*/
+}
+
+footer ul {
+	list-style: none;
+    padding: 5px;
+    display:table;
+    width:100%;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+
+footer li {
+	display: table-cell;
+	text-align: center;
+	border-right-style: solid;
+	border-right-width: light;
+	border-right-color: rgb(128,128,128);
+}
+
+footer li:last-child {
+	border: none;
+	text-align: left;
+}
+
+footer a {
+    font-family: "Avenir Black", sans-serif;
+	font-size: 13pt;
+	font-style: normal;
+	font-weight: 600;
+	color: rgb(128,128,128);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+/*
 footer {
 	clear:left;
 	padding-top: 1em;
@@ -64,7 +127,7 @@ footer {
 }
 
 footer a {
-    font-family: "Avenir Black", sans-serif;
+    font-family: Avenir, sans-serif;
 	font-size: 20pt;
 	font-style: normal;
 	font-weight: normal;
@@ -80,73 +143,16 @@ footer li {
 footer ul {
 	margin-bottom: 0;
 }
-
-/* Vermutlich nur zur Übung ausgeblendet
-footer, #zeitdokumente, #einfuehrungstext, #textauszug, .medienverweise {
-	display: none;
-}
 */
-
-#verknuepfungen {
-	color: rgb(179,179,179);
-	border: 1px dashed rgb(179,179,179);
-	max-width: 250px;
-	padding: 10px;
-	padding-right: 5px;
-	padding-bottom: 0px;
-}
-
-#verknuepfungen h2 {
-	text-transform: uppercase;
-	font-weight: normal;
-	font-size: 15pt;
-	margin: 0px;
-	border-bottom: 1px dashed rgb(179,179,179);
-	padding-bottom: 10px;
-}
-
-#verknuepfungen ul {
-	list-style: none;
-	padding-left: 0px;
-	margin: 0px;
-}
-
-#verknuepfungen li {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	border-bottom: 1px dashed rgb(179,179,179);
-	background-image: url('./img/Pfeil_weiss01.png');
-	background-repeat: no-repeat;
-	background-position: right center;
-	background-size: 25px 25px;
-}
-
-#verknuepfungen a {
-	text-decoration: none;
-	color: inherit;
-	font-size: 20pt;
-	font-weight: bold;
-	text-transform: uppercase;
-}
-
-#verknuepfungen li:last-child {
-	border-bottom: none;
-}
-
-#verknuepfungen li:active {
-	background-color: rgb(63,169,245);
-	opacity: 0.5;
-}
-
 .medienverweise div {
 	background-color: rgb(40,40,40);
-	margin: 20px 0;
+	margin-bottom: 20px;
 	padding-bottom: 20px;
 }
 
 .medienverweise h2 {
 	font-family: "Avenir Medium", sans-serif;
-	font-size: 20pt;
+	font-size: 17pt;
 	font-style: normal;
 	font-weight: normal;
 	color: rgb(69,169,245);
@@ -156,7 +162,7 @@ footer, #zeitdokumente, #einfuehrungstext, #textauszug, .medienverweise {
 	background-repeat:no-repeat;
 	background-position:right;
 	background-size: Auto 50%;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 }
 
 .medienverweise ul {
@@ -172,7 +178,7 @@ footer, #zeitdokumente, #einfuehrungstext, #textauszug, .medienverweise {
 }
 
 .medienverweise li a {
-	font-family: "Avenir Black", sans-serif;
+	font-family: Avenir, sans-serif;
 	font-size: 15pt;
 	color: rgb(242,242,242);
 	font-weight: normal;
@@ -197,12 +203,12 @@ footer, #zeitdokumente, #einfuehrungstext, #textauszug, .medienverweise {
 */
 
 #textauszug h2 {
-    font-family: "Avenir Medium", sans-serif;
-	font-size: 20pt;
+    font-family: Avenir, sans-serif;
+	font-size: 17pt;
 	font-weight: normal;
 	font-style: normal;
 	color: rgb(69,169,245);
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 	padding: 10px;
 	margin: 0;
 }
@@ -222,8 +228,7 @@ footer, #zeitdokumente, #einfuehrungstext, #textauszug, .medienverweise {
 
 .dialog {
 	font-family: "Marion Regular", serif;
-	font-style: none;
-	margin-top: 25px;
+	font-style: normal;
 	line-height: 17pt;
 }
 
@@ -232,23 +237,204 @@ footer, #zeitdokumente, #einfuehrungstext, #textauszug, .medienverweise {
 	text-transform: uppercase;
 }
 
-.fullcontent_link{
+/*
+#textauszug .fullcontent_link{
 	padding-left: 40px;
 	padding-top: 20px;
 	padding-bottom: 10px;
-	margin-left: 10px;
 	background-image: url("img/Pfeil01.png");
 	background-size: Auto 50%;
 	background-repeat: no-repeat;
 	background-position: left;
 }
+*/
 
-.fullcontent_link a{
-	font-family: "Marion Regular";
-	font-size: 15pt;
+#textauszug .fullcontent_link a{
+	color: rgb(69,169,245);
+	background-image: url("img/Pfeil01.png");
+}
+
+.fullcontent_link a {
+	font-size: 12pt;
+	color: rgb(255,255,255);
+	text-decoration: none;
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-origin: padding-box;
+	background-size: 20px 20px;
+	padding-top: 12px;
+	padding-bottom: 15px;
+	padding-left: 20px;
+	margin-left: 15px;
+	display: block;
+}
+
+/*
+ * einführungstext
+ */
+
+#einfuehrungstext {
+	width: 300px;
+	height: auto;
+	background-color: rgb(63,169,245);
+	font-family: "Marion", serif;
+}
+
+#einfuehrungstext .contentfragment {
+	padding: 10px;
+	max-height: 130px;
+	font-size: 12pt;
+	color: rgb(255,255,255);
+	font-weight: normal;
+	margin: 0px;
+	overflow: hidden;
+}
+
+/* handle the case that we have very short texts... */
+#einfuehrungstext .contentfragment p:first-child {
+	margin-top: 0px;
+}
+
+#einfuehrungstext .contentfragment p:last-child {
+	margin-bottom: 0px;
+}
+
+#einfuehrungstext h2 {
+	font-size: 13pt;
+	font-weight: 600;
+	padding: 0px;
+	padding-top: 5px;
+	margin: 0px;
+}
+
+#einfuehrungstext p {
+	font-weight: 600;
+}
+
+#einfuehrungstext .fullcontent_link a{
+	color: rgb(255,255,255);
+	background-image: url("./img/Pfeil_weiss01.png");
+}
+/*
+#einfuehrungstext .fullcontent_link a {
+	font-size: 12pt;
+	color: rgb(255,255,255);
+	text-decoration: none;
+	background-image: url("./img/Pfeil_weiss01.png");
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-origin: padding-box;
+	background-size: 20px 20px;
+	padding-top: 12px;
+	padding-bottom: 15px;
+	padding-left: 20px;
+	display: block;
+}
+*/
+
+/*
+ * zeitdokumente
+ */
+
+#zeitdokumente {
+	background-color: rgb(45,45,45);
+	font-family: "Avenir Medium", sans-serif;
+	color: rgb(242,242,242);
 	font-weight: normal;
 	font-style: normal;
-	text-decoration:none;
-	line-height: 15px;
-	color: rgb(69,169,245);
+	max-width: 200px;
+	max-height: 360px;
+	width: auto;
+	height: auto;
+	padding-bottom: 10px;
+}
+
+#zeitdokumente h2 {
+	font-size: 15pt;
+	/* font-weight must be overridden here because it is assigned by default for h2 */
+	font-weight: normal;
+	font-style: normal;
+	padding: 0px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-transform: uppercase;
+	/* we need a margin in order to get a left-side offset for the border */
+	margin: 0px;
+	margin-left: 10px;
+	margin-right: 10px;
+	border-bottom: 1px dashed rgb(242,242,242);
+}
+
+#zeitdokumente figure {
+	margin: 0px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-image: url("./img/Strich01.png") 0 0 300 stretch;
+	border-bottom: 10px dashed rgb(63,159,245);
+}
+
+#zeitdokumente img {
+	margin: 0px;
+	padding: 0px;
+	width: 200px;
+	width: auto;
+	height: auto;
+	max-height: 200px;
+	max-width: 180px;
+}
+
+#zeitdokumente figcaption {
+	font-size: 12pt;
+}
+
+/*
+ * mehr unter...
+ */
+
+#verknuepfungen {
+	/* no stroke length of dashes possible, the border is drawn around the whole content */
+	float: left;
+	margin-left: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 1px dashed rgb(179,179,179);
+	max-width: 300px;
+}
+
+#verknuepfungen h2 {
+	font-family: "Avenir Medium", sans-serif;
+	font-size: 12pt;
+	font-style: normal;
+	font-weight: normal;
+	color: rgb(179,179,179);
+	text-transform: uppercase;
+}
+
+#verknuepfungen ul {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+#verknuepfungen li {
+	/* see how margin and padding is used to completely underline the single list entries (padding/left-right: 0px) while at the same time leaving 10px of space to the outer border */
+	padding: 10px;
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-left: 0;
+	margin-right: 0;
+	border-top: 1px dashed rgb(179,179,179);
+}
+
+#verknuepfungen li a {
+	font-family: Avenir, sans-serif;
+	font-size: 15pt;
+	color: rgb(179,179,179);
+	font-weight: bold;
+	font-style: normal;
+	text-decoration: none;
+	padding: 0px;
+	margin: 0px;
 }
