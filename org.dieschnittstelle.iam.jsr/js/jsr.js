@@ -128,6 +128,7 @@ function createVerknuepfungen(contentItem) {
 	while (ul.firstChild) {
 		ul.removeChild(ul.firstChild);
 	}
+	
 
 	// then iterate over the list of links that is contained in the contentItem object
 	for (var i = 0; i < contentItem.content.length; i++) {
