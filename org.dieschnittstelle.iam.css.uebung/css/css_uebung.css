@@ -1,11 +1,12 @@
 * {
 	margin: 0;
+	padding: 0;
 }
 
 html, body {
 	background-color: rgb(90,90,90);
 	font-family: Avenir, sans-serif;
-	height: 100%;
+	height: vh;
 }
 
 h1 {
@@ -42,7 +43,7 @@ header>a {
 
 section {
 	background-color: rgb(90,90,90);
-	min-height: 100%;
+	height: calc(100vh - 46px);
 	margin-bottom: -25px;
 	/*
 	transition: opacity 2s, background-color 2s;
