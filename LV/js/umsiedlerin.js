@@ -6,7 +6,7 @@ var foot;
 function initView(){
 	
 	//initialization of root element
-	viewRoot = document.getElementsByTagName("article")[0];
+	viewRoot = document.getElementsByTagName("section")[0];
 	foot = document.getElementsByTagName("footer")[0];
 	
 	//initialization of fullcontent_link class elements

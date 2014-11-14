@@ -60,10 +60,10 @@ function setTitle(title) {
 function createObjekt(contentItem) {
     console.log("createObjekt()");
     
-    // create the objektfragment from template and set id=objekt to the section of the render_container
-    var render_section = contentItem.render_container;
-   	document.querySelector("#"+render_section).appendChild(objektfragment);
-    document.querySelector("#"+render_section).setAttribute("id", "objekt");  
+    // create the objektfragment from template and set id=objekt to the article of the render_container
+    var render_article = contentItem.render_container;
+   	document.querySelector("#"+render_article).appendChild(objektfragment);
+    document.querySelector("#"+render_article).setAttribute("id", "objekt");  
     
     // we set the src attribute of the img
     document.querySelector("#objekt_figure img").setAttribute("src", contentItem.src);
@@ -77,10 +77,10 @@ function createObjekt(contentItem) {
 function createTextauszug(contentItem) {
     console.log("createTextauszug()");
 	
-	// create the zeitfragment from template and set id=textauszug to the section of the render_container
-    var render_section = contentItem.render_container;
-    document.querySelector("#"+render_section).appendChild(zeitfragment);
-    document.querySelector("#"+render_section).setAttribute("id", "textauszug");
+	// create the zeitfragment from template and set id=textauszug to the article of the render_container
+    var render_article = contentItem.render_container;
+    document.querySelector("#"+render_article).appendChild(zeitfragment);
+    document.querySelector("#"+render_article).setAttribute("id", "textauszug");
     
     // the content will be provided by a server-side html file which we set as innerHTML in the local attachment site (the div element marked as "contentfragment")
     xhr("GET", contentItem.src, null, function(xmlhttp) {
@@ -93,13 +93,13 @@ function createTextauszug(contentItem) {
 function createMedienverweis(contentItem) {
     console.log("createMedienverweis()");
 	
-	var render_section = contentItem.render_container;
-	// set id=medienverweis to the section of the render_container
+	var render_article = contentItem.render_container;
+	// set id=medienverweis to the article of the render_container
     if(mv==1){
-    	document.querySelector("#"+render_section).setAttribute("id", "medienverweise");
+    	document.querySelector("#"+render_article).setAttribute("id", "medienverweise");
 	}
 	
-	//marker for medienverweis section is allready set
+	//marker for medienverweis article is allready set
 	mv = 2;
 	
     // we read out the list element
