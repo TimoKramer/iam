@@ -1,7 +1,3 @@
-/**
- * @author Joachim Brehm und Axel Pausch
- * 
- */
 
 //Save the root element
 var viewRoot;

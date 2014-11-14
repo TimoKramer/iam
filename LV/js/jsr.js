@@ -1,6 +1,3 @@
-/**
- * @author Joachim Brehm und Axel Pausch
- */
 
 var objektfragment;
 var zeitfragment;
