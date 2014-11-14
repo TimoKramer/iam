@@ -1,0 +1,12 @@
+{
+	"topicid": "die_umsiedlerin",
+	"title": "Die Umsiedlerin",
+	"content_items": [
+		{
+			"render_container": "left",
+			"render_async": true,
+			"type": "textauszug",
+			"src": "content/texte/die_umsiedlerin.html"
+		}
+	]
+}

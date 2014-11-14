@@ -1,0 +1,79 @@
+{
+	"topicid": "die_umsiedlerin",
+	"title": "Die Umsiedlerin",
+	"content_items": [
+		{
+			"render_container": "column_left",
+			"type": "zeitdokumente",
+				"src_bak": "http://www.esquife.cult.cu/primeraepoca/imagenes/imrevista/No60/muller.jpg",
+				"src": "content/img/hm_als_fondrak_1961.jpg",
+				"title": "Programmheft zur Uraufführung"
+		}, {
+			"render_container": "column_center_left",
+			"type": "bilder",
+			"content": [
+				{
+					"_mediaid" : "2013081622150",
+					"src": "content/img/hm_als_fondrak_1961.jpg",
+					"title": "Heiner Müller als Fondrak (1961)"
+				}, {
+					"_mediaid" : "2013081622151",
+					"src": "content/img/hm_mit_bk_tragelehn.jpg",
+					"title": "Heiner Müller mit B.K. Tragelehn"
+				}
+			]
+		}, {
+			"render_container": "column_center_left",
+			"render_async": true,
+			"type": "einfuehrungstext",
+			"src": "content/kommentare/die_umsiedlerin.html"
+		}, {
+			"render_container": "column_center_right",
+			"render_async": true,
+			"type": "textauszug",
+			"src": "content/texte/die_umsiedlerin.html"
+		}, {
+			"render_container": "column_right",
+			"type": "medienverweise",
+			"_contentitemid" : 100001,
+			"subtype": "Kommentar",
+			"content": [
+				{
+					"title": "Hochschule für Ökonomie",
+					"src": "/"
+				}
+			]
+		}, {
+			"render_container": "column_right",
+			"type": "medienverweise",
+			"subtype": "Filme und Audio",
+			"_contentitemid" : 100002,
+			"content": [
+				{
+					"mediatype": "video/ogg",
+					"title": "Über Tiere und Menschen",
+					"src": "content/mov/hm_tiere_und_menschen.ogv"
+				}, {
+					"mediatype": "audio/ogg",
+					"title": "Demo Alexanderplatz 1989",
+					"src": "content/wav/4_november_1989_alexanderplatz_berlin_ddr_ausschnitt.ogg"
+				}
+			]
+		}, {
+			"render_container": "column_margin",
+			"type": "verknuepfungen",
+			"content": [
+				{
+					"title": "Ort",
+					"target": "#"
+				}, {
+					"title": "Zeit",
+					"target": "#"
+				}
+			]
+		}, {
+			"render_container": "column_margin",
+			"type": "add_to_merkliste"
+		}
+	]
+}

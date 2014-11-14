@@ -1,0 +1,22 @@
+{
+	"topicid": "der_bau",
+	"title": "Der Bau",
+	"content_items": [
+		{
+			"render_container": "column_margin",
+			"type": "verknuepfungen",
+			"content": [
+				{
+					"title": "Ort",
+					"target": "#"
+				}, {
+					"title": "Zeit",
+					"target": "#"
+				}, {
+					"title": "Personen",
+					"target": "#"
+				}
+			]
+		}
+	]
+}
