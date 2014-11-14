@@ -4,28 +4,23 @@ var zeitfragment;
 var img_description;
 var mv = 1;
 
-function loadContentFromServer() {
+function loadContentAndCreateLayout() {
 
-    console.log("loadContentFromServer()");
+    console.log("loadContentAndCreateLayout()");
     
     objektfragment = document.getElementById("objektfragment");
     zeitfragment = document.getElementById("zeitfragment");
     objektfragment.parentNode.removeChild(objektfragment);
     zeitfragment.parentNode.removeChild(zeitfragment);
     
-	
-    // load the json data that contains the content that will be used to populate the view elements
+	// using xhr from xhr.js to get data	
     xhr("GET", "/data/uebungen/ue2_1.json", null, function(xmlhttp) {
-        // we read out the textual content from the response, parsing it as json -- try out with
-        var textContent = xmlhttp.responseText;
-        console.log("responseText from server is: " + textContent);
-        var jsonContent = JSON.parse(textContent);
-        console.log("responseText as json object is: " + jsonContent);
+        var jsonContent = JSON.parse(xmlhttp.responseText);
 
-        // we read out the title and set it
+        // read out the title and set it
         setTitle(jsonContent.title);
 
-        // the content is a list of json objects. log its length
+        // log length of content_items
         console.log("length of content items loaded from server is: " + jsonContent.content_items.length);
 
         // now iterate over the items checking its type and calling the appropriate function for creating the content item
