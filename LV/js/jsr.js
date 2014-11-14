@@ -1,19 +1,62 @@
 
-var objektfragment;
 var zeitfragment;
 var img_description;
 var mv = 1;
 
-function loadContentAndCreateLayout() {
+/*
+ * Anforderung 2 JSR2
+ * the following vars and functions serve for switching between different configs and shall be used for realising the jsr exercise
+ */
+var configs = ["/data/die_umsiedlerin.json", "/data/der_bau.json", "/data/uebungen/ue2_1.json", "/data/uebungen/ue2_2.json", "/data/uebungen/ue2_3.json"];
+var currentConfigId = 0;
 
-    console.log("loadContentAndCreateLayout()");
+function switchJsonConfig() {
+	if (currentConfigId < (configs.length - 1)) {
+		currentConfigId = currentConfigId + 1;
+		console.log("ConfigID " + currentConfigId);
+	} else {
+		currentConfigId = 0;
+	}
+}
+
+var config_switch;
+
+/*
+ * this functions loads the content given the selected config
+ */
+function initialiseView() {
+
+	// set the switch function as onlick on the config_switch element and display the config
+	config_switch = document.getElementById("config_switch");
+	config_switch.onclick = function() {
+		switchJsonConfig();
+		loadContentAndCreateLayout();
+	};
+	
+	loadContentAndCreateLayout();
+}
+
+function loadContentAndCreateLayout() {
+	// displaying the current config
+	var pathSegments = configs[currentConfigId].split("/");
+	config_switch.textContent = pathSegments[pathSegments.length-1];
+
+	// resetting the layout, setting all elements to hidden, first
+	var zdgetter = document.getElementById("zeitdokumente");
+	if (zdgetter) zdgetter.hidden = true;
+	var etgetter = document.getElementById("einfuehrungstext");
+	if (etgetter) etgetter.hidden = true;
+	var vkgetter = document.getElementById("verknuepfungen");
+	if (vkgetter) vkgetter.hidden = true;
+	var ofgetter = document.getElementById("objekt");
+	if (ofgetter) ofgetter.hidden = true;
+	var zfgetter = document.getElementById("zeitfragment");
+	if (zfgetter) zfgetter.hidden = true;
+	console.log(zdgetter + etgetter + vkgetter + ofgetter + zfgetter);
+	console.log("loadContentFromServer()");
     
-    objektfragment = document.getElementById("objektfragment");
-    zeitfragment = document.getElementById("zeitfragment");
-    objektfragment.parentNode.removeChild(objektfragment);
-    zeitfragment.parentNode.removeChild(zeitfragment);
-    
-	// using xhr from xhr.js to get data	
+	// using xhr from xhr.js to get data
+	//xhr("GET", ((currentConfigId && configs) ? configs[currentConfigId] : "/data/die_umsiedlerin.json"), null, function(xmlhttp) {
     xhr("GET", "/data/uebungen/ue2_1.json", null, function(xmlhttp) {
         var jsonContent = JSON.parse(xmlhttp.responseText);
 
@@ -52,25 +95,22 @@ function setTitle(title) {
 }
 
 
-function createObjekt(contentItem) {
-    console.log("createObjekt()");
-    
-    // create the objektfragment from template and set id=objekt to the article of the render_container
-    var render_article = contentItem.render_container;
-   	document.querySelector("#"+render_article).appendChild(objektfragment);
-    document.querySelector("#"+render_article).setAttribute("id", "objekt");  
-    
-    // we set the src attribute of the img
-    document.querySelector("#objekt_figure img").setAttribute("src", contentItem.src);
-    // ... and the caption
-  //  document.getElementById("objekt").getElementsByTagName("figcaption")[0].textContent = contentItem.description;
-    img_description = contentItem.description;
-    
+function createObjekt(contentItem) {    
+	
+	console.log("creating Objekt");
+	
+	document.getElementById(contentItem.render_container).appendChild(document.getElementById('objekt'));
+	document.querySelector("#objekt_figure img").setAttribute("src", contentItem.src);
+	objekt_figure.getElementsByTagName("figcaption")[0].textContent = contentItem.description;
+    objekt.hidden = false;
 }
 
 
 function createTextauszug(contentItem) {
-    console.log("createTextauszug()");
+    
+    console.log("creating Textauszug");
+	
+	document.querySelector("")
 	
 	// create the zeitfragment from template and set id=textauszug to the article of the render_container
     var render_article = contentItem.render_container;

@@ -16,9 +16,9 @@
 		
 	</head>
 	
-	<body onload="initView(); loadContentAndCreateLayout();">
+	<body onload="initView(); initialiseView();">
     
-	    <header id="backlink">
+	    <header id="zurueck">
 	      <a href="#">&lt;&lt; zur&uuml;ck</a>
 	    </header>
 	    
@@ -26,11 +26,13 @@
 	    	
 			<h1 id="topic_title" class="editable">Die&nbsp;Umsiedlerin</h1>
 			
+			<span id="config_switch">config switch</span> 
+			
 			<div id="all_content">	
 	       		<div id="scroll_content">
 		            <article id="left">
 		            
-			            <div id="objektfragment">
+			            <div id="objekt">
 							<div id="objekt_headline">
 								<h2>Objekt</h2>
 								<img id="objekt_img" src="content/img/Kringel01.png"/>
