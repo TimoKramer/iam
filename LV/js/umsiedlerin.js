@@ -19,7 +19,10 @@ function initView(){
 	//click action on fullcontent_link change to detailview
 	fullcontent_link.onclick = function(event){
 		event.stopPropagation();
+		console.log(viewRoot.classList);
+		console.log("Watt??");
 		viewRoot.classList.toggle("faded");
+		console.log(foot.classList);
 		foot.classList.toggle("faded");
 		setTimeout( function(){
 			toggleDetailView("textauszug");
