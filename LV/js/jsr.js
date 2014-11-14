@@ -14,7 +14,7 @@ function loadContentFromServer() {
     zeitfragment.parentNode.removeChild(zeitfragment);
     
 	
-    // we load the json data that contains the content that will be used to populate the view elements
+    // load the json data that contains the content that will be used to populate the view elements
     xhr("GET", "/data/uebungen/ue2_1.json", null, function(xmlhttp) {
         // we read out the textual content from the response, parsing it as json -- try out with
         var textContent = xmlhttp.responseText;
