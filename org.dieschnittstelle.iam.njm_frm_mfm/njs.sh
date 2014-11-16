@@ -1,1 +1,1 @@
-../Binrunnable/node webserver.js
+node webserver.js

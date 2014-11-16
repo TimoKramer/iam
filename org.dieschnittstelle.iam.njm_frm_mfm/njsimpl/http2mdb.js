@@ -57,7 +57,7 @@ module.exports = {
 			res.end();
 		}
 	}
-}
+};
 
 /*
  * the top-level methods for handling the requests: the uri identifies which collection shall be accessed
