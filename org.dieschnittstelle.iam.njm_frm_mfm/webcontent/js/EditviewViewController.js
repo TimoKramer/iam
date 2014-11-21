@@ -74,7 +74,7 @@ var iam = (function(iammodule) {
 			// for MFM: use some extended form example
 			var einfuehrungstextformVC = iam.controller.einfuehrungstextform.newInstance(topicid, eventDispatcher, crudops);
 			einfuehrungstextformVC.initialiseEinfuehrungstextForm();
-		}
+		};
 		
 		/***************************************************************************************
 		 *                               long press handling
@@ -189,7 +189,7 @@ var iam = (function(iammodule) {
 
 	iammodule.controller.editview = {
 		newInstance : newInstance
-	}
+	};
 
 	// return the module
 	return iammodule;

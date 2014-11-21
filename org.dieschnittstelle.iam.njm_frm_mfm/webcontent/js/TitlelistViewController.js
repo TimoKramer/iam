@@ -18,7 +18,7 @@ var iam = (function(iammodule) {
 				updateView.call(this,(eval("(" + xmlhttp.responseText + ")")));
 			}.bind(this));
 
-		}
+		};
 		
 		updateView = function(titlelist) {
 			console.log("updateView(): titlelist is: " + titlelist);
@@ -55,7 +55,8 @@ var iam = (function(iammodule) {
 
 			// then trigger formatting
 			adjustFontsize();
-		}
+		};
+		
 		function adjustFontsize() {
 			doAdjustFontsizeToWidth("contentview", "title", 6, 40, 0.99);
 		}
@@ -74,7 +75,7 @@ var iam = (function(iammodule) {
 			console.log("container: " + sidebar);
 
 			var sectionWidth = container.getBoundingClientRect().width - margin;
-			console.log("container width considering margin: " + sectionWidth)
+			console.log("container width considering margin: " + sectionWidth);
 
 			var spans = container.getElementsByClassName(spanClass);
 
@@ -86,7 +87,7 @@ var iam = (function(iammodule) {
 				// to be on the safe side, we will add a buffer
 				var newFontSize = factor * origFontsize * buffer;
 				//console.log("newFontSize is: " + newFontSize);
-				var newstyle = "font-size: " + newFontSize + "px; line-height: " + newFontSize / 1.2 + "px;"
+				var newstyle = "font-size: " + newFontSize + "px; line-height: " + newFontSize / 1.2 + "px;";
 				console.log("setting style: " + newstyle);
 				spans[i].style = newstyle;
 			}
@@ -105,11 +106,11 @@ var iam = (function(iammodule) {
 			titlelist : {
 				newInstance : newInstance
 			}
-		}
+		};
 	} else {
 		iammodule.controller.titlelist = {
 			newInstance : newInstance
-		}
+		};
 	}
 
 	// return the module

@@ -22,7 +22,7 @@ var iam = (function(parentmodule) {
 	// declare some id function on CustomEvent (see for a non standard alternative: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/__defineGetter__)
 	CustomEvent.prototype.desc = function() {
 		return (this.group ? this.group : "") + "_" + (this.type ? this.type : "") + "_" + (this.target ? this.target : "");
-	}
+	};
 	/*
 	 * some class that can be used for collecting event handlers and dispatching events, we call it eventdispatcher for the time being
 	 */

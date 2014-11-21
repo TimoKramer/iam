@@ -67,7 +67,10 @@ function doGet(uri, req, res) {
 
 	if (utils.startsWith(uri, "/topicviews")) {
 		readTopicview(utils.substringAfter(uri, "/topicviews/"), req, res);
+	} else if (utils.startsWith(uri, "/objects")) {
+		readObject(utils.substringAfter(uri, "/objects/"), req, res);
 	} else {
+		console.log("nischt");
 		res.writeHead(404);
 		res.end();
 	}
@@ -81,6 +84,8 @@ function doPost(uri, req, res) {
 		handleMultipartRequest(uri, req, res);
 	} else if (utils.startsWith(uri, "/topicviews")) {
 		createTopicview(utils.substringAfter(uri, "/topicviews/"), req, res);
+	} else if (utils.startsWith(uri, "/objects")) {
+		createObject(utils.substringAfter(uri, "/objects/"), req, res);
 	} else {
 		res.writeHead(404);
 		res.end();
@@ -203,8 +208,60 @@ function createTopicview(uri, req, res) {
 				// and respond
 				respondSuccess(res, saved);
 			}
-		})
+		});
 	});
+}
+
+function createObject(uri,req,res) {
+	
+	var alldata = "";
+	
+	req.on("data", function(data){
+		alldata += data;
+	});
+	
+	req.on("end", function(){
+		console.log("received data: " + alldata);
+		db.objects.save(JSON.parse(alldata), function(err, saved){
+			if (err || !saved) {
+				console.err("got error: " + err);
+				respondError(res);
+			}
+			else {
+				respondSuccess(res, saved);
+			}
+		});
+		respondSuccess(res, JSON.parse(alldata));
+	});
+}
+
+function readObject(uri, req, res) {
+	if (uri.length > 0) {
+		db.objects.find({topicid: uri},function(err, elements) {
+			if (err || !elements) {
+				console.err("got error: " + err);
+				respondError(res);
+			} else if (elements.length == 0) {
+				console.log("da ist nix");
+				respondError(res, 404);
+			} else {
+				respondSuccess(res, elements[0]);
+			}
+		});
+	} else {
+		// read all
+		db.objects.find(function(err, elements) {
+			if (err || !elements) {
+				console.err("got error: " + err);
+				respondError(res);
+			} else if (elements.length == 0) {
+				console.log("da ist nix");
+				respondError(res, 404);
+			} else {
+				respondSuccess(res, elements);
+			}
+		});
+	}
 }
 
 function deleteTopicview(uri, req, res) {
@@ -288,7 +345,7 @@ function updateTopicview(uri, req, res) {
 					// and respond
 					respondSuccess(res, updated);
 				}
-			})
+			});
 		});
 	} else {
 		console.log("updateTopicview(): topicid is: " + topicid);
@@ -315,7 +372,7 @@ function updateTopicview(uri, req, res) {
 					// and respond
 					respondSuccess(res, updated);
 				}
-			})
+			});
 		});
 	}
 }

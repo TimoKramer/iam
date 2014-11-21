@@ -35,7 +35,7 @@ var iam = (function(parentmodule) {
 			if (i != 1) {
 				rest += separator;
 			}
-			rest += split[i]
+			rest += split[i];
 		}
 
 		return rest;
@@ -61,7 +61,7 @@ var iam = (function(parentmodule) {
 		startsWith : startsWith,
 		endsWith : endsWith
 
-	}
+	};
 
 	return parentmodule;
 

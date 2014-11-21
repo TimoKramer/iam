@@ -23,7 +23,7 @@ var iam =
 
 		this.initialise = function(callback) {
 			callback();
-		}
+		};
 
 		this.createTopicview = function(topicid, title, callback) {
 
@@ -59,7 +59,7 @@ var iam =
 				});
 			});
 
-		}
+		};
 
 		this.readTopicview = function(topicid, callback) {
 
@@ -80,7 +80,7 @@ var iam =
 				}
 			});
 
-		}
+		};
 		/*
 		 * the server-side implementation of this function demonstrates how the ids assigned internally by mongodb are handled, therefore we pass both the manuylly assigned topicid (e.g. die_umsiedlerin) and the internal id
 		 */
@@ -131,7 +131,7 @@ var iam =
 				});
 			}
 
-		}
+		};
 
 		this.updateTopicview = function(topicid, update, callback) {
 
@@ -152,32 +152,40 @@ var iam =
 				}
 			});
 
-		}
+		};
 		/*
 		 * these functions need to be implemented for the njm exercises
 		 */
 
 		this.createObject = function(obj, callback) {
-
-		}
+			xhr("POST","http2mdb/objects", obj, function(xmlhttp){
+				var created = JSON.parse(xmlhttp.responseText);
+				callback(created);
+			});
+		};
 
 		this.readObject = function(objid, callback) {
-
-		}
+			xhr("GET", "http2mdb/objects/" + objid, null, function(xmlhttp) {
+				var read = JSON.parse(xmlhttp.responseText);
+				callback(read);
+			}, function(xmlhttp) {
+				callback();
+			});
+		};
 
 		this.updateObject = function(obj, callback) {
 
-		}
+		};
 
 		this.deleteObject = function(objid, callback) {
 
-		}
+		};
 		/*
 		 * this function is needed for creating the objectlist view
 		 */
 		this.readAllObjects = function(callback) {
 
-		}
+		};
 	}
 
 	// a factory method
@@ -188,7 +196,7 @@ var iam =
 	// export the factory method
 	iammodule.crud.remote = {
 		newInstance : newInstance
-	}
+	};
 
 	// return the module
 	return iammodule;

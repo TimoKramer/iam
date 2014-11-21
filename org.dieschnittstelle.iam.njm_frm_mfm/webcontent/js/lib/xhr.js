@@ -40,7 +40,7 @@ var iam = ( function(parentmodule) {
 
 					switch (xmlhttp.readyState) {
 						case 4:
-							console.log("onreadstatechange: request finished and response is ready. Status is: " + xmlhttp.status)
+							console.log("onreadstatechange: request finished and response is ready. Status is: " + xmlhttp.status);
 							// in case we have a request code of 200 OK, we execute the onsuccess function passed as an argument
 							if (xmlhttp.status == 200) {
 								// show how to access a response header
@@ -52,7 +52,7 @@ var iam = ( function(parentmodule) {
 									// the function will be passed the request object to be free with regard to reading out its content
 									onsuccess(xmlhttp);
 								} else {
-									alert("request " + url + " executed successfully, but no onsuccess callback is specified.")
+									alert("request " + url + " executed successfully, but no onsuccess callback is specified.");
 								}
 							} else {
 								if (onerror) {
@@ -115,14 +115,14 @@ var iam = ( function(parentmodule) {
 			} else {
 				console.error("no requestpath specified! Ignore...");
 			}
-		}
+		};
 
 		// export the function
 		parentmodule.xhr = {
 			xhr : xhr
-		}
+		};
 		
 		// return the parentmodule that now contains the submodule
 		return parentmodule;
 
-	}(iam || {}))
+	}(iam || {}));

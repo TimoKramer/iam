@@ -20,7 +20,7 @@ var iam = (function(parentmodule) {
 		console.log("about to access uri: " + uri);
 		sessionStorage.setItem("previousView", window.location);
 		window.location = uri + "?args=" + JSON.stringify(args);
-	}
+	};
 
 	/*
 	 * go back to the previous view using the history
@@ -44,7 +44,7 @@ var iam = (function(parentmodule) {
 			console.log("previousView(): no previousView specified in session storage. Going back one step in history.");
 			history.go(-1);
 		}
-	}
+	};
 
 	/*
 	 * get the arguments that might have been passed when calling the view
@@ -55,7 +55,7 @@ var iam = (function(parentmodule) {
 		var args = JSON.parse(argstr);
 
 		return args;
-	}
+	};
 
 	/*
 	 * show the topicview for some topicid (the topicview is the "overview" view that we have been working with so far)
@@ -66,7 +66,7 @@ var iam = (function(parentmodule) {
 		nextView("topicview.html", {
 			"topicid" : topicid
 		});
-	}
+	};
 
 	// export the functions
 	parentmodule.navigation = {
@@ -76,9 +76,9 @@ var iam = (function(parentmodule) {
 		getViewargs : getViewargs,
 		loadTopicview : loadTopicview
 
-	}
+	};
 
 	// return the parentmodule that now contains the submodule
 	return parentmodule;
 
-})(iam || {})
+})(iam || {});

@@ -11,7 +11,7 @@ var startsWith = function startsWith(string, substring) {
 
 var endsWith = function endsWith(string, substring) {
     return string.length >= substring.length && string.substring(string.length - substring.length) == substring;
-}
+};
 
 module.exports = {
 
