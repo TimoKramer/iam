@@ -53,7 +53,7 @@ var iam = (function(parentmodule) {
 					eventListeners[event.desc()] = [callback];
 				}
 			}
-		}
+		};
 
 		this.notifyListeners = function(event) {
 			var els = eventListeners[event.desc()];
@@ -63,7 +63,7 @@ var iam = (function(parentmodule) {
 					els[i](event);
 				}
 			}
-		}
+		};
 	}
 
 	// export the CustomEvent and EventDispatcher APIs
@@ -77,7 +77,7 @@ var iam = (function(parentmodule) {
 		newEventDispatcher : function() {
 			return new EventDispatcher();
 		}
-	}
+	};
 
 	return parentmodule;
 

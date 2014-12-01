@@ -160,7 +160,18 @@ var iam =
 		this.createObject = function(obj, callback) {
 			xhr("POST","http2mdb/objects", obj, function(xmlhttp){
 				var created = JSON.parse(xmlhttp.responseText);
-				callback(created);
+				if (created) {
+					//callback(created);
+					xhr("PUT", "http2mdb/topicviews/" + created.topicid + "/content_items", {
+						type: "objekt",
+						render_container: "none",
+						objektid: created._id
+					}, function(xhr) {
+						callback(created);
+					});
+				} else {
+					alert("the object element could not be created!");
+				}
 			});
 		};
 
@@ -178,6 +189,49 @@ var iam =
 		};
 
 		this.deleteObject = function(objid, callback) {
+			console.log("Objekt wird gelöscht!");
+			/*
+			if (!callback) {
+				xhr("DELETE", "http2mdb/obects/" + topicid + "/content_items/demo_element", {
+					type : "demo_element",
+					render_container : "none"
+				}, function(xmlhttp) {
+					console.log("got response from deletion of demo_element from content_items: " + xmlhttp.responseText);
+					var deletedItem = parseInt(xmlhttp.responseText);
+					if (deletedItem < 1) {
+						alert("demo_element could not be deleted!");
+					} else {
+						console.log("demo_element was deleted successfully");
+					}
+					// we then delete the rest of the topicview
+					xhr("DELETE", "http2mdb/topicviews/" + topicid_internal, null, function(xmlhttp) {
+						var deleted = parseInt(xmlhttp.responseText);
+						if (deleted > 0) {
+							if (callback) {
+								callback(true);
+							}
+						} else {
+							alert("The topicview element could not be deleted!");
+						}
+					});
+
+				});
+			} else {
+			*/
+				// for deleting an object we also identify it using the topicid
+				xhr("DELETE", "http2mdb/objects/" + objid, null, function(xmlhttp) {
+					var deleted = parseInt(xmlhttp.responseText);
+					if (deleted > 0) {
+						if (callback) {
+							callback(true);
+						} else {
+							titleel.innerHTML = "Lorem Ipsum";
+						}
+					} else {
+						alert("The topicview element could not be deleted!");
+					}
+				});
+			//}
 
 		};
 		/*

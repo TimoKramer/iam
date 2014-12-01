@@ -75,7 +75,7 @@ var iam = (function(iammodule) {
 					topicviewObj = event.data;
 					crudops.readObject(topicid, function(readobj) {
 						if (readobj) {
-							alert("read Object for topicview " + topicid + "; " + JSON.stringify(readobj));
+							eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "topicview", _topicviewObj));
 						} else {
 							alert("no object exists for topicview " + topicid);
 						}
@@ -101,6 +101,11 @@ var iam = (function(iammodule) {
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "uploaded|created", "einfuehrungstext"), function(event) {
 				createEinfuehrungstext.call(this, event.data);
 			}.bind(this));
+			
+			// react to the event that an object has been read or created
+			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created", "object"), function(event) {
+				showObject.call(this, event.data);
+			}.bind(this));			
 
 			// initialise the crud operations and try to read out a topicview object
 			crudops.initialise( function() {
@@ -129,6 +134,12 @@ var iam = (function(iammodule) {
 			} else {
 				titleel.innerHTML = "Lorem Ipsum";
 			}
+		}
+		
+		function showObject(objectFromDb) {
+			var objectSection = document.getElementById("objekt");
+			objectSection.hidden = false;
+			objectSection.getElementsByTagName("img")[0].src = objectFromDb.src;
 		}
 
 		/*********************************************************************************
@@ -180,12 +191,12 @@ var iam = (function(iammodule) {
 			console.log("createObject()");
 			alert("createObject(); " + topicid);
 			crudops.createObject({
-				src : "http://lorempixel.com/200/300",
+				src : "http://lorempixel.com/300/200",
 				title : "lorem",
 				description : "ipsum dolor sit amet",
 				topicid : topicid
-			}, function(created) {
-				alert("createdObject(): got: " + JSON.stringify(created));
+			}, function(createdobj) {
+				eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "object", createdobj));
 			});
 		};
 
@@ -195,6 +206,11 @@ var iam = (function(iammodule) {
 
 		this.deleteObject = function() {
 			console.log("deleteObject()");
+			crudops.deleteObject(topicid, topicviewObj._id, function(deleted) {
+				if (deleted) {
+					eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "deleted", "object"));
+				}
+			}.bind(this));
 		};
 
 		/*********************************************************************************
@@ -251,7 +267,7 @@ var iam = (function(iammodule) {
 	// a factory method
 	function newInstance() {
 		return new TopicviewViewController();
-	}
+	};
 
 	// export the factory method
 	iammodule.controller.topicview = {

@@ -96,6 +96,8 @@ function doDelete(uri, req, res) {
 	console.log("doDelete(): " + uri);
 	if (utils.startsWith(uri, "/topicviews")) {
 		deleteTopicview(utils.substringAfter(uri, "/topicviews/"), req, res);
+	} else if (utils.startsWith(uri, "/objects")) {
+		deleteObject(utils.substringAfter(uri, "/objects/"), req, res);
 	} else {
 		res.writeHead(404);
 		res.end();
@@ -311,6 +313,52 @@ function deleteTopicview(uri, req, res) {
 		});
 	}
 }
+
+function deleteObject(){
+	console.log("deleteObject(): " + uri);
+	if (uri && uri.indexOf("/content_items/") != -1) {
+		console.log("uri specifies an element to be removed from the content_items list: " + uri);
+		// we assume that the type of element to be deleted is given by the last uri segment
+		var segments = uri.split("/");
+		var topicid = segments[0];
+		var type2delete = segments[segments.length - 1];
+		console.log("will try to remove element of type " + type2delete + " from content_items of topicview with topicid " + topicid);
+		db.topicviews.update({
+			topicid : topicid
+		}, {
+			$pull : {
+				"content_items" : {
+					type : type2delete
+				}
+			}
+		}, function(err, updated) {
+			if (err || !updated) {
+				console.error("type " + type2delete + " could not be removed from content_items: " + err);
+				respondError(res);
+			} else {
+				console.log("deleteTopicview(): delete done: " + updated);
+				// and respond
+				respondSuccess(res, updated);
+			}
+		});
+	} else {
+		// MFM: the uri segment we get here is the internal _id that has been assigned by the database. The string value we get here needs to be converted to an id value using the ObjectID function
+		var convertedid = require("mdbjs").ObjectId(uri);
+
+		db.topicviews.remove({
+			// topicid : uri
+			_id : convertedid
+		}, function(err, update) {
+			if (err || !update) {
+				console.log("topicview " + uri + " could not be deleted. Got: " + err);
+				respondError(res);
+			} else {
+				console.log("topicview " + uri + " was deleted. Got: " + update);
+				respondSuccess(res, update);
+			}
+		});
+	}
+};
 
 function updateTopicview(uri, req, res) {
 	console.log("updateTopicview(): " + uri);

@@ -117,7 +117,7 @@ var iam = (function(parentmodule) {
 		cutNpasteElementById : cutNpasteElementById,
 		cutNpasteElement : cutNpasteElement
 
-	}
+	};
 
 	// return the parentmodule that now contains the submodule
 	return parentmodule;
