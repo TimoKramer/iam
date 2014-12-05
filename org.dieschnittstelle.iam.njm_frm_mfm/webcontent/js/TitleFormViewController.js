@@ -92,7 +92,7 @@ var iam = (function(iammodule) {
 			}.bind(this));
 
 
-		}
+		};
 		
 		function onFocus() {
 			// if we use longpress recognition for opening the editview we must explicitly request focus for the title element as the autofocus attribute does not seem to be considered
@@ -168,7 +168,7 @@ var iam = (function(iammodule) {
 	// export the module
 	iammodule.controller.titleform = {
 		newInstance : newInstance
-	}
+	};
 
 	return iammodule;
 

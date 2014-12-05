@@ -32,7 +32,7 @@ var iam = (function(iammodule) {
 
 			// we declare a listener function that we add to the three radio buttons
 			var radioOnClickListener = function(event) {
-				console.log("got onclick on radio button: " + event.target)
+				console.log("got onclick on radio button: " + event.target);
 				// as soon as we get a click, we remove any validationMessage
 				inputContentModeFirst.setCustomValidity("");
 				outputValidationMessages.innerHTML = "";
@@ -56,10 +56,10 @@ var iam = (function(iammodule) {
 			// we also declare listeners on the input fields that reset the vaidation messages in case an input occurs
 			inputTxt.oninput = function(event) {
 				outputValidationMessages.innerHTML = "";
-			}
+			};
 			inputSrc.onclick = function(event) {
 				outputValidationMessages.innerHTML = "";
-			}
+			};
 			// we declare a listener that catches the invalid event and that is added to each input element
 			var inputOnInvalidListener = function(event) {
 				console.log("invalid: " + event.currentTarget + ": " + event.currentTarget.validity.valueMissing + ", " + event.currentTarget.validationMessage);
@@ -67,7 +67,7 @@ var iam = (function(iammodule) {
 				outputValidationMessages.innerHTML = event.currentTarget.validationMessage;
 				// avoid setting the standard validation message bubble - this does not affect the styling!
 				event.preventDefault();
-			}
+			};
 			// add the listener to some input elements
 			inputSrc.oninvalid = inputOnInvalidListener;
 			inputTxt.oninvalid = inputOnInvalidListener;
@@ -90,7 +90,7 @@ var iam = (function(iammodule) {
 					return submitEinfuehrungstextForm();
 				}
 			};
-		}
+		};
 
 		/*
 		 * this is a demo method that shows different ways of form usage - it is fully functional only for case the user selected the "fileupload" option. Here, the server's response will be sent to the page's iframe and trigger the onMultipartResponse method!
@@ -162,7 +162,7 @@ var iam = (function(iammodule) {
 	// export the module
 	iammodule.controller.einfuehrungstextform = {
 		newInstance : newInstance
-	}
+	};
 
 	return iammodule;
 

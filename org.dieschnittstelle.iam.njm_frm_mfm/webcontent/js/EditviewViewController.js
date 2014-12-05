@@ -90,14 +90,14 @@ var iam = (function(iammodule) {
 
 			tabsContainer.onclick = function(event) {
 				keepEditview(event);
-			}
+			};
 			
 			// we allow for another way to open the editview: click on the header 
 			document.getElementsByTagName("header")[0].onclick = openEditview;
 			// we block propagation of onclick in the zurück button (otherwise the above onclick handler will be invoked)
 			document.getElementById("navigation_button").onclick = function(event) {
 				event.stopPropagation();
-			}
+			};
 		}
 
 		/***************************************************************************************
@@ -108,11 +108,11 @@ var iam = (function(iammodule) {
 				console.log("got submit on addElement form: " + event.target);
 
 				// get the type of element that shall be created
-				var elementType = event.target.elementType.value
+				var elementType = event.target.elementType.value;
 				console.log("selected element type is: " + elementType);
 				showAddElementForm(elementType);
 				return false;
-			}
+			};
 		}
 
 		/*
