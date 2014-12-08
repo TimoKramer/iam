@@ -73,9 +73,9 @@ var iam = (function(iammodule) {
 				// we update our local representation of the object
 				if (event.type = "read") {
 					topicviewObj = event.data;
-					crudops.readObject(topicid, function(readobj) {
+					crudops.readObjectForTopicview(topicviewObj, function(readobj) {
 						if (readobj) {
-							eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "topicview", _topicviewObj));
+							eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "topicview", topicviewObj));
 						} else {
 							alert("no object exists for topicview " + topicid);
 						}
@@ -194,7 +194,6 @@ var iam = (function(iammodule) {
 				src : "http://lorempixel.com/300/200",
 				title : "lorem",
 				description : "ipsum dolor sit amet",
-				topicid : topicid
 			}, function(createdobj) {
 				eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "object", createdobj));
 			});

@@ -160,9 +160,11 @@ var iam =
 		this.createObject = function(obj, callback) {
 			xhr("POST","http2mdb/objects", obj, function(xmlhttp){
 				var created = JSON.parse(xmlhttp.responseText);
+				var topicid = iam.navigation.getViewargs().topicid;
+				alert("topicid: " + topicid);
 				if (created) {
 					//callback(created);
-					xhr("PUT", "http2mdb/topicviews/" + created.topicid + "/content_items", {
+					xhr("PUT", "http2mdb/topicviews/" + topicid + "/content_items", {
 						type: "objekt",
 						render_container: "none",
 						objektid: created._id
@@ -173,6 +175,21 @@ var iam =
 					alert("the object element could not be created!");
 				}
 			});
+		};
+		
+		this.readObjectForTopicview = function(topicviewObj,callback) {
+			var objectFound = false;
+			for (var i=0; i<topicviewObj.content_items.length; i++) {
+				var currentItem = topicviewObj.content_items[i];
+				if (currentItem.type == "objekt") {
+					this.readObject(currentItem.objektid, callback);
+					objectFound = true;
+					break;
+				}
+			}
+			if(!objektFound) {
+				callback();
+			}
 		};
 
 		this.readObject = function(objid, callback) {

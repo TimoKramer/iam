@@ -239,7 +239,8 @@ function createObject(uri,req,res) {
 
 function readObject(uri, req, res) {
 	if (uri.length > 0) {
-		db.objects.find({topicid: uri},function(err, elements) {
+		var internalid = require("mdbjs").ObjektId(uri);
+		db.objects.find({_id: internalid},function(err, elements) {
 			if (err || !elements) {
 				console.err("got error: " + err);
 				respondError(res);

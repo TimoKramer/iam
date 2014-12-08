@@ -17,17 +17,28 @@ var iam = (function(iammodule) {
 		var crudops = _crudops;
 		var eventDispatcher = _eventDispatcher;
 		
+		var objektForm = document.forms["form_objekt"];
+		var objektFormSubmit = objektForm.submit;
+				
 		this.initialiseObjektForm = function() {
 			console.log("initialiseObjektForm()");
-			//alert("initialiseObjektForm()");
-	
+			alert("initialiseObjektForm()");
+			alert("objektFormSubmit: " + objektFormSubmit);
+			
+			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud","readcreated","object",function(event){
+				updateObjektForm(event.data);
+			}));
+			
+			objektForm.onsubmit = submitObjektForm;
 		};
 		
 		/*
 		 * this function can be called from an event listener when a crud operation has been performed on some object element
 		 */
 		function updateObjektForm(objektElement) {
-			console.log("updateObjektForm()");	
+			console.log("updateObjektForm()");
+			objektForm.title.value = objektElement.title;
+			objektForm.src.value = objektElement.src;	
 		}
 
 
@@ -36,7 +47,12 @@ var iam = (function(iammodule) {
 		 */
 		function submitObjektForm() {
 			console.log("submitObjektForm()");
-
+			crudops.createObject({title: objektForm.title.value, src: objektForm.src.value}, function(created){
+				//alert("created objekt: " + JSON.stringify(created));
+				eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "object", readobj));
+			});
+			
+			return false; 
 		}
 
 	}

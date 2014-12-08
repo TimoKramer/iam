@@ -19,8 +19,10 @@ var iam = (function(iammodule) {
 		
 		this.initialiseObjektlist = function() {
 			console.log("initialiseObjektlist()");
-			//alert("initialiseObjektlist()");			
-
+			alert("initialiseObjektlist()");			
+			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created|updated|deleted", "object"), function(event){
+				alert("got crud event " + event.type + " for object");
+			});
 		};
 	}
 

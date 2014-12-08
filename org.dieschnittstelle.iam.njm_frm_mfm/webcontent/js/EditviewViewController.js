@@ -74,6 +74,9 @@ var iam = (function(iammodule) {
 			// for MFM: use some extended form example
 			var einfuehrungstextformVC = iam.controller.einfuehrungstextform.newInstance(topicid, eventDispatcher, crudops);
 			einfuehrungstextformVC.initialiseEinfuehrungstextForm();
+			
+			iam.controller.objektform.newInstance(topicid,eventDispatcher,crudops);
+			iam.controller.objektlist.newInstance(topicid,eventDispatcher,crudops);
 		};
 		
 		/***************************************************************************************
