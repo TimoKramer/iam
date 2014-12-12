@@ -66,6 +66,13 @@ var iam = (function(iammodule) {
 					editview.classList.toggle("overlay");
 				}
 			}.bind(this));
+			
+			eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabCreated", ""), function(event) {
+				showTabForElementtype(event.data);
+			}.bind(this));
+			eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabDestroyed", ""), function(event) {
+				hideTabForElementtype(event.data);
+			}.bind(this));
 
 			// initialise the controller for the title form
 			var titleformVC = iam.controller.titleform.newInstance(topicid, eventDispatcher, crudops);

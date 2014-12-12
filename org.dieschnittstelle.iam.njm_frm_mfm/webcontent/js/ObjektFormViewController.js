@@ -19,28 +19,64 @@ var iam = (function(iammodule) {
 		
 		var objektForm = document.forms["form_objekt"];
 		var objektFormSubmit = objektForm.submit;
+		var objektFormInputUpload = objektForm.upload;
+		var objektFormInputUrl = objektForm.src;
+		
+		var contentModeUploadButton = document.getElementById("objektContentModeUpload");
+		var contentModeUrlButton = doucment.getElementById("objektContentModeUrl");
 				
 		this.initialiseObjektForm = function() {
 			console.log("initialiseObjektForm()");
-			alert("initialiseObjektForm()");
-			alert("objektFormSubmit: " + objektFormSubmit);
+			alert("initialiseObjektForm()...objektFormSubmit: " + objektFormSubmit);
 			
-			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud","readcreated","object",function(event){
-				updateObjektForm(event.data);
-			}));
+			//contentModeSelectorUpload = objektForm.querySelector("#objektContentMode_upload");
+			//contentModeSelectorUrl = objektForm.querySelector("#objektContentMode_url");
+			
+			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud","created|read","object"),function(event){
+				//eventDispatcher.notifyListeners(iam.eventhandling.customEvent("ui", "tabCreated", "", "objekt"));
+				//updateObjektForm.call(this, event.data);
+				updateObjektForm.call(event.data);
+			}.bind(this));
 			
 			objektForm.onsubmit = submitObjektForm;
+			
+			contentModeUploadButton.onclick = toggleContentMode;
+			contentModeUrlButton.onclick = toggleContentMode;
+			
+			updateObjektForm();
 		};
+		
+		function toggleContentMode() {
+			if ((event && event.target == contentModeUploadButton) || getSelectedContentMode() == "upload") {
+				objektFormInputUpload.disabled = false;
+				objektFormInputUrl.disabled = true;
+			} else {
+				objektFormInputUpload.disabled = true;
+				objektFormInputUrl.disabled = false;
+			}
+		}
 		
 		/*
 		 * this function can be called from an event listener when a crud operation has been performed on some object element
 		 */
 		function updateObjektForm(objektElement) {
-			console.log("updateObjektForm()");
-			objektForm.title.value = objektElement.title;
-			objektForm.src.value = objektElement.src;	
+			if (objektElement) {
+				console.log("updateObjektForm()");
+				objektForm.title.value = objektElement.title;
+				objektForm.src.value = objektElement.src;
+				objektFormSubmit.value = "Aktualisieren";
+				objektFormSubmit.disabled = true;
+			} else {
+				objektFormSubmit.value = "Erzeugen";
+				objektFormSubmit.disabled = false;
+			}
+			
+			toggleContentMode();
 		}
 
+		function getSelectedContentMode() {
+			return objektForm.querySelector("input[type='radio']:checked").value;
+		}
 
 		/*
 		 * this method can be used for implementing submission of object form content to the server
@@ -48,8 +84,8 @@ var iam = (function(iammodule) {
 		function submitObjektForm() {
 			console.log("submitObjektForm()");
 			crudops.createObject({title: objektForm.title.value, src: objektForm.src.value}, function(created){
-				//alert("created objekt: " + JSON.stringify(created));
-				eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "object", readobj));
+				alert("created objekt: " + JSON.stringify(created));
+				eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "object", created));
 			});
 			
 			return false; 

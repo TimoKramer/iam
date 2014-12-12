@@ -75,7 +75,7 @@ var iam = (function(iammodule) {
 					topicviewObj = event.data;
 					crudops.readObjectForTopicview(topicviewObj, function(readobj) {
 						if (readobj) {
-							eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "topicview", topicviewObj));
+							eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "object", readobj));
 						} else {
 							alert("no object exists for topicview " + topicid);
 						}
