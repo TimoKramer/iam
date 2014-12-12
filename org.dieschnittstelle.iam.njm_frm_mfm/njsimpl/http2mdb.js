@@ -451,11 +451,6 @@ function respondError(res, code) {
 /* MFM: function for responding the result of multipart request processing: we send a script that invokes an onMultipartResponse() callback */
 function respondMultipart(req, res, uri, content) {
 	console.log("respondMultipart(): " + uri);
-	var script = "<script language=\"javascript\" type=\"text/javascript\">var content = " + JSON.stringify(content) + "; window.top.window.vc.onMultipartResponse(\'" + uri + "\', content);</script>";
-	res.writeHead(200, {
-		'Content-Type' : 'text/html'
-	});
-	res.write(script);
-	res.end();
+	resondSuccess(res, content);
 }
 
