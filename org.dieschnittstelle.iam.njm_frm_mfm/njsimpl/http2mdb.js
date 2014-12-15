@@ -453,6 +453,6 @@ function respondError(res, code) {
 /* MFM: function for responding the result of multipart request processing: we send a script that invokes an onMultipartResponse() callback */
 function respondMultipart(req, res, uri, content) {
 	console.log("respondMultipart(): " + uri);
-	resondSuccess(res, content);
+	respondSuccess(res, content);
 }
 
