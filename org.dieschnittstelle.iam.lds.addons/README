@@ -1,0 +1,8 @@
+webcontent/js/TopicviewCRUDOperationsLocal.js: Codegerüst für Ü LDS2, Anforderungen 1+2
+
+webcontent/js/lib/indexeddb.js: generische Implementierung von CRUD Operationen für indexeddb, verwendet in TopicviewCRUDOperationsLocal.js
+
+webcontent/js/TopicviewCRUDOperationsSynced.js: Codegerüst für Ü LDS2, Anforderungen 3+4
+
+
+Übertragen Sie die drei Dateien in die Anwendung, die Sie für die Umsetzung der Übungsaufgaben verwenden.
