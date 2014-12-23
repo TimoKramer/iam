@@ -27,7 +27,7 @@ var iam = ( function(iammodule) {
 
 			this.initialiseObjektForm = function() {
 				console.log("initialiseObjektForm()");
-				alert("initialiseObjektForm()...objektFormSubmit: " + objektFormSubmit);
+				//alert("initialiseObjektForm()...objektFormSubmit: " + objektFormSubmit);
 
 				//contentModeSelectorUpload = objektForm.querySelector("#objektContentMode_upload");
 				//contentModeSelectorUrl = objektForm.querySelector("#objektContentMode_url");
