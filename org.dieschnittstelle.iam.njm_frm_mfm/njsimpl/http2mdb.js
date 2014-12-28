@@ -70,7 +70,6 @@ function doGet(uri, req, res) {
 	} else if (utils.startsWith(uri, "/objects")) {
 		readObject(utils.substringAfter(uri, "/objects/"), req, res);
 	} else {
-		console.log("nischt");
 		res.writeHead(404);
 		res.end();
 	}
@@ -78,7 +77,6 @@ function doGet(uri, req, res) {
 
 function doPost(uri, req, res) {
 	console.log("doPost(): " + uri);
-
 	// MFM: check whether we have a multipart request
 	if (utils.startsWith(req.headers["content-type"], "multipart/form-data;")) {
 		handleMultipartRequest(uri, req, res);
@@ -441,7 +439,6 @@ function respondSuccess(res, json) {
 	} else {
 		res.writeHead(200);
 	}
-
 	res.end();
 }
 

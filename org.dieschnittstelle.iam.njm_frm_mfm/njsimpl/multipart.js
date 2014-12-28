@@ -33,8 +33,8 @@ MultipartReader.prototype.init = function(boundary, onend) {
 
     var that = this;
 
-    this.parser = new MultipartParser()
-    this.parser.initWithBoundary(boundary)
+    this.parser = new MultipartParser();
+    this.parser.initWithBoundary(boundary);
 
     this.parser.onPartBegin = function() {
         if (loggerEnabled) {
@@ -47,22 +47,22 @@ MultipartReader.prototype.init = function(boundary, onend) {
             }
             onPartEnd();
             if (loggerEnabled) {
-                console.log("onPartBegin(): resume")
+                console.log("onPartBegin(): resume");
             }
         }
 
-        that.part = {}
+        that.part = {};
         that.headers = new Object();
-        that.curr_header_name = ""
-        that.curr_header_value = ""
-        that.data = new Buffer('')
-    }
+        that.curr_header_name = "";
+        that.curr_header_value = "";
+        that.data = new Buffer('');
+    };
 
     this.parser.onHeaderField = function(b, start, end) {
         if (loggerEnabled) {
             console.log("parser.onHeaderField(): " + start + "/" + end);
         }
-        that.curr_header_name = b.slice(start, end).toString()
+        that.curr_header_name = b.slice(start, end).toString();
         if (loggerEnabled) {
             console.log("got header field: " + that.curr_header_name);
         }
@@ -72,31 +72,31 @@ MultipartReader.prototype.init = function(boundary, onend) {
         if (loggerEnabled) {
             console.log("parser.onHeaderValue(): " + start + "/" + end);
         }
-        that.curr_header_value = b.slice(start, end).toString()
+        that.curr_header_value = b.slice(start, end).toString();
         if (loggerEnabled) {
             console.log("got header value: " + that.curr_header_value);
         }
-    }
+    };
 
     this.parser.onHeaderEnd = function() {
         if (loggerEnabled) {
             console.log("parser.onHeaderEnd()");
         }
-        that.headers[that.curr_header_name.toLowerCase()] = that.curr_header_value
-    }
+        that.headers[that.curr_header_name.toLowerCase()] = that.curr_header_value;
+    };
 
     this.parser.onHeadersEnd = function() {
         if (loggerEnabled) {
             console.log("parser.onHeadersEnd()");
         }
-    }
+    };
 
     this.parser.onPartData = function(b, start, end) {
         if (loggerEnabled) {
             console.log("parser.onPartData(): " + start + "/" + end);
         }
-        that.data = Buffer.concat([that.data, b.slice(start, end)])
-    }
+        that.data = Buffer.concat([that.data, b.slice(start, end)]);
+    };
 
     this.parser.onPartEnd = function() {
         if (loggerEnabled) {
