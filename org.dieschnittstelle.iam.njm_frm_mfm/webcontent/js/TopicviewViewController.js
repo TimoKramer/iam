@@ -60,8 +60,8 @@ var iam = (function(iammodule) {
 			actionbar_object = document.getElementById("actionbar_object");
 
 			// instantiate the component for the crud operations
-			//crudops = iam.crud.remote.newInstance();
-			crudops = iam.crud.local.newInstance(topicid);
+			crudops = iam.crud.remote.newInstance();
+			//crudops = iam.crud.local.newInstance(topicid);
 
 			// instantiate the editview
 			var editviewVC = iam.controller.editview.newInstance(topicid, eventDispatcher, crudops);

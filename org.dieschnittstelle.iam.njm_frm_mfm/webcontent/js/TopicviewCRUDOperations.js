@@ -187,7 +187,7 @@ var iam =
 					break;
 				}
 			}
-			if(!objektFound) {
+			if(!objectFound) {
 				callback();
 			}
 		};

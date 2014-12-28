@@ -23,7 +23,7 @@ var iam = ( function(iammodule) {
 			var objektFormInputUrl = objektForm.src;
 
 			var contentModeUploadButton = document.getElementById("objektContentModeUpload");
-			var contentModeUrlButton = doucment.getElementById("objektContentModeUrl");
+			var contentModeUrlButton = document.getElementById("objektContentModeUrl");
 
 			this.initialiseObjektForm = function() {
 				console.log("initialiseObjektForm()");
@@ -47,7 +47,7 @@ var iam = ( function(iammodule) {
 			};
 
 			function toggleContentMode() {
-				if ((event && event.target == contentModeUploadButton) || getSelectedContentMode() == "upload") {
+				if ((this.event && this.event.target == contentModeUploadButton) || getSelectedContentMode() == "upload") {
 					objektFormInputUpload.disabled = false;
 					objektFormInputUrl.disabled = true;
 				} else {
