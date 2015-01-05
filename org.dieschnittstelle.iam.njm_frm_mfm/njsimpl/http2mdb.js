@@ -42,6 +42,7 @@ module.exports = {
 
 		// we truncate the url
 		var uri = utils.substringAfter(req.url, "/http2mdb");
+		console.log("URI: " + uri);
 
 		if (req.method == "GET") {
 			doGet(uri, req, res);
@@ -228,17 +229,18 @@ function createObject(uri,req,res) {
 				respondError(res);
 			}
 			else {
+				console.log("http2mdb.createObject - saved: " + JSON.stringify(saved));
 				respondSuccess(res, saved);
 			}
 		});
-		respondSuccess(res, JSON.parse(alldata));
+		//respondSuccess(res, JSON.parse(alldata));
 	});
 }
 
 function readObject(uri, req, res) {
 	if (uri.length > 0) {
 		
-		var internalid = require("mdbjs").ObjektId(uri);
+		var internalid = require("mdbjs").ObjectId(uri);
 		
 		db.objects.find({_id: internalid},function(err, elements) {
 			if (err || !elements) {
@@ -432,6 +434,7 @@ function updateTopicview(uri, req, res) {
 
 function respondSuccess(res, json) {
 	if (json) {
+		console.log("http2mdb.respondSuccess - json: " + JSON.stringify(json));
 		res.writeHead(200, {
 			'Content-Type' : 'application/json'
 		});

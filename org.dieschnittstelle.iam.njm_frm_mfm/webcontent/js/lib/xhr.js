@@ -18,7 +18,7 @@ var iam = ( function(parentmodule) {
 		 * onerror: callback in case of error
 		 */
 		function xhr(method, requestpath, obj, onsuccess, onerror) {
-			console.log("callWebapp()");
+			console.log("callServer()");
 
 			// create the request
 			var xmlhttp = new XMLHttpRequest();

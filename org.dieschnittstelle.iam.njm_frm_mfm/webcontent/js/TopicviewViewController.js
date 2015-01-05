@@ -112,6 +112,7 @@ var iam = (function(iammodule) {
 			crudops.initialise( function() {
 
 				crudops.readTopicview(topicid, function(_topicviewObj) {
+					console.log("crudops.readTopicview mit topicid = " + topicid);
 					// check whether some topicview already exists
 					if (_topicviewObj) {
 						eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "topicview", _topicviewObj));
@@ -196,6 +197,7 @@ var iam = (function(iammodule) {
 				title : "lorem",
 				description : "ipsum dolor sit amet",
 			}, function(createdobj) {
+				console.log("TopicviewViewController.createdObject - createdobj: " + JSON.stringify(createdobj));
 				eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "object", createdobj));
 			});
 		};

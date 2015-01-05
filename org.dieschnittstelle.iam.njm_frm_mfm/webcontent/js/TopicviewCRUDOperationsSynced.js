@@ -21,47 +21,47 @@ var iam = (function(iammodule) {
 		// the initialise function
 		this.initialise = function(callback) {
 
-		}
+		};
 		/*
 		 * the crud operations for topicview
 		 */
 		this.createTopicview = function(topicid, title, callback) {
 
-		}
+		};
 
 		this.readTopicview = function(topicid, callback) {
 
-		}
+		};
 
 		this.deleteTopicview = function(topicid, topicid_internal, callback) {
 
-		}
+		};
 
 		this.updateTopicview = function(topicid, update, callback) {
 
-		}
+		};
 		/*
 		 * the crud operations for object
 		 */
 		this.createObject = function(obj, callback) {
 
-		}
+		};
 
 		this.readObjectForTopicview = function(topicviewObj, callback) {
 
-		}
+		};
 
 		this.readObject = function(objid, callback) {
 
-		}
+		};
 
 		this.updateObject = function(obj, callback) {
 
-		}
+		};
 
 		this.deleteObject = function(objid, callback) {
 
-		}
+		};
 		/*
 		 * the id of the objekt to be deleted is determined given the content_items array of topicviewObj
 		 *
@@ -74,13 +74,13 @@ var iam = (function(iammodule) {
 		 */
 		this.deleteObjectForTopicview = function(topicviewObj, callback) {
 
-		}
+		};
 		/*
 		 * this function is needed for creating the objectlist view
 		 */
 		this.readAllObjects = function(callback) {
 
-		}
+		};
 	}
 
 	// a factory method
@@ -91,7 +91,7 @@ var iam = (function(iammodule) {
 
 	iammodule.crud.synced = {
 		newInstance : newInstance
-	}
+	};
 
 	// return the module
 	return iammodule;

@@ -160,10 +160,13 @@ var iam =
 		this.createObject = function(obj, callback) {
 			xhr("POST","http2mdb/objects", obj, function(xmlhttp){
 				var created = JSON.parse(xmlhttp.responseText);
+				console.log("CRUD.createObject - created: "+ JSON.stringify(created));
 				var topicid = iam.navigation.getViewargs().topicid;
 				alert("topicid: " + topicid);
 				if (created) {
 					//callback(created);
+					console.log("CRUD.createObject - created._id: " + created._id);
+					// UPDATE TOPICVIEW
 					xhr("PUT", "http2mdb/topicviews/" + topicid + "/content_items", {
 						type: "objekt",
 						render_container: "none",
@@ -182,6 +185,7 @@ var iam =
 			for (var i=0; i<topicviewObj.content_items.length; i++) {
 				var currentItem = topicviewObj.content_items[i];
 				if (currentItem.type == "objekt") {
+					console.log("CRUD.readObjectForTopicview " + JSON.stringify(currentItem));
 					this.readObject(currentItem.objektid, callback);
 					objectFound = true;
 					break;
@@ -209,7 +213,7 @@ var iam =
 			console.log("Objekt wird gelöscht!");
 			/*
 			if (!callback) {
-				xhr("DELETE", "http2mdb/obects/" + topicid + "/content_items/demo_element", {
+				xhr("DELETE", "http2mdb/objects/" + topicid + "/content_items/demo_element", {
 					type : "demo_element",
 					render_container : "none"
 				}, function(xmlhttp) {
