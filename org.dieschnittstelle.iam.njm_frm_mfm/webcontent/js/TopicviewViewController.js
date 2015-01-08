@@ -60,12 +60,19 @@ var iam = (function(iammodule) {
 			actionbar_object = document.getElementById("actionbar_object");
 
 			// instantiate the component for the crud operations
-			crudops = iam.crud.remote.newInstance();
-			//crudops = iam.crud.local.newInstance(topicid);
+			crudops = getCrudopsImpl(topicid);
 
 			// instantiate the editview
 			var editviewVC = iam.controller.editview.newInstance(topicid, eventDispatcher, crudops);
 			editviewVC.initialiseView();
+
+			var switchImplButton = document.getElementById("switchImplButton");
+			switchImplButton.textContent = getCrudopsImplName();
+			switchImplButton.onclick = function(event) {
+				event.stopPropagation();
+				switchCrudopsImpl();
+				window.location.reload();
+			};
 
 			/*
 			 *  instantiate the event handlers that react to crud events: CRUD for topicview

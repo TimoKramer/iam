@@ -51,7 +51,8 @@ var iam = (function(parentmodule) {
 	 */
 	function getViewargs() {
 		console.log("getViewargs(): search string is: " + window.location.search);
-		var argstr = decodeURIComponent(window.location.search.substring("?args=".length));
+		//var argstr = decodeURIComponent(window.location.search.substring("?args=".length));
+		var argstr = sessionStorage.getItem("currentViewargs");
 		var args = JSON.parse(argstr);
 
 		return args;
