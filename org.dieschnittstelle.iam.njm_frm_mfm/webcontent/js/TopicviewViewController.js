@@ -150,6 +150,34 @@ var iam = (function(iammodule) {
 			objectSection.hidden = false;
 			objectSection.getElementsByTagName("img")[0].src = objectFromDb.src;
 		}
+		
+		function getCrudopsImplName() {
+		    var implname = sessionStorage.getItem("crudopsImpl");
+		    if (!implname) {
+		        implname = "local";
+		        sessionStorage.setItem("crudopsImpl", "local");
+		    }
+		    return implname;
+		}
+		
+		function getCrudopsImpl(topicid) {
+		    var implname = getCrudopsImplName();
+		    var implobj = iam.crud[implname].newInstance(topicid);
+		    
+		    return implobj;
+		}
+		
+		function switchCrudopsImpl() {
+		    var impls = ["local", "remote", "synced"];
+		    var currentImplname = sessionStorage.getItem("crudopsImpl");
+		    var pos = impls.indexOf(currentImplname);
+		    if (pos < (impls.length-1)) {
+		        nextimplname = impls[pos+1];
+		    } else {
+		        nextimplname = impls[0];
+		    }
+		    sessionStorage.setItem("crudopsImpl", nextimplname);
+		}
 
 		/*********************************************************************************
 		 * NJM: these are the actions that will be invoked from the action bar of the gui
