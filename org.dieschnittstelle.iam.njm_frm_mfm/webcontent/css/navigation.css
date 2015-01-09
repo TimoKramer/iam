@@ -96,3 +96,6 @@ header nav a {
     color: rgb(128,128,128);
 }
 
+nav .right {
+	float: right;
+}
