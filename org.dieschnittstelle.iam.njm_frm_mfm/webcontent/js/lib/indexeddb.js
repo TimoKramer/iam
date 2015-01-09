@@ -61,8 +61,8 @@ var iam = ( function(parentmodule) {
 				} else {
 					request.onerror = function(event) {
 						alert("Got error trying to create database: " + event.target.errorCode);
-					};
-				};
+					}
+				}
 
 				// if an upgrade is needed for the db, onupgradeneeded will be called before onsuccess!
 				request.onsuccess = function(event) {
@@ -100,8 +100,8 @@ var iam = ( function(parentmodule) {
 					}
 
 					console.log("open().onupgradeneeded(): done.");
-				};
-			};
+				}
+			}
 			/*
 			 * delete a db
 			 */
@@ -109,7 +109,7 @@ var iam = ( function(parentmodule) {
 				console.log("deleting db: " + dbname);
 				indexedDB.deleteDatabase(dbname);
 				console.log("deletion done.");
-			};
+			}
 			/*************************
 			 * simple CRUD operations
 			 *************************/
@@ -126,15 +126,15 @@ var iam = ( function(parentmodule) {
 				// set an oncomplete handler on the transaction - this will be called after all requests in the transaction will have been executed successfully
 				transaction.oncomplete = function(event) {
 					console.log("the object was saved successfully");
-				};
+				}
 				if (onerror) {
 					transaction.onerror = function(event) {
-						onerror(event, context);
+						onerror(event, context)
 					};
 				} else {
 					transaction.onerror = function(event) {
 						alert("Got error trying to create object: " + event.target.errorCode);
-					};
+					}
 				}
 				// access the object store to which the object shall be added from the transaction
 				var objectStore = transaction.objectStore(objectstore);
@@ -149,7 +149,7 @@ var iam = ( function(parentmodule) {
 						onsuccess(object, context);
 					}
 				};
-			};
+			}
 			/*
 			 * read all objects from some store
 			 */
@@ -185,8 +185,8 @@ var iam = ( function(parentmodule) {
 					} else {
 						alert("Got error trying to read all objects from store " + objectstore + ": " + event.target.errorCode);
 					}
-				};
-			};
+				}
+			}
 			/*
 			 * delete an object
 			 */
@@ -216,8 +216,8 @@ var iam = ( function(parentmodule) {
 						onsuccess(false, event, context);
 					}
 				};
-			};
-			
+
+			}
 			/*
 			 * read a single object
 			 */
@@ -254,7 +254,7 @@ var iam = ( function(parentmodule) {
 						}
 					}
 				};
-			};
+			}
 			/*
 			 * update an object
 			 */
@@ -289,7 +289,7 @@ var iam = ( function(parentmodule) {
 					}
 
 					updaterequest.onsuccess = function(event) {
-						console.log("updateObject(): onsuccess");
+						console.log("updateObject(): onsuccess")
 						if (onsuccess) {
 							// we just feed back true/false
 							onsuccess(true, context);
@@ -306,7 +306,7 @@ var iam = ( function(parentmodule) {
 						}
 					};
 				};
-			};
+			}
 			// /*
 			// * this is a particular update function not covered by the generic api: update an object if we have specified a keypath - the difference is that the id must be set on the object itself and must not be passed as a second argument to the put operation
 			// */
@@ -341,14 +341,14 @@ var iam = ( function(parentmodule) {
 		// factory function
 		function newInstance(_dbname, _version, _objectstores, _modifiers, _onstorecreated, _stringids) {
 			return new IndexDBCRUDOperationsImpl(_dbname, _version, _objectstores, _modifiers, _onstorecreated, _stringids);
-		};
+		}
 
 		// export the factory function
 		parentmodule.indexeddb = {
 			newInstance : newInstance
-		};
+		}
 
 		// return the parentmodule that now contains the submodule
 		return parentmodule;
 
-	}(iam || {}));
+	}(iam || {}))
