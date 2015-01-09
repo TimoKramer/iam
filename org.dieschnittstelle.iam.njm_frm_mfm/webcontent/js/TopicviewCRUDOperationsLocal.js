@@ -17,7 +17,7 @@ var iam = (function(iammodule) {
 	function TopicviewCRUDOperationsLocal(_topicid) {
 
 		// this controls the way ids for objects are assigned - for full compliance with LDS2 manualids should be set to true. The demo from December 16, 2014 uses
-		var manualids = false;
+		var manualids = true;
 		var topicid = _topicid;
 
 		// we create a local instance of the generic implementation of the crud operations. Three objectstores will be used:
@@ -51,25 +51,46 @@ var iam = (function(iammodule) {
 			}, function() {
 				alert("error trying to initialise indexeddb!");
 			});
-		}
+		};
+		
 		/*
 		 * the crud operations for topicview
 		 */
 		this.createTopicview = function(topicid, title, callback) {
-
-		}
+            alert("createTopicview");
+            idbcrud.createObject("topicviews", {topicid: topicid, title: title, content_items:[]}, function(created){
+                alert("created topicview: " + JSON.stringify(created));
+                callback(created);
+            });
+		};
 
 		this.readTopicview = function(topicid, callback) {
-
-		}
+            alert();
+            idbcrud.readObject("topicviews", topicid, function(topicviewObject) {
+                // try to read objectref for the topicid
+                idbcrud.readObject("objectrefs", topicid, function(objectref) {
+                    alert("found objectref for topicid " + topicid);
+                    topicviewObj.content_items.push(objectref);
+                    callback(topicviewObj);
+                },
+                function() {
+                    alert("found no objectref for topicid " + topicid);
+                    callback(topicviewObj);
+                });
+                // if one exists, we add it to content_items of topicviewObj
+            }, function(){
+                callback();
+            });
+		};
 
 		this.deleteTopicview = function(topicid, topicid_internal, callback) {
 
-		}
+		};
 
 		this.updateTopicview = function(topicid, update, callback) {
 
-		}
+		};
+		
 		/*
 		 * the crud operations for object
 		 */
@@ -77,24 +98,44 @@ var iam = (function(iammodule) {
 			if (manualids && !obj._id) {
 				obj._id = nextId();
 			}
-
-		}
+            alert("create object");
+            idbcrud.createObject("objects", obj, function(created){
+                idbcrud.createObject("objectrefs", {
+                    topicid: topicid,
+                    type: "objekt",
+                    objektid: created._id
+                }, function(objrefcreated) {
+                    alert("created objectref: " + JSON.stringify(objrefcreated));
+                    callback(created);
+                });
+            });
+		};
 
 		this.readObjectForTopicview = function(topicviewObj, callback) {
-
-		}
+            alert("topicviewObj: " + JSON.stringify(topicviewObj));
+            var objectFound = false;
+            for (var i=0; i < topicviewObj.content_items.length; i++) {
+                var currentItem = topicviewObj.content_items[i];
+                if (currentItem.type == "objekt") {
+                    this.readObject(currentItem.objektid, callback);
+                    objectFound = true;
+                    break;
+                }
+            }
+		};
 
 		this.readObject = function(objid, callback) {
-
-		}
+            alert("readObject()");
+            idbcrud.readObject("objects", objid, callback);
+		};
 
 		this.updateObject = function(obj, callback) {
 
-		}
+		};
 
 		this.deleteObject = function(objid, callback) {
 
-		}
+		};
 
 		/*
 		 * the id of the objekt to be deleted is determined given the content_items array of topicviewObj
@@ -108,13 +149,15 @@ var iam = (function(iammodule) {
 		 */
 		this.deleteObjectForTopicview = function(topicviewObj, callback) {
 
-		}
+		};
+		
 		/*
 		 * this function is needed for creating the objectlist view
 		 */
 		this.readAllObjects = function(callback) {
 
-		}
+		};
+		
 		/*
 		 * a helper function that gives us a String-valued id based on the current time - this is required for LDS2, requirement 2 (local ids)
 		 */
@@ -132,7 +175,7 @@ var iam = (function(iammodule) {
 
 	iammodule.crud.local = {
 		newInstance : newInstance
-	}
+	};
 
 	// return the module
 	return iammodule;
