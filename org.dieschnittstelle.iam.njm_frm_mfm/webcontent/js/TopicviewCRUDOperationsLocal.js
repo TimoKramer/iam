@@ -5,7 +5,7 @@
 var iam = (function(iammodule) {
 
 	// 141220: modified log message
-	console.log("loading TopicviewCRUDOperationsLocal as submodule crud.local of: " + iammodule);
+	console.log("loading TopicviewCRUDOperationsLocal as submodule crud.local of: " + JSON.stringify(iammodule));
 
 	if (!iammodule.crud) {
 		iammodule.crud = {};

@@ -5,7 +5,7 @@
 var iam = (function(iammodule) {
 
 	// 141220: modified log message
-	console.log("loading TopicviewCRUDOperationsSynced as submodule crud.synced of: " + iammodule);
+	console.log("loading TopicviewCRUDOperationsSynced as submodule crud.synced of: " + JSON.stringify(iammodule));
 
 	if (!iammodule.crud) {
 		iammodule.crud = {};

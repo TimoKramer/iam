@@ -7,7 +7,7 @@
 
 var iam = ( function(parentmodule) {
 
-		console.log("loading indexeddb as submodule indexeddb of: " + parentmodule);
+		console.log("loading indexeddb as submodule indexeddb of: " + JSON.stringify(parentmodule));
 
 		function IndexDBCRUDOperationsImpl(_dbname, _version, _objectstores, _modifiers, _onstorecreated, _intids) {
 
