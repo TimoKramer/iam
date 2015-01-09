@@ -152,10 +152,10 @@ var iam = (function(iammodule) {
 		}
 		
 		function getCrudopsImplName() {
-		    var implname = sessionStorage.getItem("crudopsImpl");
+		    var implname = localStorage.getItem("crudopsImpl");
 		    if (!implname) {
 		        implname = "local";
-		        sessionStorage.setItem("crudopsImpl", "local");
+		        localStorage.setItem("crudopsImpl", "local");
 		    }
 		    return implname;
 		}
@@ -169,14 +169,14 @@ var iam = (function(iammodule) {
 		
 		function switchCrudopsImpl() {
 		    var impls = ["local", "remote", "synced"];
-		    var currentImplname = sessionStorage.getItem("crudopsImpl");
+		    var currentImplname = getCrudopsImplName();
 		    var pos = impls.indexOf(currentImplname);
 		    if (pos < (impls.length-1)) {
 		        nextimplname = impls[pos+1];
 		    } else {
 		        nextimplname = impls[0];
 		    }
-		    sessionStorage.setItem("crudopsImpl", nextimplname);
+		    localStorage.setItem("crudopsImpl", nextimplname);
 		}
 
 		/*********************************************************************************

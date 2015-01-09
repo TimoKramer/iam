@@ -17,51 +17,65 @@ var iam = (function(iammodule) {
 	function TopicviewCRUDOperationsSynced(_topicid) {
 
 		var topicid = _topicid;
+		
+		var localcrud = iam.crud.local.newInstance(topicid);
+		var remotecrud = iam.crud.remote.newInstance();
 
 		// the initialise function
 		this.initialise = function(callback) {
-
-		}
+            remotecrud.initialise(function() {
+                localcrud.initialise(callback);
+            });
+		};
+		
 		/*
 		 * the crud operations for topicview
 		 */
 		this.createTopicview = function(topicid, title, callback) {
-
-		}
+            console.log("createTopicview()");
+            remotecrud.createTopicview(topicview, title, function(createdTopicview) {
+                localcrud.createTopicview(createdTopicview.topicid, createdTopicview.title, callback);
+            });
+        };
 
 		this.readTopicview = function(topicid, callback) {
-
-		}
+            localcrud.readTopicview(topicid, callback);
+		};
 
 		this.deleteTopicview = function(topicid, topicid_internal, callback) {
 
-		}
+		};
 
 		this.updateTopicview = function(topicid, update, callback) {
 
-		}
+		};
+		
 		/*
 		 * the crud operations for object
 		 */
 		this.createObject = function(obj, callback) {
-
-		}
+            console.log("createObject(): " + obj);
+            remotecrud.createObject(obj, function(createdObject) {
+                localcrud.createObject(createdObject, callback);
+            });
+		};
 
 		this.readObjectForTopicview = function(topicviewObj, callback) {
-
-		}
+            localcrud.readObjectForTopicview(topicviewObj, callback);
+		};
 
 		this.readObject = function(objid, callback) {
 
-		}
+		};
 
 		this.updateObject = function(obj, callback) {
 
-		}
+		};
 
 		this.deleteObject = function(objid, callback) {
 
-		}
+		};
+		
 		/*
 		 * the id of the objekt to be deleted is determined given the content_items array of topicviewObj
 		 *
@@ -74,13 +88,14 @@ var iam = (function(iammodule) {
 		 */
 		this.deleteObjectForTopicview = function(topicviewObj, callback) {
 
-		}
+		};
+		
 		/*
 		 * this function is needed for creating the objectlist view
 		 */
 		this.readAllObjects = function(callback) {
 
-		}
+		};
 	}
 
 	// a factory method
