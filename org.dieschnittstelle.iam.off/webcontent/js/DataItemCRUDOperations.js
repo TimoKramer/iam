@@ -47,17 +47,20 @@ function DataItemCRUDOperations() {
 			};
 		}
 		this.isCRUDAvailable = crudimpl.isCRUDAvailable;
-	}
+	};
+	
 	/*
 	 * pass a callback to the crudimpl that will be notified if there are changes to availability of crud operations (e.g. if we are running in offline mode)
 	 */
 	this.setOnCRUDAvailabilityChanged = function(callback) {
 		crudimpl.onCRUDAvailabilityChanged = callback;
-	}
+	};
+	
 
 	this.deleteDB = function() {
 		crudimpl.deleteDB();
-	}
+	};
+	
 	/*
 	 * the functions for creating/opening and deleting the db
 	 */
@@ -69,7 +72,8 @@ function DataItemCRUDOperations() {
 		}, function(error) {
 			alert("Error initialing the CRUD Operations: " + error);
 		});
-	}
+	};
+	
 	/************************************************************
 	 * the CRUD operations that will be called by the ui actions
 	 ************************************************************/
@@ -84,7 +88,8 @@ function DataItemCRUDOperations() {
 				callback(item);
 			}
 		});
-	}
+	};
+	
 	/*
 	 * read all items
 	 */
@@ -116,8 +121,8 @@ function DataItemCRUDOperations() {
 				});
 			}
 		});
-
-	}
+	};
+	
 	/*
 	 * delete an item
 	 */
@@ -128,10 +133,11 @@ function DataItemCRUDOperations() {
 					callback(true);
 				}
 			} else {
-				alert("object " + id + " could not be deleted!")
+				alert("object " + id + " could not be deleted!");
 			}
 		});
-	}
+	};
+	
 	/*
 	 * update an item
 	 */
@@ -153,7 +159,8 @@ function DataItemCRUDOperations() {
 		};
 
 		crudimpl.updateObject(storename, item._id, update, onupdatesuccess);
-	}
+	};
+	
 	function getNextId() {
 		var lastId = localStorage.getItem("lastObjectId");
 		if (!lastId) {

@@ -28,15 +28,16 @@ function DataItemCRUDOperations() {
 
 	this.deleteDB = function() {
 		ixdb.deleteDB(dbname);
-	}
+	};
 
 	this.setIdsByIndexedDB = function(onoff) {
 		idsByIndexedDB = onoff;
-	}
+	};
 
 	this.isIdsByIndexedDB = function() {
 		return idsByIndexedDB;
-	}
+	};
+	
 	/*
 	 * the functions for creating/opening and deleting the db
 	 */
@@ -63,7 +64,8 @@ function DataItemCRUDOperations() {
 				});
 			}
 		});
-	}
+	};
+	
 	/************************************************************
 	 * the CRUD operations that will be called by the ui actions
 	 ************************************************************/
@@ -85,7 +87,8 @@ function DataItemCRUDOperations() {
 			}
 		});
 
-	}
+	};
+	
 	/*
 	 * read all items
 	 */
@@ -117,7 +120,8 @@ function DataItemCRUDOperations() {
 				});
 			}
 		});
-	}
+	};
+	
 	/*
 	 * delete an item
 	 */
@@ -128,10 +132,11 @@ function DataItemCRUDOperations() {
 					callback(true);
 				}
 			} else {
-				alert("object " + id + " could not be deleted!")
+				alert("object " + id + " could not be deleted!");
 			}
 		});
-	}
+	};
+	
 	/*
 	 * update an item
 	 */
@@ -148,7 +153,7 @@ function DataItemCRUDOperations() {
 					callback(item);
 				}
 			} else {
-				alert("object " + item.id + " could not be deleted!")
+				alert("object " + item.id + " could not be deleted!");
 			}
 		};
 
@@ -161,7 +166,8 @@ function DataItemCRUDOperations() {
 			ixdb.updateObjectWithKeypath(db, storename, item._id, update, onupdatesuccess);
 		}
 
-	}
+	};
+	
 	function getNextId() {
 		var lastId = localStorage.getItem("lastObjectId");
 		if (!lastId) {
