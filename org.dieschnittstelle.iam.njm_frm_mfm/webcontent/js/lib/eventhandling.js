@@ -8,7 +8,7 @@ var iam = (function(parentmodule) {
 	console.log("loading eventhandling as submodule eventhandling of: " + parentmodule);
 	
 	// trying to increase MasListeners because of warning in console	
-	eventListeners.setMaxListeners(30);
+	//EventDispatcher.defaultMaxListeners(30);
 	
 	/*
 	 * some custom event class
