@@ -347,7 +347,6 @@ function deleteObject(){
 	} else {
 		// MFM: the uri segment we get here is the internal _id that has been assigned by the database. The string value we get here needs to be converted to an id value using the ObjectID function
 		var convertedid = require("mdbjs").ObjectId(uri);
-
 		db.topicviews.remove({
 			// topicid : uri
 			_id : convertedid

@@ -106,7 +106,7 @@ var iam = (function(iammodule) {
 
 	iammodule.crud.synced = {
 		newInstance : newInstance
-	}
+	};
 
 	// return the module
 	return iammodule;

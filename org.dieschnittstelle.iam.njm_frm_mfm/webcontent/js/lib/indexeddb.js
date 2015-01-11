@@ -295,7 +295,7 @@ var iam = ( function(parentmodule) {
 					}
 
 					updaterequest.onsuccess = function(event) {
-						console.log("updateObject(): onsuccess")
+						console.log("updateObject(): onsuccess");
 						if (onsuccess) {
 							// we just feed back true/false
 							onsuccess(true, context);

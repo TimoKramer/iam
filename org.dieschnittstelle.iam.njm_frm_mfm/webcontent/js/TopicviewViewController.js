@@ -5,7 +5,7 @@
 // extend the iam module
 var iam = (function(iammodule) {
 
-	console.log("loading TopicviewViewContoller as submodule controller.topicview of: " + iammodule);
+	console.log("loading TopicviewViewContoller as submodule controller.topicview of: " + JSON.stringify(iammodule));
 
 	// create the controller submodule if it doesn't exist yet
 	if (!iammodule.controller) {
