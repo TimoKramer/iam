@@ -154,7 +154,8 @@ var iam = (function(iammodule) {
 		function getCrudopsImplName() {
 		    var implname = localStorage.getItem("crudopsImpl");
 		    if (!implname) {
-		        implname = "local";
+		        implname = "remote";
+		        //implname = "local";
 		        localStorage.setItem("crudopsImpl", "local");
 		    }
 		    return implname;
@@ -242,7 +243,7 @@ var iam = (function(iammodule) {
 		};
 
 		this.deleteObject = function() {
-			console.log("deleteObject()");
+			console.log("deleteObject() with topicid: " + topicid + " and topicviewObj._id: " + topicviewObj._id);
 			crudops.deleteObject(topicid, topicviewObj._id, function(deleted) {
 				if (deleted) {
 					eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "deleted", "object"));

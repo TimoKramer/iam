@@ -97,7 +97,7 @@ function IXDB() {
 		} else {
 			transaction.onerror = function(event) {
 				alert("Got error trying to create object: " + event.target.errorCode);
-			}
+			};
 		};
 		// access the object store to which the object shall be added from the transaction
 		var objectStore = transaction.objectStore(objectstore);

@@ -162,7 +162,7 @@ var iam =
 				var created = JSON.parse(xmlhttp.responseText);
 				console.log("CRUD.createObject - created: "+ JSON.stringify(created));
 				var topicid = iam.navigation.getViewargs().topicid;
-				alert("topicid: " + topicid);
+				//alert("topicid: " + topicid);
 				if (created) {
 					//callback(created);
 					console.log("CRUD.createObject - created._id: " + created._id);

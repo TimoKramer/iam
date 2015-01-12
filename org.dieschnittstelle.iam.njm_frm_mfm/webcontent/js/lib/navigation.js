@@ -19,6 +19,7 @@ var iam = (function(parentmodule) {
 	function nextView(uri, args) {
 		console.log("about to access uri: " + uri);
 		localStorage.setItem("previousView", window.location);
+		//sessionStorage.setItem("currentViewargs", JSON.stringify(args));
 		window.location = uri + "?args=" + JSON.stringify(args);
 	};
 
@@ -51,8 +52,8 @@ var iam = (function(parentmodule) {
 	 */
 	function getViewargs() {
 		//console.log("getViewargs(): search string is: " + window.location.search);
-		//var argstr = decodeURIComponent(window.location.search.substring("?args=".length));
-		var argstr = localStorage.getItem("currentViewargs");
+		var argstr = decodeURIComponent(window.location.search.substring("?args=".length));
+		//var argstr = localStorage.getItem("previousView");
 		var args = JSON.parse(argstr);
 
 		return args;

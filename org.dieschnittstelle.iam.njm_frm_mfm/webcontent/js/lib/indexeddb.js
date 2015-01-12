@@ -56,6 +56,7 @@ var iam = ( function(parentmodule) {
 
 				// open the database, providing onerror and onsuccess handlers
 				var request = indexedDB.open(dbname, version);
+				console.log("DB.initialise.request: " + JSON.stringify(request));
 				if (onerror) {
 					request.onerror = onerror;
 				} else {
@@ -68,7 +69,7 @@ var iam = ( function(parentmodule) {
 				request.onsuccess = function(event) {
 					// onsuccess, the db will be accessible as the result of of the request
 					db = request.result;
-					console.log("open().onsuccess(): initialised db: " + db);
+					console.log("open().onsuccess(): initialised db: " + JSON.stringify(db));
 
 					// then call the onavailable callback
 					if (onavailable) {

@@ -45,18 +45,15 @@ var iam = (function(parentmodule) {
 				var etypes = event.type.split("|");
 				for (var i = 0; i < etypes.length; i++) {
 					this.addEventListener(iam.eventhandling.customEvent(event.group, etypes[i], event.target), callback);
-					this.listeners(etypes[i]);
 				}
 			} else {
 				console.log("adding new event listener for event " + event.desc());
 				if (eventListeners[event.desc()]) {
 					console.log("adding listener to existing listeners.");
 					eventListeners[event.desc()].push(callback);
-					event.listeners(event.type);
 				} else {
 					console.log("creating new event listener list.");
 					eventListeners[event.desc()] = [callback];
-					event.listeners(event.type);
 				}
 			}
 		};
