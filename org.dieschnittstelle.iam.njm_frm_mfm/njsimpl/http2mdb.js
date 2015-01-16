@@ -347,15 +347,16 @@ function deleteObject(uri, req, res){
 	} else {
 		// MFM: the uri segment we get here is the internal _id that has been assigned by the database. The string value we get here needs to be converted to an id value using the ObjectID function
 		var convertedid = require("mdbjs").ObjectId(uri);
-		db.topicviews.remove({
+		console.log("uri specifies an objectid and is converted to Mongo_id: " + convertedid);
+		db.objects.remove({
 			// topicid : uri
 			_id : convertedid
 		}, function(err, update) {
 			if (err || !update) {
-				console.log("topicview " + uri + " could not be deleted. Got: " + err);
+				console.log("Objekt " + uri + " could not be deleted. Got: " + err);
 				respondError(res);
 			} else {
-				console.log("topicview " + uri + " was deleted. Got: " + update);
+				console.log("Objekt " + uri + " was deleted. Got: " + update);
 				respondSuccess(res, update);
 			}
 		});

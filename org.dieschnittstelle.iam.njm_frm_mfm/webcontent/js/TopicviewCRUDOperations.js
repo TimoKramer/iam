@@ -210,7 +210,9 @@ var iam =
 
 		};
 
-		this.deleteObject = function(objid, callback) {
+		this.deleteObject = function(topicviewObj, callback) {
+		    var topicid = topicviewObj.topicid;
+		    var objid = topicviewObj.content_items[0]._id;
 			console.log("wird gelöscht! topicid: " + topicid + ", objid: " + objid);
 			if (!objid) {
 				xhr("DELETE", "http2mdb/objects/" + topicid + "/content_items/demo_element", {

@@ -263,8 +263,8 @@ var iam = (function(iammodule) {
 
 		this.deleteObject = function() {
 		    console.log("topicviewObj: " + JSON.stringify(topicviewObj));
-			console.log("deleteObject() with topicid: " + topicid + " and topicviewObj._id: " + topicviewObj._id);
-			crudops.deleteObject(topicid, topicviewObj._id, function(deleted) {
+			console.log("deleteObject() with topicid: " + topicid + " and topicviewObj._id: " + topicviewObj.content_items[0]._id);
+			crudops.deleteObject(topicviewObj, function(deleted) {
 				if (deleted) {
 					eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "deleted", "object"));
 				}
