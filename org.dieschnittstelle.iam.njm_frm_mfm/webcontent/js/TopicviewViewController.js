@@ -79,6 +79,7 @@ var iam = (function(iammodule) {
 			 */
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created|updated", "topicview"), function(event) {
 				// we update our local representation of the object
+				console.log("MOOOOOOOOOOOOTHEEEEEEEEEEEEEERRRFFFFUUUUUUUUUUUUCKER!!!!!!!! " + event.type);
 				if (event.type = "read") {
 					topicviewObj = event.data;
 					console.log("MOTHERFUCKER!!! " + JSON.stringify(topicviewObj));
@@ -94,7 +95,8 @@ var iam = (function(iammodule) {
 					//topicviewObj = event.data;
                     topicviewObj.title = event.data.title;
 					console.log("UPDATED TOPICVIEW: " + topicviewObj);
-				} else {
+				} else if (event.type ="created"){
+				    console.log("event topicview created, event.data: " + JSON.stringify(event.data));
 					topicviewObj = event.data;
 				}
 				// and we trigger the visualisation of it
@@ -116,12 +118,18 @@ var iam = (function(iammodule) {
 			
 			// react to the event that an object has been read or created
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created", "object"), function(event) {
+				console.log("verkackter Event: " + event.type);
 				if (event.type = "read") {
+				    console.log("event object read, event.data: " + JSON.stringify(event.data));
 				    showObject.call(this, event.data);
-				} else {
-                    //topicviewObj.content_items[0] = event.data;
+				} 
+                if (event.type = "created") {
+				    console.log("event object created, event.data: " + JSON.stringify(event.data));
+                    topicviewObj.content_items[0] = event.data;
+                    console.log("topicviewObj after object created: " + JSON.stringify(topicviewObj));
 				    this.updateTopicview();
 				}
+				console.log("Problem1");
 			}.bind(this));			
 
 			// initialise the crud operations and try to read out a topicview object
@@ -218,6 +226,7 @@ var iam = (function(iammodule) {
 				title : topicviewObj.title,
 				content_items : topicviewObj.content_items
 			}, function(update) {
+			    console.log("update: " + JSON.stringify(update));
 				eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", update));
 			}.bind(this));
 
