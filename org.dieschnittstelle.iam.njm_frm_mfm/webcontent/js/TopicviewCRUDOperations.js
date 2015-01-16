@@ -209,8 +209,8 @@ var iam =
 
 		};
 
-		this.deleteObject = function(topicid, objid) {
-			console.log(" gelöscht! topicid: " + topicid + ", objid: " + objid);
+		this.deleteObject = function(objid, callback) {
+			console.log("wird gelöscht! topicid: " + topicid + ", objid: " + objid);
 			if (!objid) {
 				xhr("DELETE", "http2mdb/objects/" + topicid + "/content_items/demo_element", {
 					type : "demo_element",
@@ -237,7 +237,7 @@ var iam =
 
 				});
 			} else {
-				// for deleting an object we also identify it using the topicid
+				console.log("for deleting an object we can also identify it using the topicid: " + topicid);
 				xhr("DELETE", "http2mdb/objects/" + objid, null, function(xmlhttp) {
 					var deleted = parseInt(xmlhttp.responseText);
 					if (deleted > 0) {

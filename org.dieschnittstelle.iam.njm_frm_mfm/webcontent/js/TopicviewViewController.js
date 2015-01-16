@@ -89,6 +89,7 @@ var iam = (function(iammodule) {
 						}
 					});
 				} else if (event.type == "updated") {
+                    console.log("Event Topicview updated - topicviewObj: " + JSON.stringify(topicviewObj));
 					//topicviewObj = event.data;
                     topicviewObj.title = event.data.title;
 					console.log("UPDATED TOPICVIEW: " + topicviewObj);
@@ -114,9 +115,16 @@ var iam = (function(iammodule) {
 			
 			// react to the event that an object has been read or created
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created", "object"), function(event) {
-				showObject.call(this, event.data);
-				this.updateTopicview();
-				//console.log("EventListener on Object created: " + JSON.stringify(event.data));
+				if (event.type = "created") {
+				    console.log("Event Object created");
+				} else {				
+    				showObject.call(this, event.data);
+    				console.log("Event Object read/created - event.data: " + JSON.stringify(event.data));
+                    console.log("Event Object read/created - topicviewObj alt: " + JSON.stringify(topicviewObj));
+                    topicviewObj.content_items[0] = event.data;
+    				console.log("Event Object read/created - topicviewObj neu: " + JSON.stringify(topicviewObj));
+    				this.updateTopicview();
+                }
 			}.bind(this));			
 
 			// initialise the crud operations and try to read out a topicview object
@@ -210,7 +218,8 @@ var iam = (function(iammodule) {
 			}
 			// if update is successful the callback will be passed the updated attributs, which are actually the ones we put in
 			crudops.updateTopicview(topicid, {
-				title : title
+				title : topicviewObj.title,
+				content_items : topicviewObj.content_items
 			}, function(update) {
 				eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", update));
 			}.bind(this));
