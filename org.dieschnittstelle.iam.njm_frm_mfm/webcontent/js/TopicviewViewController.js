@@ -81,6 +81,7 @@ var iam = (function(iammodule) {
 				// we update our local representation of the object
 				if (event.type = "read") {
 					topicviewObj = event.data;
+					console.log("MOTHERFUCKER!!! " + JSON.stringify(topicviewObj));
 					crudops.readObjectForTopicview(topicviewObj, function(readobj) {
 						if (readobj) {
 							eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "object", readobj));
@@ -114,8 +115,11 @@ var iam = (function(iammodule) {
 			
 			// react to the event that an object has been read or created
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created", "object"), function(event) {
-				showObject.call(this, event.data);
-				this.updateTopicview();
+				if (event.type = "read") {
+				    showObject.call(this, event.data);
+				} else {
+				    this.updateTopicview();
+				}
 				//console.log("EventListener on Object created: " + JSON.stringify(event.data));
 			}.bind(this));			
 
