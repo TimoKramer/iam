@@ -5,7 +5,7 @@
 // extend the iam module
 var iam = (function(iammodule) {
 
-	console.log("loading TopicviewViewContoller as submodule controller.topicview of: " + JSON.stringify(iammodule));
+	console.log("loading TopicviewViewContoller as submodule controller.topicview of: " + iammodule);
 
 	// create the controller submodule if it doesn't exist yet
 	if (!iammodule.controller) {
@@ -60,38 +60,19 @@ var iam = (function(iammodule) {
 			actionbar_object = document.getElementById("actionbar_object");
 
 			// instantiate the component for the crud operations
-			crudops = getCrudopsImpl(topicid);
+			crudops = iam.crud.remote.newInstance();
 
 			// instantiate the editview
 			var editviewVC = iam.controller.editview.newInstance(topicid, eventDispatcher, crudops);
 			editviewVC.initialiseView();
-
-			var switchImplButton = document.getElementById("switchImplButton");
-			switchImplButton.textContent = getCrudopsImplName();
-			switchImplButton.onclick = function(event) {
-				event.stopPropagation();
-				switchCrudopsImpl();
-				window.location.reload();
-			};
 
 			/*
 			 *  instantiate the event handlers that react to crud events: CRUD for topicview
 			 */
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created|updated", "topicview"), function(event) {
 				// we update our local representation of the object
-				if (event.type = "read") {
-					topicviewObj = event.data;
-					crudops.readObjectForTopicview(topicviewObj, function(readobj) {
-						if (readobj) {
-							eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "object", readobj));
-						} else {
-							alert("no object exists for topicview " + topicid);
-						}
-					});
-				} else if (event.type == "updated") {
-					//topicviewObj = event.data;
-                    topicviewObj.title = event.data.title;
-					console.log("UPDATED TOPICVIEW: " + topicviewObj);
+				if (event.type == "updated") {
+					topicviewObj.title = event.data.title;
 				} else {
 					topicviewObj = event.data;
 				}
@@ -104,26 +85,18 @@ var iam = (function(iammodule) {
 				// and we trigger the visualisation of it
 				updateTitleView.call(this);
 			}.bind(this));
-
+			
 			/*
 			 * event handler that reacts to creation of an einfuehrungstext element
 			 */
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "uploaded|created", "einfuehrungstext"), function(event) {
-				createEinfuehrungstext.call(this, event.data);
+				createEinfuehrungstext.call(this,event.data);
 			}.bind(this));
-			
-			// react to the event that an object has been read or created
-			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created", "object"), function(event) {
-				showObject.call(this, event.data);
-				this.updateTopicview();
-				//console.log("EventListener on Object created: " + JSON.stringify(event.data));
-			}.bind(this));			
 
 			// initialise the crud operations and try to read out a topicview object
 			crudops.initialise( function() {
 
 				crudops.readTopicview(topicid, function(_topicviewObj) {
-					console.log("crudops.readTopicview mit topicid = " + topicid);
 					// check whether some topicview already exists
 					if (_topicviewObj) {
 						eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "topicview", _topicviewObj));
@@ -133,8 +106,8 @@ var iam = (function(iammodule) {
 				}.bind(this));
 			}.bind(this));
 
-		};
-
+		}
+		
 		/*
 		 * this function updates the display of the title heading
 		 */
@@ -148,41 +121,6 @@ var iam = (function(iammodule) {
 				titleel.innerHTML = "Lorem Ipsum";
 			}
 		}
-		
-		function showObject(objectFromDb) {
-			var objectSection = document.getElementById("objekt");
-			objectSection.hidden = false;
-			objectSection.getElementsByTagName("img")[0].src = objectFromDb.src;
-		}
-		
-		function getCrudopsImplName() {
-		    var implname = localStorage.getItem("crudopsImpl");
-		    if (!implname) {
-		        implname = "remote";
-		        //implname = "local";
-		        localStorage.setItem("crudopsImpl", "local");
-		    }
-		    return implname;
-		}
-		
-		function getCrudopsImpl(topicid) {
-		    var implname = getCrudopsImplName();
-		    var implobj = iam.crud[implname].newInstance(topicid);
-		    
-		    return implobj;
-		}
-		
-		function switchCrudopsImpl() {
-		    var impls = ["local", "remote", "synced"];
-		    var currentImplname = getCrudopsImplName();
-		    var pos = impls.indexOf(currentImplname);
-		    if (pos < (impls.length-1)) {
-		        nextimplname = impls[pos+1];
-		    } else {
-		        nextimplname = impls[0];
-		    }
-		    localStorage.setItem("crudopsImpl", nextimplname);
-		}
 
 		/*********************************************************************************
 		 * NJM: these are the actions that will be invoked from the action bar of the gui
@@ -190,14 +128,14 @@ var iam = (function(iammodule) {
 		this.toggleActionbar = function() {
 			actionbar_title.classList.toggle("hidden");
 			actionbar_object.classList.toggle("hidden");
-		};
+		}
 
 		this.createTopicview = function() {
 			crudops.createTopicview(topicid, topicid.replace(/_/g, " "), function(_topicviewObj) {
 				// notify listeners for the given event
 				eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "topicview", _topicviewObj));
 			}.bind(this));
-		};
+		}
 
 		this.updateTopicview = function() {
 			// here we toggle insertion of "_" vs. " " in the title text
@@ -208,6 +146,7 @@ var iam = (function(iammodule) {
 			} else {
 				title = title.replace(/ /g, "_");
 			}
+
 			// if update is successful the callback will be passed the updated attributs, which are actually the ones we put in
 			crudops.updateTopicview(topicid, {
 				title : title
@@ -215,7 +154,7 @@ var iam = (function(iammodule) {
 				eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", update));
 			}.bind(this));
 
-		};
+		}
 
 		this.deleteTopicview = function() {
 			crudops.deleteTopicview(topicid, topicviewObj._id, function(deleted) {
@@ -223,38 +162,24 @@ var iam = (function(iammodule) {
 					eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "deleted", "topicview"));
 				}
 			}.bind(this));
-		};
+		}
+		
 
 		/*
 		 * NJM: these functions need to be implemented for the njm exercises
 		 */
 		this.createObject = function() {
 			console.log("createObject()");
-			alert("createObject(); " + topicid);
-			crudops.createObject({
-				src : "http://lorempixel.com/300/200",
-				title : "lorem",
-				description : "ipsum dolor sit amet",
-			}, function(createdobj) {
-				console.log("TopicviewViewController.createdObject - createdobj: " + JSON.stringify(createdobj));
-				eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "object", createdobj));
-			});
-		};
+		}
 
 		this.updateObject = function() {
 			console.log("updateObject()");
-		};
+		}
 
 		this.deleteObject = function() {
-		    console.log("topicviewObj: " + JSON.stringify(topicviewObj));
-			console.log("deleteObject() with topicid: " + topicid + " and topicviewObj._id: " + topicviewObj._id);
-			crudops.deleteObject(topicid, topicviewObj._id, function(deleted) {
-				if (deleted) {
-					eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "deleted", "object"));
-				}
-			}.bind(this));
-		};
-
+			console.log("deleteObject()");
+		}
+		
 		/*********************************************************************************
 		 * MFM: these functions are used for displaying the einfuehrungstext element
 		 *********************************************************************************/
@@ -291,7 +216,6 @@ var iam = (function(iammodule) {
 				});
 			}
 		}
-
 		/*
 		 * multipart responses will result in invoking this method via a <script> element sent to the page's iframe
 		 */
@@ -299,22 +223,22 @@ var iam = (function(iammodule) {
 			console.log("onMultipartResponse: " + mpobj);
 			// check which kind of object we have created by the multipart request
 			switch (mpobj.type) {
-			case "einfuehrungstext":
-				eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "uploaded", "einfuehrungstext", mpobj));
-				break;
+				case "einfuehrungstext":
+					eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "uploaded", "einfuehrungstext", mpobj));
+					break;
 			}
-		};
+		}
 	}
 
 	// a factory method
 	function newInstance() {
 		return new TopicviewViewController();
-	};
+	}
 
 	// export the factory method
 	iammodule.controller.topicview = {
 		newInstance : newInstance
-	};
+	}
 
 	// return the module
 	return iammodule;

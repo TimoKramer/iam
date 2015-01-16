@@ -1,0 +1,98 @@
+body {
+    margin: 0px;
+    height: 100%;
+}
+
+/*
+ * the footer
+ */
+
+footer {
+    margin: 0px;
+	height: 40px;
+	/*width: 320px;*/
+	width: 100%;
+	background-color: rgb(0,0,0);
+}
+
+/* vertical alignment seems to be tricky */
+footer nav {
+	padding-top: 5px;
+	padding-left: 5px;
+}
+
+footer ul {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+footer ul.hidden {
+    display:none;
+}
+
+footer ul li {
+	display: inline-block;
+	border-right: 2px solid rgb(128,128,128);
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 0px;
+	padding-top: 0px;
+	text-align: center;	
+	width: 18%
+}
+
+footer ul li:last-child {
+    border-right: none;
+}
+
+/* this way we can add textual content. Note however that this content will not by itself be an interactive element 
+footer ul:after {
+	content: ">>";
+	font-family: "Avenir Black", sans-serif;
+	font-size: 15pt;
+	color: rgb(128,128,128);
+}*/
+
+footer a {
+	text-decoration: none;
+	font-family: "Avenir Black", sans-serif;
+	font-weight: bold;
+	font-style: normal;
+	font-size: 12pt;
+	color: rgb(128,128,128);
+	text-transform: uppercase;
+	padding-bottom: 0px;
+	padding-top: 0px;
+}
+
+footer a:active {
+    opacity: 0.75;
+}
+
+/*
+ * the header
+ */
+
+header {
+    /*width: 320px;*/
+    width: 100%;
+    background-color: rgb(0,0,0);
+    height: 20px;
+}
+
+/* the navigation link in the header */
+header nav a {
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+    height: 22px;
+    font-family: "Avenir", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 11pt;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: rgb(128,128,128);
+}
+

@@ -1,0 +1,79 @@
+/*
+ * the heading
+ */
+header {
+	height: 20px;
+}
+
+/*
+ * 
+ */
+body {
+    background-color: rgb(90,90,90);
+}
+
+/*
+ * the main content
+ */
+div#contentscrollview {
+	/*width: 320px;*/
+	width: 100%;
+	/*height: 360px;*/
+	/*height: auto;*/
+	height: -moz-calc(100% - (20px + 25px) );
+	height: -webkit-calc(100% - (20px + 25px) );
+	overflow-y: auto;
+	overflow-x: auto;
+	padding: 0px;
+	margin: 0px;
+}
+
+div#contentview {
+	padding: 0px;
+	margin: 0px;
+	padding-left: 20px;
+	padding-right: 20px;
+	width: 280px;
+	max-width: 280px;
+}
+
+@media (orientation: portrait) {
+	div#contentview {
+		width: -moz-calc(100% - (40px + 20px));
+		width: -webkit-calc(100% - (40px + 20px));
+		max-width: -moz-calc(100% - (40px + 20px));
+		max-width: -webkit-calc(100% - (40px + 20px));
+	}
+}
+
+div#contentview ul {
+	list-style-type: none;
+	padding: 0px;
+	padding-bottom: 10px;
+	margin: 0px;
+	width: 100%;
+}
+
+div#contentview li {
+	padding: 0px;
+	margin: 0px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	border-bottom: 1px dashed rgb(153,153,153);
+}
+
+div#contentview li:last-child {
+	border-bottom: none;
+	padding-bottom: 0px;
+}
+
+div#contentview li a {
+	/* very important: font-size needs to be set in px, not in pt, otherwise the scaling does not work properly as pt is less than px */
+	font-size: 6px;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-family: "Avenir", sans-serif;
+	/* this is the starting point for adjusting the size - it is minimal because we assume that this way we will not exceed the given width */
+	color: rgb(153,153,153);
+}
+

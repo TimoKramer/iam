@@ -23,7 +23,7 @@ var iam =
 
 		this.initialise = function(callback) {
 			callback();
-		};
+		}
 
 		this.createTopicview = function(topicid, title, callback) {
 
@@ -59,7 +59,7 @@ var iam =
 				});
 			});
 
-		};
+		}
 
 		this.readTopicview = function(topicid, callback) {
 
@@ -80,7 +80,7 @@ var iam =
 				}
 			});
 
-		};
+		}
 		/*
 		 * the server-side implementation of this function demonstrates how the ids assigned internally by mongodb are handled, therefore we pass both the manuylly assigned topicid (e.g. die_umsiedlerin) and the internal id
 		 */
@@ -131,7 +131,7 @@ var iam =
 				});
 			}
 
-		};
+		}
 
 		this.updateTopicview = function(topicid, update, callback) {
 
@@ -152,113 +152,32 @@ var iam =
 				}
 			});
 
-		};
+		}
 		/*
 		 * these functions need to be implemented for the njm exercises
 		 */
 
 		this.createObject = function(obj, callback) {
-			xhr("POST","http2mdb/objects", obj, function(xmlhttp){
-				var created = JSON.parse(xmlhttp.responseText);
-				console.log("CRUD.createObject - created: "+ JSON.stringify(created));
-				var topicid = iam.navigation.getViewargs().topicid;
-				//alert("topicid: " + topicid);
-				if (created) {
-					//callback(created);
-					console.log("CRUD.createObject - created._id: " + created._id);
-					// UPDATE TOPICVIEW
-					xhr("PUT", "http2mdb/topicviews/" + topicid + "/content_items", {
-						type: "objekt",
-						render_container: "none",
-						objektid: created._id
-					}, function(xhr) {
-						callback(created);
-					});
-				} else {
-					alert("the object element could not be created!");
-				}
-			});
-		};
-		
-		this.readObjectForTopicview = function(topicviewObj,callback) {
-			var objectFound = false;
-			for (var i=0; i<topicviewObj.content_items.length; i++) {
-				var currentItem = topicviewObj.content_items[i];
-				if (currentItem.type == "objekt") {
-					console.log("CRUD.readObjectForTopicview " + JSON.stringify(currentItem));
-					this.readObject(currentItem.objektid, callback);
-					objectFound = true;
-					break;
-				}
-			}
-			if(!objectFound) {
-				callback();
-			}
-		};
+
+		}
 
 		this.readObject = function(objid, callback) {
-			xhr("GET", "http2mdb/objects/" + objid, null, function(xmlhttp) {
-				var read = JSON.parse(xmlhttp.responseText);
-				callback(read);
-			}, function(xmlhttp) {
-				callback();
-			});
-		};
+
+		}
 
 		this.updateObject = function(obj, callback) {
 
-		};
+		}
 
-		this.deleteObject = function(topicid, objid) {
-			console.log(" gelöscht! topicid: " + topicid + ", objid: " + objid);
-			if (!objid) {
-				xhr("DELETE", "http2mdb/objects/" + topicid + "/content_items/demo_element", {
-					type : "demo_element",
-					render_container : "none"
-				}, function(xmlhttp) {
-					console.log("got response from deletion of demo_element from content_items: " + xmlhttp.responseText);
-					var deletedItem = parseInt(xmlhttp.responseText);
-					if (deletedItem < 1) {
-						alert("demo_element could not be deleted!");
-					} else {
-						console.log("demo_element was deleted successfully");
-					}
-					// we then delete the rest of the topicview
-					xhr("DELETE", "http2mdb/topicviews/" + topicid, null, function(xmlhttp) {
-						var deleted = parseInt(xmlhttp.responseText);
-						if (deleted > 0) {
-							if (callback) {
-								callback(true);
-							}
-						} else {
-							alert("The topicview element could not be deleted!");
-						}
-					});
+		this.deleteObject = function(objid, callback) {
 
-				});
-			} else {
-				// for deleting an object we also identify it using the topicid
-				xhr("DELETE", "http2mdb/objects/" + objid, null, function(xmlhttp) {
-					var deleted = parseInt(xmlhttp.responseText);
-					if (deleted > 0) {
-						if (callback) {
-							callback(true);
-						} else {
-							titleel.innerHTML = "Lorem Ipsum";
-						}
-					} else {
-						alert("The topicview element could not be deleted!");
-					}
-				});
-			}
-
-		};
+		}
 		/*
 		 * this function is needed for creating the objectlist view
 		 */
 		this.readAllObjects = function(callback) {
 
-		};
+		}
 	}
 
 	// a factory method
@@ -269,7 +188,7 @@ var iam =
 	// export the factory method
 	iammodule.crud.remote = {
 		newInstance : newInstance
-	};
+	}
 
 	// return the module
 	return iammodule;

@@ -42,7 +42,6 @@ module.exports = {
 
 		// we truncate the url
 		var uri = utils.substringAfter(req.url, "/http2mdb");
-		console.log("URI: " + uri);
 
 		if (req.method == "GET") {
 			doGet(uri, req, res);
@@ -58,7 +57,7 @@ module.exports = {
 			res.end();
 		}
 	}
-};
+}
 
 /*
  * the top-level methods for handling the requests: the uri identifies which collection shall be accessed
@@ -68,8 +67,6 @@ function doGet(uri, req, res) {
 
 	if (utils.startsWith(uri, "/topicviews")) {
 		readTopicview(utils.substringAfter(uri, "/topicviews/"), req, res);
-	} else if (utils.startsWith(uri, "/objects")) {
-		readObject(utils.substringAfter(uri, "/objects/"), req, res);
 	} else {
 		res.writeHead(404);
 		res.end();
@@ -78,13 +75,12 @@ function doGet(uri, req, res) {
 
 function doPost(uri, req, res) {
 	console.log("doPost(): " + uri);
+
 	// MFM: check whether we have a multipart request
 	if (utils.startsWith(req.headers["content-type"], "multipart/form-data;")) {
 		handleMultipartRequest(uri, req, res);
 	} else if (utils.startsWith(uri, "/topicviews")) {
 		createTopicview(utils.substringAfter(uri, "/topicviews/"), req, res);
-	} else if (utils.startsWith(uri, "/objects")) {
-		createObject(utils.substringAfter(uri, "/objects/"), req, res);
 	} else {
 		res.writeHead(404);
 		res.end();
@@ -95,8 +91,6 @@ function doDelete(uri, req, res) {
 	console.log("doDelete(): " + uri);
 	if (utils.startsWith(uri, "/topicviews")) {
 		deleteTopicview(utils.substringAfter(uri, "/topicviews/"), req, res);
-	} else if (utils.startsWith(uri, "/objects")) {
-		deleteObject(utils.substringAfter(uri, "/objects/"), req, res);
 	} else {
 		res.writeHead(404);
 		res.end();
@@ -209,64 +203,8 @@ function createTopicview(uri, req, res) {
 				// and respond
 				respondSuccess(res, saved);
 			}
-		});
+		})
 	});
-}
-
-function createObject(uri,req,res) {
-	
-	var alldata = "";
-	
-	req.on("data", function(data){
-		alldata += data;
-	});
-	
-	req.on("end", function(){
-		console.log("received data: " + alldata);
-		db.objects.save(JSON.parse(alldata), function(err, saved){
-			if (err || !saved) {
-				console.err("got error: " + err);
-				respondError(res);
-			}
-			else {
-				console.log("http2mdb.createObject - saved: " + JSON.stringify(saved));
-				respondSuccess(res, saved);
-			}
-		});
-		//respondSuccess(res, JSON.parse(alldata));
-	});
-}
-
-function readObject(uri, req, res) {
-	if (uri.length > 0) {
-		
-		var internalid = require("mdbjs").ObjectId(uri);
-		
-		db.objects.find({_id: internalid},function(err, elements) {
-			if (err || !elements) {
-				console.err("got error: " + err);
-				respondError(res);
-			} else if (elements.length == 0) {
-				console.log("da ist nix");
-				respondError(res, 404);
-			} else {
-				respondSuccess(res, elements[0]);
-			}
-		});
-	} else {
-		// read all
-		db.objects.find(function(err, elements) {
-			if (err || !elements) {
-				console.err("got error: " + err);
-				respondError(res);
-			} else if (elements.length == 0) {
-				console.log("da ist nix");
-				respondError(res, 404);
-			} else {
-				respondSuccess(res, elements);
-			}
-		});
-	}
 }
 
 function deleteTopicview(uri, req, res) {
@@ -317,51 +255,6 @@ function deleteTopicview(uri, req, res) {
 	}
 }
 
-function deleteObject(uri, req, res){
-	console.log("deleteObject(): " + uri);
-	if (uri && uri.indexOf("/content_items/") != -1) {
-		console.log("uri specifies an element to be removed from the content_items list: " + uri);
-		// we assume that the type of element to be deleted is given by the last uri segment
-		var segments = uri.split("/");
-		var topicid = segments[0];
-		var type2delete = segments[segments.length - 1];
-		console.log("will try to remove element of type " + type2delete + " from content_items of topicview with topicid " + topicid);
-		db.topicviews.update({
-			topicid : topicid
-		}, {
-			$pull : {
-				"content_items" : {
-					type : type2delete
-				}
-			}
-		}, function(err, updated) {
-			if (err || !updated) {
-				console.error("type " + type2delete + " could not be removed from content_items: " + err);
-				respondError(res);
-			} else {
-				console.log("deleteTopicview(): delete done: " + updated);
-				// and respond
-				respondSuccess(res, updated);
-			}
-		});
-	} else {
-		// MFM: the uri segment we get here is the internal _id that has been assigned by the database. The string value we get here needs to be converted to an id value using the ObjectID function
-		var convertedid = require("mdbjs").ObjectId(uri);
-		db.topicviews.remove({
-			// topicid : uri
-			_id : convertedid
-		}, function(err, update) {
-			if (err || !update) {
-				console.log("topicview " + uri + " could not be deleted. Got: " + err);
-				respondError(res);
-			} else {
-				console.log("topicview " + uri + " was deleted. Got: " + update);
-				respondSuccess(res, update);
-			}
-		});
-	}
-};
-
 function updateTopicview(uri, req, res) {
 	console.log("updateTopicview(): " + uri);
 
@@ -395,7 +288,7 @@ function updateTopicview(uri, req, res) {
 					// and respond
 					respondSuccess(res, updated);
 				}
-			});
+			})
 		});
 	} else {
 		console.log("updateTopicview(): topicid is: " + topicid);
@@ -422,7 +315,7 @@ function updateTopicview(uri, req, res) {
 					// and respond
 					respondSuccess(res, updated);
 				}
-			});
+			})
 		});
 	}
 }
@@ -433,7 +326,6 @@ function updateTopicview(uri, req, res) {
 
 function respondSuccess(res, json) {
 	if (json) {
-		console.log("http2mdb.respondSuccess - json: " + JSON.stringify(json));
 		res.writeHead(200, {
 			'Content-Type' : 'application/json'
 		});
@@ -441,6 +333,7 @@ function respondSuccess(res, json) {
 	} else {
 		res.writeHead(200);
 	}
+
 	res.end();
 }
 
@@ -452,6 +345,11 @@ function respondError(res, code) {
 /* MFM: function for responding the result of multipart request processing: we send a script that invokes an onMultipartResponse() callback */
 function respondMultipart(req, res, uri, content) {
 	console.log("respondMultipart(): " + uri);
-	respondSuccess(res, content);
+	var script = "<script language=\"javascript\" type=\"text/javascript\">var content = " + JSON.stringify(content) + "; window.top.window.vc.onMultipartResponse(\'" + uri + "\', content);</script>";
+	res.writeHead(200, {
+		'Content-Type' : 'text/html'
+	});
+	res.write(script);
+	res.end();
 }
 
