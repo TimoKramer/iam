@@ -102,12 +102,20 @@ var iam = (function(iammodule) {
 				// and we trigger the visualisation of it
 				updateTitleView.call(this);
 			}.bind(this));
+			
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "deleted", "topicview"), function(event) {
 				// we update our local representation of the object
 				topicviewObj = null;
 				// and we trigger the visualisation of it
 				updateTitleView.call(this);
 			}.bind(this));
+			
+			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "deleted", "object"), function(event) {
+			    topicviewObj.content_items = [];
+			    this.updateTopicview();
+			    var standardObjekt = ({"type":"objekt","src":"/content/img/hm_als_fondrak_1961.jpg","title":"test","description":"Testobjekt"}); 
+			    showObject(standardObjekt);
+            }.bind(this));
 
 			/*
 			 * event handler that reacts to creation of an einfuehrungstext element
@@ -162,10 +170,10 @@ var iam = (function(iammodule) {
 			}
 		}
 		
-		function showObject(objectFromDb) {
+		function showObject(updateObject) {
 			var objectSection = document.getElementById("objekt");
 			objectSection.hidden = false;
-			objectSection.getElementsByTagName("img")[0].src = objectFromDb.src;
+			objectSection.getElementsByTagName("img")[0].src = updateObject.src;
 		}
 		
 		function getCrudopsImplName() {
@@ -263,7 +271,6 @@ var iam = (function(iammodule) {
 
 		this.deleteObject = function() {
 		    console.log("topicviewObj: " + JSON.stringify(topicviewObj));
-			console.log("deleteObject() with topicid: " + topicid + " and topicviewObj._id: " + topicviewObj.content_items[0]._id);
 			crudops.deleteObject(topicviewObj, function(deleted) {
 				if (deleted) {
 					eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "deleted", "object"));

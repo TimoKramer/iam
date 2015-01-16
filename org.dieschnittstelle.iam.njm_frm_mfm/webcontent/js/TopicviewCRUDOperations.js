@@ -212,7 +212,12 @@ var iam =
 
 		this.deleteObject = function(topicviewObj, callback) {
 		    var topicid = topicviewObj.topicid;
-		    var objid = topicviewObj.content_items[0]._id;
+            if (topicviewObj.content_items[0]) {
+                var objid = topicviewObj.content_items[0]._id;
+            } else {
+                var objid = false;
+            }
+		    //var objid = topicviewObj.content_items[0]._id || false;
 			console.log("wird gelöscht! topicid: " + topicid + ", objid: " + objid);
 			if (!objid) {
 				xhr("DELETE", "http2mdb/objects/" + topicid + "/content_items/demo_element", {
@@ -227,6 +232,9 @@ var iam =
 						console.log("demo_element was deleted successfully");
 					}
 					// we then delete the rest of the topicview
+					vc.deleteTopicview();
+					
+					/*
 					xhr("DELETE", "http2mdb/topicviews/" + topicid, null, function(xmlhttp) {
 						var deleted = parseInt(xmlhttp.responseText);
 						if (deleted > 0) {
@@ -237,11 +245,13 @@ var iam =
 							alert("The topicview element could not be deleted!");
 						}
 					});
-
+                    */
+                   
 				});
 			} else {
 				console.log("for deleting an object we can also identify it using the topicid: " + topicid);
 				xhr("DELETE", "http2mdb/objects/" + objid, null, function(xmlhttp) {
+				//xhr("DELETE", "http2mdb/objects/" + topicid + "/content_items/objekt"
 					var deleted = parseInt(xmlhttp.responseText);
 					if (deleted > 0) {
 						if (callback) {
