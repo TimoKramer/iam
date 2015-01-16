@@ -186,12 +186,13 @@ var iam =
 				var currentItem = topicviewObj.content_items[i];
 				if (currentItem.type == "objekt") {
 					console.log("CRUD.readObjectForTopicview " + JSON.stringify(currentItem));
-					this.readObject(currentItem.objektid, callback);
+					this.readObject(currentItem._id, callback);
 					objectFound = true;
 					break;
 				}
 			}
 			if(!objectFound) {
+			    console.log("CRUD.readObjectForTopicview " + objectFound);
 				callback();
 			}
 		};

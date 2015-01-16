@@ -79,10 +79,10 @@ var iam = (function(iammodule) {
 			 */
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created|updated", "topicview"), function(event) {
 				// we update our local representation of the object
-				console.log("MOOOOOOOOOOOOTHEEEEEEEEEEEEEERRRFFFFUUUUUUUUUUUUCKER!!!!!!!! " + event.type);
-				if (event.type = "read") {
+				console.log("event topicview: " + event.type);
+				if (event.type == "read") {
 					topicviewObj = event.data;
-					console.log("MOTHERFUCKER!!! " + JSON.stringify(topicviewObj));
+                    console.log("event topicview read - topicviewObj: " + JSON.stringify(topicviewObj));
 					crudops.readObjectForTopicview(topicviewObj, function(readobj) {
 						if (readobj) {
 							eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "object", readobj));
@@ -91,11 +91,11 @@ var iam = (function(iammodule) {
 						}
 					});
 				} else if (event.type == "updated") {
-                    console.log("Event Topicview updated - topicviewObj: " + JSON.stringify(topicviewObj));
+                    console.log("event topicview updated - topicviewObj: " + JSON.stringify(topicviewObj));
 					//topicviewObj = event.data;
                     topicviewObj.title = event.data.title;
-					console.log("UPDATED TOPICVIEW: " + topicviewObj);
-				} else if (event.type ="created"){
+					console.log("UPDATED TOPICVIEW: " + JSON.stringify(topicviewObj));
+				} else if (event.type == "created"){
 				    console.log("event topicview created, event.data: " + JSON.stringify(event.data));
 					topicviewObj = event.data;
 				}
@@ -247,6 +247,7 @@ var iam = (function(iammodule) {
 			console.log("createObject()");
 			alert("createObject(); " + topicid);
 			crudops.createObject({
+			    type: "objekt",
 				src : "http://lorempixel.com/300/200",
 				title : "lorem",
 				description : "ipsum dolor sit amet",
