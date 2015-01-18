@@ -110,33 +110,16 @@
 					<h2><a href="#tab_objekt">Objekt</a></h2>
 					<p>
 						<form id="form_objekt">
-							<table>
-								<tr>
-									<td>
-										<fieldset class="radiogroup">
-											<input type="radio" name="objektContentMode" value="url" id="objektContentModeUrl" checked="checked"/>
-											<label for="objektContentModeUrl">URL</label>
-											<input type="radio" name="objektContentMode" value="upload" id="objektContentModeUpload"/>
-											<label for="objektContentModeUpload">Upload</label>
-										</fieldset>
-									</td>
-								</tr>
-								<tr>
-									<td><label for="title">Titel</label></td>
-									<td><input type="text" name="title"/></td>
-								</tr>
-								<tr>
-									<td><label for="src">URL</label></td>
-									<td><input type="url" name="src"/></td>
-								</tr>
-								<tr>
-									<td><label for="upload">Datei</label></td>
-									<td><input type="file" name="upload" accept="image/*"/></td>
-								</tr>
-								<tr>
-									<input type="submit" name="submit"/>
-								</tr>
-							</table>
+							<fieldset class="radiogroup">
+								<input type="radio" name="objektContentMode" value="url" id="objektContentModeUrl" checked="checked"/>
+								<label for="objektContentModeUrl">URL</label>
+								<input type="radio" name="objektContentMode" value="upload" id="objektContentModeUpload"/>
+								<label for="objektContentModeUpload">Upload</label>
+							</fieldset>
+							<input type="text" name="title"/>
+							<input type="url" name="src"/>
+							<input type="file" name="upload" accept="image/*"/>
+							<input type="submit" name="submit"/>
 						</form>
 					</p>
 				</section>
