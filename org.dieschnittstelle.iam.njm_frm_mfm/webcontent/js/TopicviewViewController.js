@@ -214,6 +214,7 @@ var iam = (function(iammodule) {
 		};
 
 		this.createTopicview = function() {
+		    console.log("Topicview wird erstellt mit topicid: " + topicid);
 			crudops.createTopicview(topicid, topicid.replace(/_/g, " "), function(_topicviewObj) {
 				// notify listeners for the given event
 				eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "topicview", _topicviewObj));

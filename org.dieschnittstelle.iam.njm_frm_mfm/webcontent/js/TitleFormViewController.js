@@ -62,6 +62,7 @@ var iam = (function(iammodule) {
 			// set a click event listener on the delete button
 			document.getElementById("deleteTitleButton").addEventListener("click", function(event) {
 				if (confirm("Möchten Sie die Ansichtsbeschreibung für \"" + topicviewObj.title + "\" wirklich löschen?")) {
+				    console.log("titleformVC - topicviewObj: " + JSON.stringify(topicviewObj));
 					crudops.deleteTopicview(topicid, topicviewObj._id, function(deleted) {
 						if (deleted) {
 							eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "deleted", "topicview"));
@@ -73,6 +74,7 @@ var iam = (function(iammodule) {
 			// set listeners for the crud events
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created|updated|deleted", "topicview"), function(event) {
 				topicviewObj = event.data;
+				console.log("TitleFormViewController hat das topicviewObj: " + JSON.stringify(topicviewObj));
 				if (event.type == "created") {
 					iam.uiutils.showToast("Ansichtsbeschreibung für \"" + event.data.title + "\" wurde erstellt!");
 				} else if (event.type == "updated") {
@@ -130,6 +132,7 @@ var iam = (function(iammodule) {
 			console.log("updateTitleForm(): disabled status of submit button is: " + titleForm.submit.disabled);
 			console.log("updateTitleForm(): disabled status of delete button is: " + deleteTitleButton.disabled);
 		}
+		
 		/*
 		 * handle submission of the title form
 		 */

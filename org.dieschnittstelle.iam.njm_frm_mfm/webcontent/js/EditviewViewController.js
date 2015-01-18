@@ -95,6 +95,7 @@ var iam = (function(iammodule) {
 
 			// these two onclick handlers deal with keeping/closing the editview
 			editview.onclick = function(event) {
+			    //console.log("editview.onclick - event: " + JSON.stringify(event));
 				closeEditview(event);
 			}.bind(this);
 
@@ -171,6 +172,7 @@ var iam = (function(iammodule) {
 		 */
 		function openEditview() {
 			console.log("openEditview()");
+			console.log("classList at openEditview: " + JSON.stringify(editview.classList));
 			editview.classList.toggle("overlay");
 			// we will set the fragement identifier to the title tab to trigger the :target selector for foreground style assignment
 			selectTab("title");
@@ -181,6 +183,7 @@ var iam = (function(iammodule) {
 			console.log("closeEditview()...");
 			// reset the fragment identifier. This will keep the # in the browser location field
 			selectTab("");
+			console.log("classList at closeEditview: " + JSON.stringify(editview.classList));
 			editview.classList.toggle("overlay");
 		}
 		
