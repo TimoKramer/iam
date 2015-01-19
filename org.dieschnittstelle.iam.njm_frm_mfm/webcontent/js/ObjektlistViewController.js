@@ -21,7 +21,7 @@ var iam = (function(iammodule) {
 			console.log("initialiseObjektlist()");
 			//alert("initialiseObjektlist()");			
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created|updated|deleted", "object"), function(event){
-				//alert("got crud event " + event.type + " for object");
+				updateEditView(event);
 			});
 		};
 		
@@ -32,9 +32,8 @@ var iam = (function(iammodule) {
 	}
 
     function updateEditView(hasObjekt) {
-        console.log(" " + JSON.stringify(hasObjekt));
+        console.log("updateEditView " + JSON.stringify(hasObjekt));
     }
-
 
 	function newInstance(topicid, eventDispatcher, crudops) {
 		// we combine instance creation with calling the initialise function

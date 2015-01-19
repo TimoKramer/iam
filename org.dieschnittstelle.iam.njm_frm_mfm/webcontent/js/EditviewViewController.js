@@ -70,6 +70,10 @@ var iam = (function(iammodule) {
 					editview.classList.toggle("overlay");
 				}
 			}.bind(this));
+			// in case an objekt is available, we add the objektlist-tab
+            eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created", "object"), function(event) {
+                showTabForElementtype("objektList", tabsContainer);
+            }.bind(this));		
 			
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabCreated", ""), function(event) {
 				showTabForElementtype(event.data);
