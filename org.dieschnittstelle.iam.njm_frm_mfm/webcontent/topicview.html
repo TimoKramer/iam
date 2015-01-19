@@ -48,7 +48,7 @@
 							<h2>Objekt</h2>
 							<span id="objekt-control"></span>
 							<figure>
-								<img src="/content/img/hm_mit_bk_tragelehn.jpg" width="300"/>
+								<img src="/content/img/hm_mit_bk_tragelehn.jpg"/>
 								<figcaption>lorem ipsum</figcaption>
 							</figure>
 						</section>
@@ -116,10 +116,12 @@
 								<input type="radio" name="objektContentMode" value="upload" id="objektContentModeUpload"/>
 								<label for="objektContentModeUpload">Upload</label>
 							</fieldset>
-							<input type="text" name="title"/>
-							<input type="url" name="src"/>
+							<input type="text" placeholder="Titel" name="title"/>
+							<input type="url" placeholder="URL" name="src"/>
 							<input type="file" name="upload" accept="image/*"/>
-							<input type="submit" name="submit"/>
+							<input type="text" placeholder="Beschreibung" name="description"/>
+							<input type="submit" value="Nix" name="submit"/>
+							<input type="button" value="Löschen"/>
 						</form>
 					</p>
 				</section>

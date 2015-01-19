@@ -108,7 +108,9 @@ var iam = ( function(iammodule) {
 				} else {
 					crudops.createObject({
 						title : objektForm.title.value,
-						src : objektForm.src.value
+						src : objektForm.src.value,
+						type : "objekt",
+						description: objektForm.description.value
 					}, function(created) {
 						//alert("created objekt: " + JSON.stringify(created));
 						eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "object", created));
