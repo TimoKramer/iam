@@ -21,6 +21,7 @@ var iam = ( function(iammodule) {
 			var objektFormSubmit = objektForm.submit;
 			var objektFormInputUpload = objektForm.upload;
 			var objektFormInputUrl = objektForm.src;
+			var deleteObjektButton = document.getElementById("deleteObjektButton");
 
 			var contentModeUploadButton = document.getElementById("objektContentModeUpload");
 			var contentModeUrlButton = document.getElementById("objektContentModeUrl");
@@ -31,11 +32,16 @@ var iam = ( function(iammodule) {
 
 				//contentModeSelectorUpload = objektForm.querySelector("#objektContentMode_upload");
 				//contentModeSelectorUrl = objektForm.querySelector("#objektContentMode_url");
+				
+                eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabSelected", "object"), function(event) {
+                    console.log("HIER SAMMA!!");
+                    updateObjektForm.call(this, event.data);
+                }.bind(this));
 
 				eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "created|read", "object"), function(event) {
 					//eventDispatcher.notifyListeners(iam.eventhandling.customEvent("ui", "tabCreated", "", "objekt"));
-					//updateObjektForm.call(this, event.data);
-					updateObjektForm.call(event.data);
+					updateObjektForm.call(this, event.data);
+					//updateObjektForm.call(event.data);
 				}.bind(this));
 
 				objektForm.onsubmit = submitObjektForm;
@@ -43,7 +49,7 @@ var iam = ( function(iammodule) {
 				contentModeUploadButton.onclick = toggleContentMode;
 				contentModeUrlButton.onclick = toggleContentMode;
 
-				updateObjektForm();
+				//updateObjektForm();
 			};
 
 			function toggleContentMode() {
@@ -61,16 +67,19 @@ var iam = ( function(iammodule) {
 			 */
 			function updateObjektForm(objektElement) {
 				if (objektElement) {
-					console.log("updateObjektForm()");
+					console.log("updateObjektForm() hat Objekt gefunden: "+ JSON.stringify(objektElement));
 					objektForm.title.value = objektElement.title;
 					objektForm.src.value = objektElement.src;
 					objektFormSubmit.value = "Aktualisieren";
 					objektFormSubmit.disabled = true;
+					deleteObjektButton.disabled = false;
 				} else {
+				    console.log("updateObjektForm() hat kein Objekt gefunden");
 					objektFormSubmit.value = "Erzeugen";
 					objektFormSubmit.disabled = false;
+					deleteObjektButton.disabled = true;
 				}
-
+                console.log("updateObjektForm - objektElement: " + JSON.stringify(objektElement));
 				toggleContentMode();
 			}
 

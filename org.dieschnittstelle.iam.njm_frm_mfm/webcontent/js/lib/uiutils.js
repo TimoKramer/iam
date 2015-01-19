@@ -107,7 +107,7 @@ var iam = (function(parentmodule) {
 
 		return element;
 	}
-
+	
 	// export the public functions as submodule to the porent module
 	parentmodule.uiutils = {
 

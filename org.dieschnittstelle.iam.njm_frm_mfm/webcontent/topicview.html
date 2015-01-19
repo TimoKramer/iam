@@ -116,13 +116,13 @@
 								<input type="radio" name="objektContentMode" value="upload" id="objektContentModeUpload"/>
 								<label for="objektContentModeUpload">Upload</label>
 							</fieldset>
-							<input type="text" placeholder="Titel" name="title"/>
+							<input type="text" placeholder="Titel" required="required" name="title"/>
 							<input type="url" placeholder="URL" name="src"/>
 							<input type="file" name="upload" accept="image/*"/>
 							<input type="text" placeholder="Beschreibung" name="description"/>
-							<input type="submit" value="Nix" name="submit"/>
-							<input type="button" value="Löschen"/>
+							<input type="submit" value="" name="submit"/>
 						</form>
+						<button id="deleteObjektButton" name="remove">Löschen</button> 
 					</p>
 				</section>
 			</article>

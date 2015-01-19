@@ -92,7 +92,9 @@ var iam = (function(iammodule) {
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabSelected", "title"), function(event) {
 				onFocus.call(this);
 			}.bind(this));
-
+			eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabSelected", "titel"), function(event) {
+                onFocus.call(this);
+            }.bind(this));
 
 		};
 		

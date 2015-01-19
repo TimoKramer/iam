@@ -24,7 +24,17 @@ var iam = (function(iammodule) {
 				//alert("got crud event " + event.type + " for object");
 			});
 		};
+		
+		eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabSelected", "allObjects"), function(event) {
+            console.log("DO SAMMA!!");
+            updateEditView.call(this, event.data);
+        }.bind(this));
 	}
+
+    function updateEditView(hasObjekt) {
+        console.log(" " + JSON.stringify(hasObjekt));
+    }
+
 
 	function newInstance(topicid, eventDispatcher, crudops) {
 		// we combine instance creation with calling the initialise function

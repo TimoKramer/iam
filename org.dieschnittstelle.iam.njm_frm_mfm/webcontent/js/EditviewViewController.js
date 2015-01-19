@@ -24,6 +24,7 @@ var iam = (function(iammodule) {
 		var inactiveTabsContainer = null;
 		var newElementTab = null;
 		var editview = null;
+		var tabs = null;
 
 		/*
 		 * the topicid
@@ -48,6 +49,9 @@ var iam = (function(iammodule) {
 			tabsContainer = document.getElementsByClassName("tabsContainer")[0];
 			inactiveTabsContainer = document.getElementsByClassName("inactiveTabsContainer")[0];
 			newElementTab = document.getElementById("tab_newElement");
+			
+			// get tabs to react on click
+			registerTabs();
 
 			// initialise the long press handling
 			initialiseLongPressHandling.call(this);
@@ -72,6 +76,9 @@ var iam = (function(iammodule) {
 			}.bind(this));
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabDestroyed", ""), function(event) {
 				hideTabForElementtype(event.data);
+			}.bind(this));
+			eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabOpened", ""), function(event) {
+			    console.log("tabOpenened! " + event);
 			}.bind(this));
 
 			// initialise the controller for the title form
@@ -116,7 +123,7 @@ var iam = (function(iammodule) {
 		 ***************************************************************************************/
 		function initialiseAddElementForm() {
 			document.getElementById("form_addElement").onsubmit = function(event) {
-				console.log("got submit on addElement form: " + event.target);
+				console.log("got submit on addElement form: " + JSON.stringify(event.target));
 
 				// get the type of element that shall be created
 				var elementType = event.target.elementType.value;
@@ -144,6 +151,7 @@ var iam = (function(iammodule) {
 				default:
 					iam.uiutils.showToast("Derzeit kein Editor verfügbar für Elementtyp " + elementType + "!");
 			}
+			registerTabs();
 		}
 
 		/***************************************************************************************
@@ -165,6 +173,7 @@ var iam = (function(iammodule) {
 			window.location.hash = "tab_" + elementType;
 			// we dispatch a ui event that allows the controllers inside the tab to react on tab selection (e.g. by setting focus)
 			eventDispatcher.notifyListeners(iam.eventhandling.customEvent("ui", "tabSelected", elementType));
+			console.log("notifyListeners of tabSelected with elementType: " + JSON.stringify(elementType));
 		}
 
 		/*
@@ -178,7 +187,6 @@ var iam = (function(iammodule) {
 			selectTab("title");
 		}
 
-
 		function closeEditview() {
 			console.log("closeEditview()...");
 			// reset the fragment identifier. This will keep the # in the browser location field
@@ -188,10 +196,41 @@ var iam = (function(iammodule) {
 		}
 		
 		function keepEditview(event) {
-			console.log("keepEditview()");
+			console.log("keepEditview() - event: " + event);
+            console.log("keepEditview() - tabs: " + JSON.stringify(tabs));
 			event.stopPropagation();
 		}
+		
+        /*****************
+        * click on tab behaviour
+        *****************/
+        function registerTabs() {
+            tabs = document.querySelectorAll('article.tabsContainer section h2');
+            console.log("initialised view with tabs: " + JSON.stringify(tabs));
+            // initialise the click handling on tabs
+            addListenersToTabClicks(tabs);
+        }
 
+        function addListenersToTabClicks(tabs) {
+            for (i=0; i<tabs.length; i++) {
+                tabs[i].addEventListener('click', function(event) {
+                    switch(this.firstChild.textContent) {
+                        case "Objekt":
+                            selectTab("object");
+                            break;
+                        case "Titel":
+                            selectTab("title");
+                            break;
+                        case "Alle Objekte":
+                            selectTab("allObjects");
+                            break;
+                        default:
+                            return false;
+                    }
+                    console.log("CLICK: " + this.firstChild.textContent);
+                });
+            }
+        }
 	}
 
 	// a factory method
