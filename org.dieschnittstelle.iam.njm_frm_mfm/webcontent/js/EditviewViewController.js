@@ -52,6 +52,8 @@ var iam = (function(iammodule) {
 			
 			// get tabs to react on click
 			registerTabs();
+			//get Löschen-Button to react on click ist jetzt direkt im ObjektFormVC
+			//registerDeleteButton();
 
 			// initialise the long press handling
 			initialiseLongPressHandling.call(this);
@@ -235,6 +237,7 @@ var iam = (function(iammodule) {
                 });
             }
         }
+                
 	}
 
 	// a factory method

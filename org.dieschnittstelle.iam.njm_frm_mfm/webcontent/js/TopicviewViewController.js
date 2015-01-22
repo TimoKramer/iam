@@ -113,7 +113,7 @@ var iam = (function(iammodule) {
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "deleted", "object"), function(event) {
 			    topicviewObj.content_items = [];
 			    this.updateTopicview();
-			    var standardObjekt = ({"type":"objekt","src":"/content/img/hm_als_fondrak_1961.jpg","title":"test","description":"Testobjekt"}); 
+			    var standardObjekt = ({"type":"objekt","src":"/content/img/klein_hm_als_fondrak_1961.jpg","title":"test","description":"Testobjekt"}); 
 			    showObject(standardObjekt);
             }.bind(this));
 
