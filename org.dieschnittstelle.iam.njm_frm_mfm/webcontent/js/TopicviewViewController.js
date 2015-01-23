@@ -323,9 +323,9 @@ var iam = (function(iammodule) {
 			console.log("onMultipartResponse: " + mpobj);
 			// check which kind of object we have created by the multipart request
 			switch (mpobj.type) {
-			case "einfuehrungstext":
-				eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "uploaded", "einfuehrungstext", mpobj));
-				break;
+    			case "einfuehrungstext":
+    				eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "uploaded", "einfuehrungstext", mpobj));
+    			break;
 			}
 		};
 	}

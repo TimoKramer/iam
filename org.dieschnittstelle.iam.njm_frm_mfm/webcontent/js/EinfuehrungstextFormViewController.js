@@ -23,7 +23,7 @@ var iam = (function(iammodule) {
 		this.initialiseEinfuehrungstextForm = function() {
 
 			// initialise the ui elements
-			inputSrc = document.querySelector("input[name='src']");
+			inputSrc = document.querySelector("#form_einfuehrungstext input[name='src']");
 			inputTxt = document.querySelector("textarea[name='txt']");
 			inputContentModeFirst = document.querySelector("input[name='contentMode']");
 			outputValidationMessages = document.getElementsByClassName("validationMessages")[0];
@@ -38,9 +38,11 @@ var iam = (function(iammodule) {
 				outputValidationMessages.innerHTML = "";
 
 				if (event.target.id == "contentMode_txt") {
+				    console.log("contentMode_txt gewählt...inputsrc.disabled");
 					inputSrc.disabled = true;
 					inputTxt.disabled = false;
 				} else {
+				    console.log("contentMode_txt gewählt...inputsrc.enabled");
 					inputSrc.disabled = false;
 					inputTxt.disabled = true;
 				}

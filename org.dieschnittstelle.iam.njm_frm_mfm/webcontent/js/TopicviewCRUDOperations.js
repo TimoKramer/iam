@@ -82,10 +82,6 @@ var iam =
 
 		};
 		
-		this.alertMe = function() {
-		    alert("TopicviewCRUDOps: OOOOOOOOOOOOOOOOOOOOOOOOOOOM!!!!!!!!!!!!!!!!!!!!");
-		};
-		
 		/*
 		 * the server-side implementation of this function demonstrates how the ids assigned internally by mongodb are handled, therefore we pass both the manuylly assigned topicid (e.g. die_umsiedlerin) and the internal id
 		 */

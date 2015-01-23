@@ -201,8 +201,8 @@ var iam = (function(iammodule) {
 		}
 		
 		function keepEditview(event) {
-			console.log("keepEditview() - event: " + event);
-            console.log("keepEditview() - tabs: " + JSON.stringify(tabs));
+			//console.log("keepEditview() - event: " + event);
+            //console.log("keepEditview() - tabs: " + JSON.stringify(tabs));
 			event.stopPropagation();
 		}
 		
