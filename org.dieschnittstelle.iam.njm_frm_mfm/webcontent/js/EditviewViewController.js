@@ -90,8 +90,6 @@ var iam = (function(iammodule) {
 			// initialise the controller for the title form
 			var titleformVC = iam.controller.titleform.newInstance(topicid, eventDispatcher, crudops);
 			titleformVC.initialiseTitleForm();
-			
-			// for MFM: use some extended form example
 			var einfuehrungstextformVC = iam.controller.einfuehrungstextform.newInstance(topicid, eventDispatcher, crudops);
 			einfuehrungstextformVC.initialiseEinfuehrungstextForm();
 			
@@ -189,6 +187,7 @@ var iam = (function(iammodule) {
 			console.log("openEditview()");
 			console.log("classList at openEditview: " + JSON.stringify(editview.classList));
 			editview.classList.toggle("overlay");
+			registerTabs();
 			// we will set the fragement identifier to the title tab to trigger the :target selector for foreground style assignment
 			selectTab("title");
 		}

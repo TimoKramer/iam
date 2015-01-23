@@ -267,7 +267,7 @@ var iam = (function(iammodule) {
 		};
 
 		this.updateObject = function() {
-			console.log("updateObject()");
+			console.log("TopicviewVC - updateObject()");
 		};
 
 		this.deleteObject = function() {
