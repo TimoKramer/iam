@@ -126,7 +126,6 @@ var iam = (function(iammodule) {
 			
 			// react to the event that an object has been read or created
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created", "object"), function(event) {
-				console.log("verkackter Event: " + event.type);
 				if (event.type = "read") {
 				    console.log("event object read, event.data: " + JSON.stringify(event.data));
 				    showObject.call(this, event.data);

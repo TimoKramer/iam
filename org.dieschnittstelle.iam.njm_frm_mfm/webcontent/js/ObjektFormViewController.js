@@ -22,10 +22,12 @@ var iam = ( function(iammodule) {
         var objektFormSubmit = objektForm.submit;
         var objektFormInputUpload = objektForm.upload;
         var objektFormInputUrl = objektForm.src;
+        var objektFormInputList = objektForm.list;
         var deleteObjektButton = document.getElementById("deleteObjektButton");
 
         var contentModeUploadButton = document.getElementById("objektContentModeUpload");
         var contentModeUrlButton = document.getElementById("objektContentModeUrl");
+        var contentModeListButton = document.getElementById("objektContentModeList");
 
         var objekt = null;
 
@@ -47,10 +49,14 @@ var iam = ( function(iammodule) {
                 objekt = event.data;
             }.bind(this));
 
-            objektForm.onsubmit = submitObjektForm;
-
+            objektForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+                submitObjektForm();
+             });
+             
             contentModeUploadButton.onclick = toggleContentMode;
             contentModeUrlButton.onclick = toggleContentMode;
+            contentModeListButton.onclick = toggleContentMode;
 
             // set an event listener on the title input element: "input" vs. "change": the latter will only be called on focus change!
             objektForm.title.addEventListener("input", function(event) {
@@ -61,7 +67,7 @@ var iam = ( function(iammodule) {
                     deleteObjektButton.disabled = true;
                     objektForm.submit.disabled = false;
                 }
-                if (topicviewObj.content_items[0].type == "objekt") {
+                if (topicviewObj.content_items[0] && topicviewObj.content_items[0].type == "objekt") {
                     deleteObjektButton.disabled = false;
                 }
             }.bind(this));
@@ -82,9 +88,15 @@ var iam = ( function(iammodule) {
             if ((this.event && this.event.target == contentModeUploadButton) || getSelectedContentMode() == "upload") {
                 objektFormInputUpload.disabled = false;
                 objektFormInputUrl.disabled = true;
+                objektFormInputList.disabled = true;
+            } else if ((this.event && this.event.target == contentModeListButton) || getSelectedContentMode() == "list") {
+                objektFormInputUpload.disabled = true;
+                objektFormInputUrl.disabled = true;
+                objektFormInputList.disabled = false;
             } else {
                 objektFormInputUpload.disabled = true;
                 objektFormInputUrl.disabled = false;
+                objektFormInputList.disabled = true;
             }
         }
 
@@ -126,20 +138,19 @@ var iam = ( function(iammodule) {
             if (getSelectedContentMode() == "upload") {
                 alert("create multipart form!");
                 var formdata = new FormData();
-                formdata.append("title", objektForm.titile.value);
+                formdata.append("title", objektForm.title.value);
                 formdata.append("src", objektForm.upload.files[0]);
-
+                formdata.append("description", objektForm.description.value);
+                formdata.append("type", "objekt");
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function() {
-                    if (xhr.readystate == 4) {
-                        if (xhr.status == 200) {
-                            alert("got response from server: " + xhr.responseText);
-                            var objektData = JSON.parse(xhr.responseText);
-                            crudops.createObject(objektData, function(created) {
-                                alert("created objekt element: " + JSON.stringify(created));
-                                eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "object", created));
-                            });
-                        }
+                    if (xhr.readyState==4 && xhr.status == 200) {
+                        alert("got response from server: " + xhr.responseText);
+                        var objektData = JSON.parse(xhr.responseText);
+                        crudops.createObject(objektData, function(created) {
+                            alert("created objekt element: " + JSON.stringify(created));
+                            eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "object", created));
+                        });
                     }
                 };
                 xhr.open("POST", "http2mdb/objects");
