@@ -4,30 +4,30 @@
 // extend the iam module
 var iam = (function(iammodule) {
 
-	console.log("loading ObjektlistViewContoller as submodule controller.objektlist of: " + iammodule);
+    console.log("loading ObjektlistViewContoller as submodule controller.objektlist of: " + iammodule);
 
-	// create the controller submodule if it doesn't exist yet
-	if (!iammodule.controller) {
-		iammodule.controller = {};
-	}
+    // create the controller submodule if it doesn't exist yet
+    if (!iammodule.controller) {
+        iammodule.controller = {};
+    }
 
-	function ObjektlistViewController(_topicid, _eventDispatcher, _crudops) {
+    function ObjektlistViewController(_topicid, _eventDispatcher, _crudops) {
 
-		topicid = _topicid;
-		crudops = _crudops;
-		eventDispatcher = _eventDispatcher;
-				
-		this.initialiseObjektlist = function() {
-			console.log("initialiseObjektlist()");
+        topicid = _topicid;
+        crudops = _crudops;
+        eventDispatcher = _eventDispatcher;
+                
+        this.initialiseObjektlist = function() {
+            console.log("initialiseObjektlist()");
             /*
             eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created", "topicview"), function(event){
                 updateEditView(event);
             }.bind(this));
             
-			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created|updated|deleted", "object"), function(event){
-				updateEditView(event);
-			}.bind(this));
-			*/
+            eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created|updated|deleted", "object"), function(event){
+                updateEditView(event);
+            }.bind(this));
+            */
             eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabSelected", "objektList"), function(event) {
                 updateObjects.call(this, event.data);
             }.bind(this));
@@ -35,25 +35,23 @@ var iam = (function(iammodule) {
                 updateObjectsMitButton.call(this, event.data);
                 inititaliseButtons();
             }.bind(this));
-		};
-	
-    	function inititaliseButtons() {
-            alert("ICH MUSS KOTZEN!!!#1");
-    	    
+        };
+    
+        function inititaliseButtons() {
+            alert("ZwangsAlert");
+            
             var objektButtons = document.querySelectorAll('.idButtons');
             for (var i = 0; i < objektButtons.length; i++) {
-                //objektButtons[i].addEventListener("click", kacken(), false);
+
                 objektButtons[i].onclick = function() {
                     returnID(this.id);
                 };
             }
-    	}
-    	
-    	function returnID(id) {
-    	    alert("ICH MUSS KOTZEN!!!#2" + id);
-    	    console.log("ICH MUSS KOTZEN!!!#2" + id);
+        }
+        
+        function returnID(id) {
             eventDispatcher.notifyListeners(iam.eventhandling.customEvent("ui", "objektSelected", "", id));
-    	}
+        }
     
         function updateObjects(objektList) {
             console.log("updateEditView " + JSON.stringify(objektList));
@@ -97,19 +95,19 @@ var iam = (function(iammodule) {
         }
     }
 
-	function newInstance(topicid, eventDispatcher, crudops) {
-		// we combine instance creation with calling the initialise function
-		var instance = new ObjektlistViewController(topicid, eventDispatcher, crudops);
-		instance.initialiseObjektlist();
-		
-		return instance;
-	}
+    function newInstance(topicid, eventDispatcher, crudops) {
+        // we combine instance creation with calling the initialise function
+        var instance = new ObjektlistViewController(topicid, eventDispatcher, crudops);
+        instance.initialiseObjektlist();
+        
+        return instance;
+    }
 
-	// export the module
-	iammodule.controller.objektlist = {
-		newInstance : newInstance
-	};
+    // export the module
+    iammodule.controller.objektlist = {
+        newInstance : newInstance
+    };
 
-	return iammodule;
+    return iammodule;
 
 }(iam || {}));
