@@ -86,7 +86,7 @@ var iam = ( function(iammodule) {
             }.bind(this));
                                     
             // listeners for the crud events
-            eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created|updated|deleted", "topicview"), function(event) {
+            eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created|deleted", "topicview"), function(event) {
                 topicviewObj = event.data;
                 console.log("ObjektFormViewController hat das topicviewObj: " + JSON.stringify(topicviewObj));
                 if (topicviewObj.content_items[0]) {
@@ -146,19 +146,16 @@ var iam = ( function(iammodule) {
                 objektFormSubmit.value = "Aktualisieren";
                 objektFormSubmit.disabled = true;
                 deleteObjektButton.disabled = false;
-            /*
+                
             } else if (objektFormInputList) {
-                console.log("updateObjektForm() hat ObjektID gefunden: " + objektFormInputList);
+                console.log("updateObjektForm() hat eine ObjektID gefunden");
                 objektForm.title.value = "";
-                objektForm.title.readOnly = true;
                 objektForm.src.value = "";
-                objektForm.src.disabled = true;
                 objektForm.description.value = "";
-                objektForm.description.readOnly = true;
-                objektFormSubmit.value = "Übernehmen";
+                objektFormSubmit.value = "Erzeugen";
                 objektFormSubmit.disabled = false;
                 deleteObjektButton.disabled = true;
-            */
+                
             } else {
                 console.log("updateObjektForm() hat kein Objekt gefunden");
                 objektForm.title.value = "";
@@ -202,10 +199,20 @@ var iam = ( function(iammodule) {
                 };
                 xhr.open("POST", "http2mdb/objects");
                 xhr.send(formdata);
+                
             } else if (getSelectedContentMode() == "list") {
-                var formdata = new FormData();
-                //formdata.append("title", objektForm.title.value);
-                //crudops.updateTopicview(topicid, );
+                var objid = objektFormInputList.value;
+                console.log("ObjektID: " + objid);
+                var objectToAdd;
+                crudops.readObject(objid, function (foundObject) {
+                    alert("Dieses Objekt wird nun zum Topicview hinzugefügt: " + JSON.stringify(foundObject) + foundObject);
+                    crudops.updateTopicview(topicid + "/content_items", foundObject, function(update) {
+                        alert("Das ist der CALLBACK YEAH!!" + JSON.stringify(update));
+                        eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", update));
+                        eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "object", update));
+                    });
+                });
+                
             } else {
                 crudops.createObject({
                     title : objektForm.title.value,
