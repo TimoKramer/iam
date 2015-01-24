@@ -61,6 +61,9 @@ var iam = (function(iammodule) {
 			// initialise the form for adding elements
 			initialiseAddElementForm();
 
+            // EventListener for ObjektForm ObjektID-Input
+            addListenerToObjektIDInput();
+
 			// in case a topicview is created we add the newElementTab to the tab bar
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created", "topicview"), function(event) {
 				iam.uiutils.cutNpasteElement(newElementTab, tabsContainer);
@@ -86,6 +89,11 @@ var iam = (function(iammodule) {
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabOpened", ""), function(event) {
 			    console.log("tabOpenened! " + event);
 			}.bind(this));
+
+            eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "objektSelected", ""), function(event, data) {
+                //alert("EVENT: "+ JSON.stringify(event));
+                returnIDToObjektForm(event.data);
+            }.bind(this));
 
 			// initialise the controller for the title form
 			var titleformVC = iam.controller.titleform.newInstance(topicid, eventDispatcher, crudops);
@@ -152,7 +160,12 @@ var iam = (function(iammodule) {
 					showTabForElementtype("objektList");
 					selectTab(elementType);
 					break;
+                case "objektListMitButtons":
+                    showTabForElementtype("objektList");
+                    selectTab("objektListMitButtons");
+                    break;
 				default:
+				    console.log("Derzeit kein Editor verfügbar für Elementtyp " + elementType + "!");
 					iam.uiutils.showToast("Derzeit kein Editor verfügbar für Elementtyp " + elementType + "!");
 			}
 			registerTabs();
@@ -174,7 +187,11 @@ var iam = (function(iammodule) {
 		}
 
 		function selectTab(elementType) {
-			window.location.hash = "tab_" + elementType;
+		    if (elementType == "objektListMitButtons") {
+                window.location.hash = "tab_objektList";
+            } else {
+                window.location.hash = "tab_" + elementType;
+            }
 			// we dispatch a ui event that allows the controllers inside the tab to react on tab selection (e.g. by setting focus)
 			eventDispatcher.notifyListeners(iam.eventhandling.customEvent("ui", "tabSelected", elementType));
 			console.log("notifyListeners of tabSelected with elementType: " + JSON.stringify(elementType));
@@ -227,7 +244,7 @@ var iam = (function(iammodule) {
                             selectTab("title");
                             break;
                         case "Alle Objekte":
-                            selectTab("allObjects");
+                            selectTab("objektList");
                             break;
                         default:
                             return false;
@@ -235,6 +252,19 @@ var iam = (function(iammodule) {
                     console.log("CLICK: " + this.firstChild.textContent);
                 });
             }
+        }
+        
+        function addListenerToObjektIDInput() {
+            document.querySelector("#form_objekt input[name='list']").addEventListener("click", function(event) {
+                //alert("Hier ist was los!");
+                showAddElementForm("objektListMitButtons");
+            }.bind(this));
+  
+        }
+        
+        function returnIDToObjektForm(data) {
+            document.querySelector("#form_objekt input[name='list']").value = data;
+            selectTab("objekt");
         }
                 
 	}

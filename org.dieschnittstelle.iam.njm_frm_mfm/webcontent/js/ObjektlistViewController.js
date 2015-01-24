@@ -11,10 +11,6 @@ var iam = (function(iammodule) {
 		iammodule.controller = {};
 	}
 
-    var crudops = null;
-    var topicid = null;
-    var eventDispatcher = null;
-
 	function ObjektlistViewController(_topicid, _eventDispatcher, _crudops) {
 
 		topicid = _topicid;
@@ -32,42 +28,73 @@ var iam = (function(iammodule) {
 				updateEditView(event);
 			}.bind(this));
 			*/
-            eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabSelected", "allObjects"), function(event) {
-                console.log("DO SAMMA!! OHL OBJECTS");
+            eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabSelected", "objektList"), function(event) {
                 updateObjects.call(this, event.data);
             }.bind(this));
-                        
+            eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabSelected", "objektListMitButtons"), function(event) {
+                updateObjectsMitButton.call(this, event.data);
+                inititaliseButtons();
+            }.bind(this));
 		};
-		
-	}
-
-    function updateObjects(allObjects) {
-        console.log("updateEditView " + JSON.stringify(allObjects));
-        crudops.readAllObjects(function(allObjects) {
-            updateObjectlist(allObjects);
-        });
-    }
-    
-    function updateObjectlist(allObjects) {
-        //alert("Objekte in der Objektlist: " + JSON.stringify(allObjects));
-        
-        if (allObjects) {
-            var scrollview = document.querySelector('.scrollview');
-            while (scrollview.firstChild) {
-                scrollview.removeChild(scrollview.firstChild);
+	
+    	function inititaliseButtons() {
+            alert("ICH MUSS KOTZEN!!!#1");
+    	    
+            var objektButtons = document.querySelectorAll('.idButtons');
+            for (var i = 0; i < objektButtons.length; i++) {
+                //objektButtons[i].addEventListener("click", kacken(), false);
+                objektButtons[i].onclick = function() {
+                    returnID(this.id);
+                };
             }
-            var table = document.createElement("table");
-            scrollview.appendChild(table);
+    	}
+    	
+    	function returnID(id) {
+    	    alert("ICH MUSS KOTZEN!!!#2" + id);
+    	    console.log("ICH MUSS KOTZEN!!!#2" + id);
+            eventDispatcher.notifyListeners(iam.eventhandling.customEvent("ui", "objektSelected", "", id));
+    	}
+    
+        function updateObjects(objektList) {
+            console.log("updateEditView " + JSON.stringify(objektList));
+            crudops.readAllObjects(function(objektList) {
+                updateObjectlist(objektList);
+            });
+        }
+        
+        function updateObjectsMitButton(objektList) {
+            var mitButton = true;
+            console.log("updateEditView " + JSON.stringify(objektList));
+            crudops.readAllObjects(function(objektList) {
+                updateObjectlist(objektList, mitButton);
+            });
+        }
+    
+        function updateObjectlist(objektList, mitButton) {
+            //alert("Objekte in der Objektlist: " + JSON.stringify(objektList));
             
-            for (var i=0; i<allObjects.length; i++) {
-                var row = table.insertRow(i);
-                row.insertCell(0).innerHTML = allObjects[i].title;
-                row.insertCell(1).innerHTML = allObjects[i].description;
-                row.insertCell(2).innerHTML = "<img src=\"" + allObjects[i].src + "\" width=30px >";
+            if (objektList) {
+                var scrollview = document.querySelector('.scrollview');
+                while (scrollview.firstChild) {
+                    scrollview.removeChild(scrollview.firstChild);
+                }
+                var table = document.createElement("table");
+                scrollview.appendChild(table);
+                
+                for (var i=0; i<objektList.length; i++) {
+                    var row = table.insertRow(i);
+                    row.insertCell(0).innerHTML = objektList[i].title;
+                    row.insertCell(1).innerHTML = objektList[i].description;
+                    row.insertCell(2).innerHTML = "<img src=\"" + objektList[i].src + "\" width=30px >";
+                    if (mitButton) {
+                        row.insertCell(3).innerHTML = 
+                            "<button type=\"button\" class=\"idButtons\" id=\"" + objektList[i]._id + "\">X</button>";
+                    }
+                }
+                
             }
             
         }
-        
     }
 
 	function newInstance(topicid, eventDispatcher, crudops) {

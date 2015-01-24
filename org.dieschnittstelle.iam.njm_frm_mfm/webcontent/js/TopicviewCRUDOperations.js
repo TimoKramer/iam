@@ -136,7 +136,7 @@ var iam =
 
 		this.updateTopicview = function(topicid, update, callback) {
 
-			console.log("updateTopicview()");
+			console.log("updateTopicview()" + topicid);
 
 			// for updating, we identify the topicview passing the id and then only pass the attributes to be updated
 			xhr("PUT", "http2mdb/topicviews/" + topicid, update, function(xmlhttp) {

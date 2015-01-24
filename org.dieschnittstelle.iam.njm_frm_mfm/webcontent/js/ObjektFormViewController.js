@@ -52,12 +52,13 @@ var iam = ( function(iammodule) {
             objektForm.addEventListener("submit", function(event) {
                 event.preventDefault();
                 submitObjektForm();
-             });
+            });
              
             contentModeUploadButton.onclick = toggleContentMode;
             contentModeUrlButton.onclick = toggleContentMode;
             contentModeListButton.onclick = toggleContentMode;
-
+            
+            // EVENTLISTENERS
             // set an event listener on the title input element: "input" vs. "change": the latter will only be called on focus change!
             objektForm.title.addEventListener("input", function(event) {
                 // check whether the target (i.e. the title element) is empty
@@ -71,7 +72,19 @@ var iam = ( function(iammodule) {
                     deleteObjektButton.disabled = false;
                 }
             }.bind(this));
-
+            
+            // set a click event listener on the delete button
+            document.getElementById("deleteObjektButton").addEventListener("click", function(event) {
+                if (confirm("Möchten Sie das Objekt für \"" + topicviewObj.title + "\" wirklich löschen?")) {
+                    console.log("objektformVC - topicviewObj: " + JSON.stringify(topicviewObj));
+                    crudops.deleteObject(topicviewObj, function(deleted) {
+                        if (deleted) {
+                            eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "deleted", "object"));
+                        }
+                    }.bind(this));
+                }
+            }.bind(this));
+                                    
             // listeners for the crud events
             eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created|updated|deleted", "topicview"), function(event) {
                 topicviewObj = event.data;
@@ -87,16 +100,37 @@ var iam = ( function(iammodule) {
         function toggleContentMode() {
             if ((this.event && this.event.target == contentModeUploadButton) || getSelectedContentMode() == "upload") {
                 objektFormInputUpload.disabled = false;
+                objektFormInputUpload.readOnly = false;
                 objektFormInputUrl.disabled = true;
+                objektFormInputUrl.readOnly = false;
                 objektFormInputList.disabled = true;
+                objektForm.title.disabled = false;
+                objektForm.title.readOnly = false;
+                objektForm.description.disabled = false;
+                objektForm.description.readOnly = false;
+
             } else if ((this.event && this.event.target == contentModeListButton) || getSelectedContentMode() == "list") {
-                objektFormInputUpload.disabled = true;
-                objektFormInputUrl.disabled = true;
+                objektFormInputUpload.disabled = false;
+                objektFormInputUpload.readOnly = true;
+                objektFormInputUrl.disabled = false;
+                objektFormInputUrl.readOnly = true;
                 objektFormInputList.disabled = false;
+                objektForm.title.disabled = false;
+                objektForm.title.readOnly = true;
+                objektForm.description.disabled = false;
+                objektForm.description.readOnly = true;
+
             } else {
                 objektFormInputUpload.disabled = true;
+                objektFormInputUpload.readOnly = false;
                 objektFormInputUrl.disabled = false;
+                objektFormInputUrl.readOnly = false;
                 objektFormInputList.disabled = true;
+                objektForm.title.disabled = false;
+                objektForm.title.readOnly = false;
+                objektForm.description.disabled = false;
+                objektForm.description.readOnly = false;
+
             }
         }
 
@@ -112,6 +146,19 @@ var iam = ( function(iammodule) {
                 objektFormSubmit.value = "Aktualisieren";
                 objektFormSubmit.disabled = true;
                 deleteObjektButton.disabled = false;
+            /*
+            } else if (objektFormInputList) {
+                console.log("updateObjektForm() hat ObjektID gefunden: " + objektFormInputList);
+                objektForm.title.value = "";
+                objektForm.title.readOnly = true;
+                objektForm.src.value = "";
+                objektForm.src.disabled = true;
+                objektForm.description.value = "";
+                objektForm.description.readOnly = true;
+                objektFormSubmit.value = "Übernehmen";
+                objektFormSubmit.disabled = false;
+                deleteObjektButton.disabled = true;
+            */
             } else {
                 console.log("updateObjektForm() hat kein Objekt gefunden");
                 objektForm.title.value = "";
@@ -155,6 +202,10 @@ var iam = ( function(iammodule) {
                 };
                 xhr.open("POST", "http2mdb/objects");
                 xhr.send(formdata);
+            } else if (getSelectedContentMode() == "list") {
+                var formdata = new FormData();
+                //formdata.append("title", objektForm.title.value);
+                //crudops.updateTopicview(topicid, );
             } else {
                 crudops.createObject({
                     title : objektForm.title.value,
@@ -168,18 +219,6 @@ var iam = ( function(iammodule) {
             }
             return false;
         }
-
-        // set a click event listener on the delete button
-        document.getElementById("deleteObjektButton").addEventListener("click", function(event) {
-            if (confirm("Möchten Sie das Objekt für \"" + topicviewObj.title + "\" wirklich löschen?")) {
-                console.log("objektformVC - topicviewObj: " + JSON.stringify(topicviewObj));
-                crudops.deleteObject(topicviewObj, function(deleted) {
-                    if (deleted) {
-                        eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "deleted", "object"));
-                    }
-                }.bind(this));
-            }
-        }.bind(this));
 
     }
    
