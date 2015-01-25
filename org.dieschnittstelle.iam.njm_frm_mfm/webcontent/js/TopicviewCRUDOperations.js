@@ -136,7 +136,7 @@ var iam =
 
 		this.updateTopicview = function(topicid, update, callback) {
 
-			console.log("updateTopicview()" + topicid);
+			console.log("updateTopicview() " + topicid + " mit dem update " + JSON.stringify(update));
 
 			// for updating, we identify the topicview passing the id and then only pass the attributes to be updated
 			xhr("PUT", "http2mdb/topicviews/" + topicid + "/content_items", update, function(xmlhttp) {
@@ -171,7 +171,7 @@ var iam =
 					xhr("PUT", "http2mdb/topicviews/" + topicid + "/content_items", {
 						type: "objekt",
 						render_container: "none",
-						objektid: created._id
+						_id: created._id
 					}, function(xhr) {
 						callback(created);
 					});
@@ -187,7 +187,8 @@ var iam =
 				var currentItem = topicviewObj.content_items[i];
 				if (currentItem && currentItem.type == "objekt") {
 					console.log("CRUD.readObjectForTopicview " + JSON.stringify(currentItem));
-					this.readObject(currentItem.objektid, callback);
+					//this.readObject(currentItem.objektid, callback);
+                    this.readObject(currentItem._id, callback);
 					objectFound = true;
 					break;
 				}

@@ -39,12 +39,10 @@ var iam = ( function(iammodule) {
             //contentModeSelectorUrl = objektForm.querySelector("#objektContentMode_url");
 
             eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabSelected", "object"), function(event) {
-                console.log("HIER SAMMA!! - this : " + JSON.stringify(this) + " - event.data: " + JSON.stringify(event));
                 updateObjektForm.call(this, objekt);
             }.bind(this));
 
             eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "created|read", "object"), function(event) {
-                console.log("HIER SAMMA NUMOL!! - this : " + JSON.stringify(this) + " - event.data: " + JSON.stringify(event));
                 updateObjektForm.call(this, event.data);
                 objekt = event.data;
             }.bind(this));
@@ -138,7 +136,7 @@ var iam = ( function(iammodule) {
          * this function can be called from an event listener when a crud operation has been performed on some object element
          */
         function updateObjektForm(objektElement) {
-            if (objektElement) {
+            if (objektElement && !objektFormInputList) {
                 console.log("updateObjektForm() hat Objekt gefunden: " + JSON.stringify(objektElement));
                 objektForm.title.value = objektElement.title;
                 objektForm.src.value = objektElement.src;
@@ -153,8 +151,12 @@ var iam = ( function(iammodule) {
                 objektForm.src.value = "";
                 objektForm.description.value = "";
                 objektFormSubmit.value = "Erzeugen";
-                objektFormSubmit.disabled = false;
                 deleteObjektButton.disabled = true;
+                if (objektFormInputList.value == "") {
+                    objektFormSubmit.disabled = true;
+                } else {
+                    objektFormSubmit.disabled = false;                    
+                }
                 
             } else {
                 console.log("updateObjektForm() hat kein Objekt gefunden");
@@ -205,10 +207,10 @@ var iam = ( function(iammodule) {
                 console.log("ObjektID: " + objid);
                 var objectToAdd;
                 crudops.readObject(objid, function (foundObject) {
-                    alert("Dieses Objekt wird nun zum Topicview hinzugefügt: " + JSON.stringify(foundObject) + foundObject);
-                    crudops.updateTopicview(topicid + "/content_items", foundObject, function(update) {
-                        alert("Das ist der CALLBACK YEAH!!" + JSON.stringify(update));
-                        eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", update));
+                    var newObjekt = {"_id" : objid, "type" : "objekt", "render_container" : "none"}; 
+                    console.log("Dieses Objekt wird nun zum Topicview hinzugefügt: " + JSON.stringify(newObjekt) + "erhaltenes Objekt: " + JSON.stringify(foundObject));
+                    crudops.updateTopicview(topicid, newObjekt, function(update) {
+                        //eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", ));
                         eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "object", update));
                     });
                 });

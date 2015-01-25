@@ -19,15 +19,7 @@ var iam = (function(iammodule) {
                 
         this.initialiseObjektlist = function() {
             console.log("initialiseObjektlist()");
-            /*
-            eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created", "topicview"), function(event){
-                updateEditView(event);
-            }.bind(this));
-            
-            eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created|updated|deleted", "object"), function(event){
-                updateEditView(event);
-            }.bind(this));
-            */
+
             eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabSelected", "objektList"), function(event) {
                 updateObjects.call(this, event.data);
             }.bind(this));
