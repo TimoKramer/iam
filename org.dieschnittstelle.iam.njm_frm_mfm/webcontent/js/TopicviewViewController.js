@@ -91,13 +91,13 @@ var iam = (function(iammodule) {
 						}
 					});
 				} else if (event.type == "updated") {
-                    console.log("event topicview updated - topicviewObj: " + JSON.stringify(topicviewObj));
 					//topicviewObj = event.data;
                     topicviewObj.title = event.data.title;
+                    
 					console.log("UPDATED TOPICVIEW: " + JSON.stringify(topicviewObj));
 				} else if (event.type == "created"){
-				    console.log("event topicview created, event.data: " + JSON.stringify(event.data));
-					topicviewObj = event.data;
+				    topicviewObj = event.data;
+				    console.log("CREATED TOPICVIEW: " + JSON.stringify(topicviewObj));
 				}
 				// and we trigger the visualisation of it
 				updateTitleView.call(this);
@@ -134,9 +134,8 @@ var iam = (function(iammodule) {
 				    console.log("event object created, event.data: " + JSON.stringify(event.data));
                     topicviewObj.content_items[0] = event.data;
                     console.log("topicviewObj after object created: " + JSON.stringify(topicviewObj));
-				    this.updateTopicview();
+				    //this.updateTopicview();
 				}
-				console.log("Problem1");
 			}.bind(this));			
 
 			// initialise the crud operations and try to read out a topicview object

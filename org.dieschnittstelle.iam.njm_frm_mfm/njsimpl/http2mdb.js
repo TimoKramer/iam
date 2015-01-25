@@ -380,6 +380,9 @@ function updateTopicview(uri, req, res) {
 			console.log("updateTopicview(): data is: " + alldata);
 			// parse the data
 			var parseddata = JSON.parse(alldata);
+			if (parseddata.type == "objekt") {
+			    pullContent(topicid, "objekte");
+			}
 			// and update the content_items using the $push operation!
 			db.topicviews.update({
 				topicid : topicid
@@ -456,3 +459,23 @@ function respondMultipart(req, res, uri, content) {
 	respondSuccess(res, content);
 }
 
+/*
+ * database maintenance functions
+ */
+function pullContent(topicid, content) {
+    switch(content) {
+        case "objekte":
+            db.topicviews.update(
+                {topicid : topicid},
+                {$pull: {content_items: {type: "objekt"}}}
+            );
+            db.topicviews.update(
+                {topicid : topicid},
+                {$pull: {content_items: {type: "demo_element"}}}
+            );
+            break;
+        default:
+            break;
+    }
+    
+}

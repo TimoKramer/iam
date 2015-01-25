@@ -139,7 +139,7 @@ var iam =
 			console.log("updateTopicview()" + topicid);
 
 			// for updating, we identify the topicview passing the id and then only pass the attributes to be updated
-			xhr("PUT", "http2mdb/topicviews/" + topicid, update, function(xmlhttp) {
+			xhr("PUT", "http2mdb/topicviews/" + topicid + "/content_items", update, function(xmlhttp) {
 				var updated = parseInt(xmlhttp.responseText);
 				// if the update was successful, we update the title
 				if (updated > 0) {
@@ -185,9 +185,9 @@ var iam =
 			var objectFound = false;
 			for (var i=0; i<topicviewObj.content_items.length; i++) {
 				var currentItem = topicviewObj.content_items[i];
-				if (currentItem.type == "objekt") {
+				if (currentItem && currentItem.type == "objekt") {
 					console.log("CRUD.readObjectForTopicview " + JSON.stringify(currentItem));
-					this.readObject(currentItem._id, callback);
+					this.readObject(currentItem.objektid, callback);
 					objectFound = true;
 					break;
 				}
