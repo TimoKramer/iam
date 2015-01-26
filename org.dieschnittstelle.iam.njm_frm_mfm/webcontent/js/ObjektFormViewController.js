@@ -33,10 +33,6 @@ var iam = ( function(iammodule) {
 
         this.initialiseObjektForm = function() {
             console.log("initialiseObjektForm()");
-            //alert("initialiseObjektForm()...objektFormSubmit: " + objektFormSubmit);
-
-            //contentModeSelectorUpload = objektForm.querySelector("#objektContentMode_upload");
-            //contentModeSelectorUrl = objektForm.querySelector("#objektContentMode_url");
 
             eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabSelected", "object"), function(event) {
                 updateObjektForm.call(this, objekt);
@@ -194,7 +190,7 @@ var iam = ( function(iammodule) {
                         alert("got response from server: " + xhr.responseText);
                         var objektData = JSON.parse(xhr.responseText);
                         crudops.createObject(objektData, function(created) {
-                            alert("created objekt element: " + JSON.stringify(created));
+                            //alert("created objekt element: " + JSON.stringify(created));
                             eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "object", created));
                         });
                     }
@@ -207,12 +203,20 @@ var iam = ( function(iammodule) {
                 console.log("ObjektID: " + objid);
                 var objectToAdd;
                 crudops.readObject(objid, function (foundObject) {
-                    var newObjekt = {"_id" : objid, "type" : "objekt", "render_container" : "none"}; 
-                    console.log("Dieses Objekt wird nun zum Topicview hinzugefügt: " + JSON.stringify(newObjekt) + "erhaltenes Objekt: " + JSON.stringify(foundObject));
-                    crudops.updateTopicview(topicid, newObjekt, function(update) {
-                        eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", update));
-                        //eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "object", update));
-                    });
+                    if (foundObject) {
+                        var newObjekt = {"_id" : objid, "type" : "objekt", "render_container" : "none"}; 
+                        console.log("Dieses Objekt wird nun zum Topicview hinzugefügt: " + JSON.stringify(newObjekt) + "erhaltenes Objekt: " + JSON.stringify(foundObject));
+                        crudops.addContentItem(topicid, newObjekt, function(updated) {
+                            if (updated) {
+                                console.log("ObjektFormVC: topicviewObj = " + JSON.stringify(topicviewObj));
+                                console.log("ObjektFormVC: updated = " + JSON.stringify(updated));
+                                topicviewObj.content_items[0] = newObjekt;
+                                console.log("ObjektFormVC: topicviewObj mit newObjekt = " + JSON.stringify(topicviewObj));
+                                // unkommentieren funktioniert nicht!
+                                //eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", topicviewObj));
+                            } else console.log("ObjektFormVC: No update occured");
+                        });
+                    } else console.log("ObjektFormVC: No Object found");
                 });
                 
             } else {

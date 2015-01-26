@@ -395,7 +395,7 @@ function updateTopicview(uri, req, res) {
 					console.error("content_items could not be updated: " + err);
 					respondError(res);
 				} else {
-					console.log("updateTopicview(): update done: " + updated);
+					console.log("updateTopicview(): update done: " + updated + " response: " + res);
 					// and respond
 					respondSuccess(res, updated);
 				}

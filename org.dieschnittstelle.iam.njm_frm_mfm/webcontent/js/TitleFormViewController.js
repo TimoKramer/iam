@@ -78,6 +78,7 @@ var iam = (function(iammodule) {
 				if (event.type == "created") {
 					iam.uiutils.showToast("Ansichtsbeschreibung für \"" + event.data.title + "\" wurde erstellt!");
 				} else if (event.type == "updated") {
+				    console.log("Hier muss ein komplettes TopicviewObject übergeben werden " + JSON.stringify(event));
 					iam.uiutils.showToast("Titel \"" + event.data.title + "\" wurde aktualisiert!");
 					// we currently only do partial updates of the title!
 					topicviewObj.title = event.data.title;

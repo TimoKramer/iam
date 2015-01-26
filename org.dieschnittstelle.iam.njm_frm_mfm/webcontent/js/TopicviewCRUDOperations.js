@@ -134,30 +134,51 @@ var iam =
 
 		};
 
-		this.updateTopicview = function(topicid, update, callback) {
+        this.updateTopicview = function(topicid, update, callback) {
 
-			console.log("updateTopicview() " + topicid + " mit dem update " + JSON.stringify(update));
+            console.log("updateTopicview()");
 
-			// for updating, we identify the topicview passing the id and then only pass the attributes to be updated
-			xhr("PUT", "http2mdb/topicviews/" + topicid + "/content_items", update, function(xmlhttp) {
-				var updated = parseInt(xmlhttp.responseText);
-				// if the update was successful, we update the title
-				if (updated > 0) {
-					if (callback) {
-						callback(update);
-					} else {
-						titleel.innerHTML = title;
-					}
-				} else {
-					alert("The topicview element could not be updated!");
-				}
-			});
+            // for updating, we identify the topicview passing the id and then only pass the attributes to be updated
+            xhr("PUT", "http2mdb/topicviews/" + topicid, update, function(xmlhttp) {
+                var updated = parseInt(xmlhttp.responseText);
+                // if the update was successful, we update the title
+                if (updated > 0) {
+                    if (callback) {
+                        callback(update);
+                    } else {
+                        titleel.innerHTML = title;
+                    }
+                } else {
+                    alert("The topicview element could not be updated!");
+                }
+            });
 
+        };
+        		
+		this.addContentItem = function(topicid, update, callback) {
+            console.log("addContentItem() " + topicid + " mit dem update " + JSON.stringify(update));
+
+            // for updating, we identify the topicview passing the id and then only pass the attributes to be updated
+            xhr("PUT", "http2mdb/topicviews/" + topicid + "/content_items", update, function(xmlhttp) {
+                var updated = parseInt(xmlhttp.responseText);
+                // if the update was successful, we update the title
+                if (updated > 0) {
+                    if (callback) {
+                        callback(update);
+                    //} else {
+                    //    titleel.innerHTML = title;
+                    }
+                } else {
+                    alert("The topicview element could not be updated!");
+                }
+            });
+
+		    
 		};
+		
 		/*
 		 * these functions need to be implemented for the njm exercises
 		 */
-
 		this.createObject = function(obj, callback) {
 			xhr("POST","http2mdb/objects", obj, function(xmlhttp){
 				var created = JSON.parse(xmlhttp.responseText);
@@ -201,6 +222,7 @@ var iam =
 
 		this.readObject = function(objid, callback) {
 			xhr("GET", "http2mdb/objects/" + objid, null, function(xmlhttp) {
+			    console.log("crudops.readObject mit objid " + objid);
 				var read = JSON.parse(xmlhttp.responseText);
 				callback(read);
 			}, function(xmlhttp) {

@@ -91,10 +91,12 @@ var iam = (function(iammodule) {
 						}
 					});
 				} else if (event.type == "updated") {
-					//topicviewObj = event.data;
-                    topicviewObj.title = event.data.title;
-                    
+                    console.log("Hier muss ein komplettes TopicviewObject übergeben werden " + JSON.stringify(event));					
+                    topicviewObj = event.data;
 					console.log("UPDATED TOPICVIEW: " + JSON.stringify(topicviewObj));
+					if (topicviewObj.content_items) {
+					    showObject(topicviewObj.content_items[0]);
+					};
 				} else if (event.type == "created"){
 				    topicviewObj = event.data;
 				    console.log("CREATED TOPICVIEW: " + JSON.stringify(topicviewObj));
