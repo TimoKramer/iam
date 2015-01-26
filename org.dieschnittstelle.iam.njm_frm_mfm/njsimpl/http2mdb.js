@@ -104,7 +104,7 @@ function doDelete(uri, req, res) {
 }
 
 function doPut(uri, req, res) {
-	console.log("doPut(): " + uri);
+	console.log("doPut(): " + uri + " response: " + JSON.stringify(res));
 	if (utils.startsWith(uri, "/topicviews")) {
 		updateTopicview(utils.substringAfter(uri, "/topicviews/"), req, res);
 	} else {

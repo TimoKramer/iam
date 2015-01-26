@@ -136,7 +136,7 @@ var iam =
 
 		this.updateTopicview = function(topicid, update, callback) {
 
-			console.log("updateTopicview() " + topicid + " mit dem update " + JSON.stringify(update));
+			console.log("updateTopicview im TopicviewCRUDOps " + topicid + " mit dem update " + JSON.stringify(update));
 
 			// for updating, we identify the topicview passing the id and then only pass the attributes to be updated
 			xhr("PUT", "http2mdb/topicviews/" + topicid + "/content_items", update, function(xmlhttp) {
@@ -167,14 +167,21 @@ var iam =
 				if (created) {
 					//callback(created);
 					console.log("CRUD.createObject - created._id: " + created._id);
+					var update = JSON.parse('{"type": "objekt", "render_container": "none", "_id": "' + created._id + '"}');
+					console.log("calling updateTopicview in CRUDOps");
 					// UPDATE TOPICVIEW
-					xhr("PUT", "http2mdb/topicviews/" + topicid + "/content_items", {
+					this.updateTopicview.call(topicid, update, function(){
+					    callback(created);
+					});
+					/*
+					xhr("PUT", "http2mdb/topicviews/" + topicid + "/content_items", JSON.parse({
 						type: "objekt",
 						render_container: "none",
 						_id: created._id
-					}, function(xhr) {
+					}), function(xhr) {
 						callback(created);
 					});
+					*/
 				} else {
 					alert("the object element could not be created!");
 				}
@@ -200,6 +207,7 @@ var iam =
 		};
 
 		this.readObject = function(objid, callback) {
+		    console.log("readObject mit objid = " + objid);
 			xhr("GET", "http2mdb/objects/" + objid, null, function(xmlhttp) {
 				var read = JSON.parse(xmlhttp.responseText);
 				callback(read);

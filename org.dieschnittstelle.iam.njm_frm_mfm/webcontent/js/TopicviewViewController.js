@@ -112,6 +112,7 @@ var iam = (function(iammodule) {
 			
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "deleted", "object"), function(event) {
 			    topicviewObj.content_items = [];
+			    console.log("updateTopicview im TopicviewVC bei event object deleted");
 			    this.updateTopicview();
 			    var standardObjekt = ({"type":"objekt","src":"/content/img/klein_hm_als_fondrak_1961.jpg","title":"test","description":"Testobjekt"}); 
 			    showObject(standardObjekt);
@@ -229,6 +230,7 @@ var iam = (function(iammodule) {
 				title = title.replace(/ /g, "_");
 			}
 			// if update is successful the callback will be passed the updated attributs, which are actually the ones we put in
+			console.log("updateTopicview im TopicviewVC");
 			crudops.updateTopicview(topicid, {
 				title : topicviewObj.title,
 				content_items : topicviewObj.content_items

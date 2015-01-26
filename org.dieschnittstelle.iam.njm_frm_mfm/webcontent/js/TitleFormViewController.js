@@ -147,6 +147,7 @@ var iam = (function(iammodule) {
 			// check whether we need to perform a create or update
 			if (topicviewObj) {
 				console.log("submitTitleForm(): update");
+				console.log("updateTopicview im TitleFormVC");
 				crudops.updateTopicview(topicid, {
 					title : title
 				}, function(updated) {

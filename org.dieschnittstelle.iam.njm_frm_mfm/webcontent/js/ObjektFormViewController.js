@@ -179,7 +179,7 @@ var iam = ( function(iammodule) {
          * this method can be used for implementing submission of object form content to the server
          */
         function submitObjektForm() {
-            console.log("submitObjektForm()");
+            console.log("submitObjektForm(), getselectedcontentmode: " + getSelectedContentMode());
 
             if (getSelectedContentMode() == "upload") {
                 alert("create multipart form!");
@@ -208,7 +208,9 @@ var iam = ( function(iammodule) {
                 var objectToAdd;
                 crudops.readObject(objid, function (foundObject) {
                     var newObjekt = {"_id" : objid, "type" : "objekt", "render_container" : "none"}; 
+                    alert("topicid: " + topicid);
                     console.log("Dieses Objekt wird nun zum Topicview hinzugefügt: " + JSON.stringify(newObjekt) + "erhaltenes Objekt: " + JSON.stringify(foundObject));
+                    console.log("updateTopicview im ObjektFormVC");
                     crudops.updateTopicview(topicid, newObjekt, function(update) {
                         //eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", ));
                         eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "object", update));
