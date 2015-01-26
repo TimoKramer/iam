@@ -210,8 +210,8 @@ var iam = ( function(iammodule) {
                     var newObjekt = {"_id" : objid, "type" : "objekt", "render_container" : "none"}; 
                     console.log("Dieses Objekt wird nun zum Topicview hinzugefügt: " + JSON.stringify(newObjekt) + "erhaltenes Objekt: " + JSON.stringify(foundObject));
                     crudops.updateTopicview(topicid, newObjekt, function(update) {
-                        //eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", ));
-                        eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "object", update));
+                        eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", update));
+                        //eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "read", "object", update));
                     });
                 });
                 
