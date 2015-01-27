@@ -91,12 +91,19 @@ var iam = (function(iammodule) {
 						}
 					});
 				} else if (event.type == "updated") {
-                    console.log("Hier muss ein komplettes TopicviewObject übergeben werden " + JSON.stringify(event));					
-                    topicviewObj = event.data;
+                    console.log("Hier muss ein komplettes TopicviewObject übergeben werden " + JSON.stringify(event));
+                    if(event.data.title !== null) {
+                        topicviewObj.title = event.data.title;
+                    } else if (event.data.topicid == topicid) {
+                        topicviewObj = event.data;
+                    }
 					console.log("UPDATED TOPICVIEW: " + JSON.stringify(topicviewObj));
-					if (topicviewObj.content_items.length > 0) {
-					    showObject(topicviewObj.content_items[0]);
-					};
+					for (var i; i<topicviewObj.content_items.length; i++) {
+					    console.log(topicviewObj.content_items[i]);
+					    topicviewObj.content_items[i].type == "objekt";
+					    console.log("SHOWOBJECT!!!");
+                        showObject(topicviewObj.content_items[i]);
+					}
 				} else if (event.type == "created"){
 				    topicviewObj = event.data;
 				    console.log("CREATED TOPICVIEW: " + JSON.stringify(topicviewObj));
@@ -136,7 +143,7 @@ var iam = (function(iammodule) {
 				    console.log("event object created, event.data: " + JSON.stringify(event.data));
                     topicviewObj.content_items[0] = event.data;
                     console.log("topicviewObj after object created: " + JSON.stringify(topicviewObj));
-				    //this.updateTopicview();
+				    //showObject(event.data);
 				}
 			}.bind(this));			
 

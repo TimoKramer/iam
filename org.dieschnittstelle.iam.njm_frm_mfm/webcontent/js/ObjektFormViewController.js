@@ -213,7 +213,7 @@ var iam = ( function(iammodule) {
                                 topicviewObj.content_items[0] = newObjekt;
                                 console.log("ObjektFormVC: topicviewObj mit newObjekt = " + JSON.stringify(topicviewObj));
                                 // unkommentieren funktioniert nicht!
-                                //eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", topicviewObj));
+                                eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", topicviewObj));
                             } else console.log("ObjektFormVC: No update occured");
                         });
                     } else console.log("ObjektFormVC: No Object found");
