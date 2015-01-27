@@ -270,7 +270,11 @@ var iam = ( function(parentmodule) {
 				// and once again, we create a transaction and access the object store via that transaction
 				var objectStore = db.transaction([objectstore], "readwrite").objectStore(objectstore);
 
-				// as shown in mdn demo, indexeddb does (currently) not support partial updates, i.e. we need to read out the object first and then replace the attribute value pairs that are contained in the update object passed to this function.
+				/*
+				* as shown in mdn demo, indexeddb does (currently) not support partial updates,
+				* i.e. we need to read out the object first and then replace the attribute value pairs 
+				* that are contained in the update object passed to this function.
+				*/
 				var request = objectStore.get( intids[objectstore] ? parseInt(id) : id);
 				request.onerror = function(event) {
 					if (onerror) {
@@ -287,7 +291,10 @@ var iam = ( function(parentmodule) {
 						currentValue[attr] = update[attr];
 					}
 
-					// and then write the objec - note that put takes the key as second argument... note that if the _id is set on the update object, this operation will result in adding the _id attribute to the object store, as well
+					/* and then write the objec - note that put takes the key as second argument...  
+					 * note that if the _id is set on the update object, this operation will result
+					 *  in adding the _id attribute to the object store, as well
+					 */
 					var updaterequest = null;
 					if (!usekeypathForUpdate[objectstore]) {
 						updaterequest = objectStore.put(currentValue, intids[objectstore] ? parseInt(id) : id);

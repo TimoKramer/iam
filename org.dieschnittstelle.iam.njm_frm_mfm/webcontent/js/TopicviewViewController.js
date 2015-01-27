@@ -94,7 +94,7 @@ var iam = (function(iammodule) {
                     console.log("Hier muss ein komplettes TopicviewObject übergeben werden " + JSON.stringify(event));					
                     topicviewObj = event.data;
 					console.log("UPDATED TOPICVIEW: " + JSON.stringify(topicviewObj));
-					if (topicviewObj.content_items) {
+					if (topicviewObj.content_items.length > 0) {
 					    showObject(topicviewObj.content_items[0]);
 					};
 				} else if (event.type == "created"){
@@ -113,9 +113,9 @@ var iam = (function(iammodule) {
 			}.bind(this));
 			
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "deleted", "object"), function(event) {
-			    topicviewObj.content_items = [];
-			    this.updateTopicview();
-			    var standardObjekt = ({"type":"objekt","src":"/content/img/klein_hm_als_fondrak_1961.jpg","title":"test","description":"Testobjekt"}); 
+			    topicviewObj.content_items.objekt = [];
+			    //this.updateTopicview();
+			    var standardObjekt = ({"type":"objekt","src":"/content/img/klein_hm_mit_bk_tragelehn.jpg","title":"test","description":"Testobjekt"}); 
 			    showObject(standardObjekt);
             }.bind(this));
 
@@ -271,7 +271,7 @@ var iam = (function(iammodule) {
 		};
 
 		this.deleteObject = function() {
-		    console.log("topicviewObj: " + JSON.stringify(topicviewObj));
+		    console.log("deleting Object - topicviewObj: " + JSON.stringify(topicviewObj));
 			crudops.deleteObject(topicviewObj, function(deleted) {
 				if (deleted) {
 					eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "deleted", "object"));

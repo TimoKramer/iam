@@ -83,12 +83,22 @@ var iam = (function(iammodule) {
             });
 		};
 
-		this.deleteTopicview = function(topicid, topicid_internal, callback) {
-
-		};
-
 		this.updateTopicview = function(topicid, update, callback) {
-
+            console.log("updateTopicview with topicid: "+ topicid + " and new title: " + JSON.stringify(update));
+            idbcrud.updateObject("topicviews", topicid, update, function(response) {
+                //alert(response);
+                callback(response);
+            });
+		};
+		
+		
+		this.deleteTopicview = function(topicid, id, callback) {
+		    console.log("deleteTopicview with topicid: " + topicid + " and id: " + id);
+		    idbcrud.deleteObject("topicviews", topicid, function(updated) {
+		        console.log("Topicview deleted " + JSON.stringify(updated));
+		        topicviewObj = "";
+		        console.log("topicviewObj deleted: " + JSON.stringify(topicviewObj));
+		    });
 		};
 		
 		/*
@@ -129,11 +139,18 @@ var iam = (function(iammodule) {
             idbcrud.readObject("objects", objid, callback);
 		};
 
-		this.updateObject = function(obj, callback) {
+		this.updateObject = function(obj, id, callback) {
 
 		};
 
 		this.deleteObject = function(objid, callback) {
+            console.log("deleteObject in topicid: " + topicid);
+            idbcrud.deleteObject("objects", topicid, function(updated) {
+                console.log("Objekt deleted " + JSON.stringify(updated));
+                if (updated) {
+                    idbcrud.deleteObject("objectrefs", topicid, callback);
+                }
+            });
 
 		};
 

@@ -151,8 +151,13 @@ var iam = (function(iammodule) {
 				crudops.updateTopicview(topicid, {
 					title : title
 				}, function(updated) {
-					if (updated) {
+					if (updated !== true) {
+					    alert(updated + '!== 1');
 						eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", updated));
+					} else {
+					    topicviewObj.title = title;
+                        alert(updated + " topicviewObj " + JSON.stringify(topicviewObj));
+					    eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", topicviewObj));
 					}
 				}.bind(this));
 			} else {
