@@ -66,7 +66,7 @@ var iam = (function(iammodule) {
 
 		this.readTopicview = function(topicid, callback) {
             alert();
-            idbcrud.readObject("topicviews", topicid, function(topicviewObject) {
+            idbcrud.readObject("topicviews", topicid, function(topicviewObj) {
                 // try to read objectref for the topicid
                 idbcrud.readObject("objectrefs", topicid, function(objectref) {
                     alert("found objectref for topicid " + topicid);
