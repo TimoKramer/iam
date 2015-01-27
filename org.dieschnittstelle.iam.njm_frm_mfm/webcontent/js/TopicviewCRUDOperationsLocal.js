@@ -57,24 +57,24 @@ var iam = (function(iammodule) {
 		 * the crud operations for topicview
 		 */
 		this.createTopicview = function(topicid, title, callback) {
-            alert("createTopicview");
+            console.log("createTopicview");
             idbcrud.createObject("topicviews", {topicid: topicid, title: title, content_items:[]}, function(created){
-                alert("created topicview: " + JSON.stringify(created));
+                console.log("created topicview: " + JSON.stringify(created));
                 callback(created);
             });
 		};
 
 		this.readTopicview = function(topicid, callback) {
-            alert();
+            console.log("readTopicview");
             idbcrud.readObject("topicviews", topicid, function(topicviewObj) {
                 // try to read objectref for the topicid
                 idbcrud.readObject("objectrefs", topicid, function(objectref) {
-                    alert("found objectref for topicid " + topicid);
+                    console.log("found objectref for topicid " + topicid);
                     topicviewObj.content_items.push(objectref);
                     callback(topicviewObj);
                 },
                 function() {
-                    alert("found no objectref for topicid " + topicid);
+                    console.log("found no objectref for topicid " + topicid);
                     callback(topicviewObj);
                 });
                 // if one exists, we add it to content_items of topicviewObj
@@ -98,21 +98,21 @@ var iam = (function(iammodule) {
 			if (manualids && !obj._id) {
 				obj._id = nextId();
 			}
-            alert("create object");
+            console.log("create object");
             idbcrud.createObject("objects", obj, function(created){
                 idbcrud.createObject("objectrefs", {
                     topicid: topicid,
                     type: "objekt",
                     objektid: created._id
                 }, function(objrefcreated) {
-                    alert("created objectref: " + JSON.stringify(objrefcreated));
+                    console.log("created objectref: " + JSON.stringify(objrefcreated));
                     callback(created);
                 });
             });
 		};
 
 		this.readObjectForTopicview = function(topicviewObj, callback) {
-            alert("topicviewObj: " + JSON.stringify(topicviewObj));
+            console.log("topicviewObj: " + JSON.stringify(topicviewObj));
             var objectFound = false;
             for (var i=0; i < topicviewObj.content_items.length; i++) {
                 var currentItem = topicviewObj.content_items[i];
@@ -125,7 +125,7 @@ var iam = (function(iammodule) {
 		};
 
 		this.readObject = function(objid, callback) {
-            alert("readObject()");
+            console.log("readObject()");
             idbcrud.readObject("objects", objid, callback);
 		};
 
