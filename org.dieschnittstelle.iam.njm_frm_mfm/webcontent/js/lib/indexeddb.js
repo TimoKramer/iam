@@ -142,7 +142,8 @@ var iam = ( function(parentmodule) {
 				// access the object store to which the object shall be added from the transaction
 				var objectStore = transaction.objectStore(objectstore);
 				// create the request to add the object
-				var request = objectStore.add(object);
+				console.log("createObject mit object = " + JSON.stringify(object));
+				var request = objectStore.put(object);
 				// add a callback to the request that sets the id created by the add function!
 				request.onsuccess = function(event) {
 					console.log("createObject(): got id: " + event.target.result);
