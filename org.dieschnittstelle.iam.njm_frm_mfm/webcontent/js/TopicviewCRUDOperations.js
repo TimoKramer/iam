@@ -219,6 +219,23 @@ var iam =
 				callback();
 			}
 		};
+		
+		this.readObjectForTopicID = function(topicid, callback) {
+		    console.log("READING OBJECT FOR TOPICID!!!!!");
+		    this.readTopicview(topicid, function(response) {
+		        console.log("GOT RESPONSE FROM READTOPICVIEW" + JSON.stringify(response));
+		        for (var i = 0 ; i<response.content_items.length; i++) {
+		            if(response.content_items[i].type == "objekt") {
+		                console.log("found content_items type objekt: " + JSON.stringify(response.content_items[i]));
+		                crudops.readObject(response.content_items[i]._id, function(data) {
+		                    console.log("READOBJECTFORTOPICID returns data: " + JSON.stringify(data));
+		                    callback(data);
+		                });
+		                
+		            }
+		        }
+		    });
+		};
 
 		this.readObject = function(objid, callback) {
 			xhr("GET", "http2mdb/objects/" + objid, null, function(xmlhttp) {

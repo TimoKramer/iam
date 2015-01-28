@@ -136,11 +136,21 @@ var iam = (function(iammodule) {
 			// react to the event that an object has been read or created
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created", "object"), function(event) {
 				if (event.type = "read") {
+				    console.log("READ!!!!!!!!!!!!!");
+                    crudops.readObjectForTopicID(topicid, function(readobj) {
+                        console.log("READING OBJECT FOR TOPICID!!!!!!");
+                        if (readobj) {
+                            console.log("SHOWOBJECT: " + JSON.stringify(readobj));
+                            showObject(readobj);
+                        } else {
+                            alert("no object exists for topicview " + topicid);
+                        }
+                    });
 				    console.log("event object read, event.data: " + JSON.stringify(event.data));
-				    showObject.call(this, event.data);
 				} 
                 if (event.type = "created") {
 				    console.log("event object created, event.data: " + JSON.stringify(event.data));
+				    
                     topicviewObj.content_items[0] = event.data;
                     console.log("topicviewObj after object created: " + JSON.stringify(topicviewObj));
 				    //showObject(event.data);

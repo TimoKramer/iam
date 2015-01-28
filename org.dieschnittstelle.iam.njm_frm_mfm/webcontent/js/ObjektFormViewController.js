@@ -81,12 +81,17 @@ var iam = ( function(iammodule) {
                                     
             // listeners for the crud events
             eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created|deleted", "topicview"), function(event) {
-                topicviewObj = event.data;
-                console.log("ObjektFormViewController hat das topicviewObj: " + JSON.stringify(topicviewObj));
-                if (topicviewObj.content_items[0]) {
-                    updateObjektForm(topicviewObj.content_items[0]);
+                console.log("EVENT: " + JSON.stringify(event));
+                if(event.type == "deleted") {
+                    console.log("ich mach nix");
                 } else {
-                    updateObjektForm();
+                    topicviewObj = event.data;
+                    console.log("ObjektFormViewController hat das topicviewObj: " + JSON.stringify(topicviewObj));
+                    if (topicviewObj.content_items[0]) {
+                        updateObjektForm(topicviewObj.content_items[0]);
+                    } else {
+                        updateObjektForm();
+                    }
                 }
             }.bind(this));
         };
@@ -190,7 +195,7 @@ var iam = ( function(iammodule) {
                         alert("got response from server: " + xhr.responseText);
                         var objektData = JSON.parse(xhr.responseText);
                         crudops.createObject(objektData, function(created) {
-                            //alert("created objekt element: " + JSON.stringify(created));
+                            alert("created objekt element: " + JSON.stringify(created));
                             eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "object", created));
                         });
                     }
@@ -212,8 +217,9 @@ var iam = ( function(iammodule) {
                                 console.log("ObjektFormVC: updated = " + JSON.stringify(updated));
                                 topicviewObj.content_items[0] = newObjekt;
                                 console.log("ObjektFormVC: topicviewObj mit newObjekt = " + JSON.stringify(topicviewObj));
-                                // unkommentieren funktioniert nicht!
-                                eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", topicviewObj));
+                                alert("created objekt: " + JSON.stringify(topicviewObj));                                
+                                eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "object", newObjekt));
+                                //eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", topicviewObj));
                             } else console.log("ObjektFormVC: No update occured");
                         });
                     } else console.log("ObjektFormVC: No Object found");
@@ -226,7 +232,7 @@ var iam = ( function(iammodule) {
                     type : "objekt",
                     description : objektForm.description.value
                 }, function(created) {
-                    //alert("created objekt: " + JSON.stringify(created));
+                    alert("created objekt: " + JSON.stringify(created));
                     eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "created", "object", created));
                 });
             }
