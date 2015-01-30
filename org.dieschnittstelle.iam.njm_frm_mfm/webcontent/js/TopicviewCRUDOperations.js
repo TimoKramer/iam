@@ -220,7 +220,7 @@ var iam =
 			}
 		};
 		
-		this.readObjectForTopicID = function(topicid, callback) {
+		this.readAllObjects = function(topicid, callback) {
 		    console.log("READING OBJECT FOR TOPICID!!!!!");
 		    this.readTopicview(topicid, function(response) {
 		        console.log("GOT RESPONSE FROM READTOPICVIEW" + JSON.stringify(response));
