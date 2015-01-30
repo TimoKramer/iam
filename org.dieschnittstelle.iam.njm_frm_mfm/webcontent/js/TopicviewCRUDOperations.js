@@ -220,7 +220,7 @@ var iam =
 			}
 		};
 		
-		this.readObjectForTopicID = function(topicid, callback) {
+		this.readAllObjects = function(topicid, callback) {
 		    console.log("READING OBJECT FOR TOPICID!!!!!");
 		    this.readTopicview(topicid, function(response) {
 		        console.log("GOT RESPONSE FROM READTOPICVIEW" + JSON.stringify(response));
@@ -309,7 +309,7 @@ var iam =
 		};
 		/*
 		 * this function is needed for creating the objectlist view
-		 */
+		 
 		this.readAllObjects = function(callback) {
             xhr("GET", "http2mdb/objects/", null, function(xmlhttp) {
                 var read = JSON.parse(xmlhttp.responseText);
@@ -318,6 +318,7 @@ var iam =
                 callback();
             });
 		};
+		*/
 	}
 
 	// a factory method

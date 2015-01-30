@@ -135,7 +135,7 @@ var iam = (function(iammodule) {
 		};
 
 		this.readObject = function(objid, callback) {
-            console.log("readObject()");
+            console.log("readObject(): " + objid);
             idbcrud.readObject("objects", objid, callback);
 		};
 
@@ -171,8 +171,21 @@ var iam = (function(iammodule) {
 		/*
 		 * this function is needed for creating the objectlist view
 		 */
-		this.readAllObjects = function(callback) {
-
+		this.readAllObjects = function(topicid, callback) {
+            console.log("READING OBJECT FOR TOPICID!!!!!");
+            this.readTopicview(topicid, function(response) {
+                console.log("GOT RESPONSE FROM READTOPICVIEW" + JSON.stringify(response));
+                for (var i = 0 ; i<response.content_items.length; i++) {
+                    if(response.content_items[i].type == "objekt") {
+                        console.log("found content_items type objekt: " + JSON.stringify(response.content_items[i]));
+                        crudops.readObject(response.content_items[i].objektid, function(data) {
+                            console.log("READOBJECTFORTOPICID returns data: " + JSON.stringify(data));
+                            callback(data);
+                        });
+                        
+                    }
+                }
+            });
 		};
 		
 		/*

@@ -137,7 +137,7 @@ var iam = (function(iammodule) {
 			eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created", "object"), function(event) {
 				if (event.type = "read") {
 				    console.log("READ!!!!!!!!!!!!!");
-                    crudops.readObjectForTopicID(topicid, function(readobj) {
+                    crudops.readAllObjects(topicid, function(readobj) {
                         console.log("READING OBJECT FOR TOPICID!!!!!!");
                         if (readobj) {
                             console.log("SHOWOBJECT: " + JSON.stringify(readobj));
