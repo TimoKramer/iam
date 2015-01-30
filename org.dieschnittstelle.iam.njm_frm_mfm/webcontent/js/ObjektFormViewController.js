@@ -35,11 +35,12 @@ var iam = ( function(iammodule) {
             console.log("initialiseObjektForm()");
 
             eventDispatcher.addEventListener(iam.eventhandling.customEvent("ui", "tabSelected", "object"), function(event) {
-                updateObjektForm.call(this, objekt);
+                updateObjektForm();
             }.bind(this));
 
             eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "created|read", "object"), function(event) {
-                updateObjektForm.call(this, event.data);
+                updateObjektForm();
+                insertDataToForm();
                 objekt = event.data;
             }.bind(this));
 
@@ -57,13 +58,12 @@ var iam = ( function(iammodule) {
             objektForm.title.addEventListener("input", function(event) {
                 // check whether the target (i.e. the title element) is empty
                 if (event.target.value.length == 0) {
-                    deleteObjektButton.disabled = true;
+                    //deleteObjektButton.disabled = true;
+                    updateObjektForm();
                 } else {
-                    deleteObjektButton.disabled = true;
-                    objektForm.submit.disabled = false;
-                }
-                if (topicviewObj.content_items[0] && topicviewObj.content_items[0].type == "objekt") {
-                    deleteObjektButton.disabled = false;
+                    //deleteObjektButton.disabled = true;
+                    //objektForm.submit.disabled = false;
+                    updateObjektForm();
                 }
             }.bind(this));
             
@@ -73,7 +73,13 @@ var iam = ( function(iammodule) {
                     console.log("objektformVC - topicviewObj: " + JSON.stringify(topicviewObj));
                     crudops.deleteObject(topicviewObj, function(deleted) {
                         if (deleted) {
+                            for (var i = 0; i < topicviewObj.content_items.length; i++) {
+                                if(topicviewObj.content_items[i].type == 'objekt') {
+                                    delete topicviewObj.content_items[i];
+                                }
+                            }
                             eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "deleted", "object"));
+                            updateObjektForm();
                         }
                     }.bind(this));
                 }
@@ -88,12 +94,34 @@ var iam = ( function(iammodule) {
                     topicviewObj = event.data;
                     console.log("ObjektFormViewController hat das topicviewObj: " + JSON.stringify(topicviewObj));
                     if (topicviewObj.content_items[0]) {
-                        updateObjektForm(topicviewObj.content_items[0]);
+                        updateObjektForm();
                     } else {
                         updateObjektForm();
                     }
                 }
             }.bind(this));
+        };
+        
+        function insertDataToForm() {    
+            /*
+             * On load check if object available and load it to form
+             */
+            if (topicviewObj.content_items[0]) {
+                for (var i = 0; i < topicviewObj.content_items.length; i++) {
+                    if(topicviewObj.content_items[i].type == 'objekt') {
+                        crudops.readObject(topicviewObj.content_items[i]._id, function(objekt) {
+                            if (objekt !== undefined) {
+                                console.log("initialize hat ein Objekt geladen: " + JSON.stringify(objekt));
+                                objektForm.title.value = objekt.title;
+                                objektForm.src.value = objekt.src;
+                                objektForm.description.value = objekt.description;
+                                deleteObjektButton.disabled = false;
+                                objektFormSubmit.disabled = true;
+                            }
+                        });
+                    }
+                }
+            }
         };
 
         function toggleContentMode() {
@@ -136,39 +164,34 @@ var iam = ( function(iammodule) {
         /*
          * this function can be called from an event listener when a crud operation has been performed on some object element
          */
-        function updateObjektForm(objektElement) {
-            if (objektElement && !objektFormInputList) {
-                console.log("updateObjektForm() hat Objekt gefunden: " + JSON.stringify(objektElement));
-                objektForm.title.value = objektElement.title;
-                objektForm.src.value = objektElement.src;
-                objektForm.description.value = objektElement.description;
-                objektFormSubmit.value = "Aktualisieren";
-                objektFormSubmit.disabled = true;
-                deleteObjektButton.disabled = false;
-                
-            } else if (objektFormInputList) {
-                console.log("updateObjektForm() hat eine ObjektID gefunden");
-                objektForm.title.value = "";
-                objektForm.src.value = "";
-                objektForm.description.value = "";
-                objektFormSubmit.value = "Erzeugen";
-                deleteObjektButton.disabled = true;
+        function updateObjektForm() {
+            var objektElement = null;
+            if (topicviewObj.content_items[0] && topicviewObj.content_items[0].type == "objekt") {
+                objektElement = true;
+            }
+            if (getSelectedContentMode() !== 'list') {
+                console.log("UPDATEOBJEKTFORM NICHT LIST");
+                if (objektForm.title == "") {
+                    objektFormSubmit.disabled = true;
+                } else {
+                    objektFormSubmit.disabled = false;
+                }
+            } else {
+                console.log("UPDATEOBJEKTFORM LIST");
                 if (objektFormInputList.value == "") {
                     objektFormSubmit.disabled = true;
                 } else {
                     objektFormSubmit.disabled = false;                    
                 }
-                
+            }               
+            if (objektElement) {
+                console.log("UPDATEOBJEKTFORM hat ein Objekt gefunden: " + JSON.stringify(objektElement));
+                objektFormSubmit.value = "Aktualisieren";
             } else {
-                console.log("updateObjektForm() hat kein Objekt gefunden");
-                objektForm.title.value = "";
-                objektForm.src.value = "";
-                objektForm.description.value = "";
-                objektFormSubmit.value = "Erzeugen";
-                objektFormSubmit.disabled = true;
+                console.log("UPDATEOBJEKTFORM hat kein Objekt gefunden");
+                objektFormSubmit.value = "Erstellen";
                 deleteObjektButton.disabled = true;
             }
-            //console.log("updateObjektForm - objektElement: " + JSON.stringify(objektElement));
             toggleContentMode();
         }
 

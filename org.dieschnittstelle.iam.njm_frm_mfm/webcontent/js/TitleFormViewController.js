@@ -152,7 +152,7 @@ var iam = (function(iammodule) {
 					title : title
 				}, function(updated) {
 					if (updated !== true) {
-					    alert(updated + '!== 1');
+					    //alert(updated + '!== 1');
 						eventDispatcher.notifyListeners(iam.eventhandling.customEvent("crud", "updated", "topicview", updated));
 					} else {
 					    topicviewObj.title = title;
