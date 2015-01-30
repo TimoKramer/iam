@@ -83,7 +83,7 @@ var iam = ( function(iammodule) {
             eventDispatcher.addEventListener(iam.eventhandling.customEvent("crud", "read|created|deleted", "topicview"), function(event) {
                 topicviewObj = event.data;
                 console.log("ObjektFormViewController hat das topicviewObj: " + JSON.stringify(topicviewObj));
-                if (topicviewObj.content_items[0]) {
+                if (topicviewObj.content_items[0] != 0) {
                     updateObjektForm(topicviewObj.content_items[0]);
                 } else {
                     updateObjektForm();

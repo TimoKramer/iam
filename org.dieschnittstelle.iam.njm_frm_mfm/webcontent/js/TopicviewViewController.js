@@ -98,12 +98,13 @@ var iam = (function(iammodule) {
                         topicviewObj = event.data;
                     }
 					console.log("UPDATED TOPICVIEW: " + JSON.stringify(topicviewObj));
-					for (var i; i<topicviewObj.content_items.length; i++) {
-					    console.log(topicviewObj.content_items[i]);
-					    topicviewObj.content_items[i].type == "objekt";
-					    console.log("SHOWOBJECT!!!");
-                        showObject(topicviewObj.content_items[i]);
-					}
+					//for (var i; i<topicviewObj.content_items.length; i++) {
+					    //console.log(topicviewObj.content_items[i]);
+					    if (topicviewObj.content_items[0].type == "objekt") {
+    					    console.log("SHOWOBJECT!!!");
+                            showObject(topicviewObj.content_items[0]);
+                        }
+					//}
 				} else if (event.type == "created"){
 				    topicviewObj = event.data;
 				    console.log("CREATED TOPICVIEW: " + JSON.stringify(topicviewObj));
@@ -178,9 +179,18 @@ var iam = (function(iammodule) {
 		}
 		
 		function showObject(updateObject) {
-			var objectSection = document.getElementById("objekt");
-			objectSection.hidden = false;
-			objectSection.getElementsByTagName("img")[0].src = updateObject.src;
+		    if (updateObject.hasOwnProperty('src')) {
+		        var objectSection = document.getElementById("objekt");
+                objectSection.hidden = false;
+                objectSection.getElementsByTagName("img")[0].src = updateObject.src;
+		    } else {
+		        crudops.readObject(updateObject._id, function(gotObject) {
+                    var objectSection = document.getElementById("objekt");
+                    objectSection.hidden = false;
+                    objectSection.getElementsByTagName("img")[0].src = gotObject.src;		            
+		        });
+		    }
+			
 		}
 		
 		function getCrudopsImplName() {
